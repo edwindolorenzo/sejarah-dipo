@@ -149,6 +149,7 @@ public class EnemyScript : PhysicsObject
             }
         }
         animator.SetFloat("Move", Mathf.Abs(velocity.x));
+        animator.SetBool("Grounded", grounded);
     }
 
     bool CanSeePlayer(float distance)
@@ -190,7 +191,7 @@ public class EnemyScript : PhysicsObject
         {
             move.x = -1f;
         }
-        if(animator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Walk"))
+        if(animator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Walk") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Jump"))
         {
             targetVelocity = move * maxSpeed;
         }

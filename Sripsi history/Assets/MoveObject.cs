@@ -23,9 +23,15 @@ public class MoveObject : MonoBehaviour
         }
     }
 
+    protected virtual void ComputeAnimation()
+    {
+
+    }
+
     // Update is called once per frame
     void Update()
     {
+        ComputeAnimation();
         if (!repeatable)
         {
             float currentDuration = (Time.time - startTime) * speed;

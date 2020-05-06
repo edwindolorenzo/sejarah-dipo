@@ -205,7 +205,6 @@ GameObject:
   - component: {fileID: 2605438477663145825}
   - component: {fileID: 2605438477663145824}
   - component: {fileID: 2605438477663145827}
-  - component: {fileID: 2605438477663145826}
   - component: {fileID: 2605438477663145831}
   - component: {fileID: 2605438477663145828}
   m_Layer: 9
@@ -328,18 +327,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2605438477663145826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2605438477663145837}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d7ae0144a6616543a69f2a5d09cfc9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2605438477663145831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,8 +344,8 @@ MonoBehaviour:
   player: {fileID: 0}
   castPoint: {fileID: 2605438477856267701}
   agroRange: 6
-  jumpTakeOffSpeed: 10
   maxSpeed: 1
+  jumpTakeOffSpeed: 10
   chaseRangeY: 4
   attackPoint: {fileID: 2605438477371634769}
   startPatrol: {fileID: 2605438477920573311}

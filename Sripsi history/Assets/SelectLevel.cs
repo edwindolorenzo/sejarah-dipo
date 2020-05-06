@@ -8,11 +8,12 @@ public class SelectLevel : MonoBehaviour
 {
 
     public Button[] buttons;
+    GameObject playerMenu;
     int levelPassed;
     // Start is called before the first frame update
     void Start()
     {
-
+        playerMenu = GameObject.Find("MainMenuPlayer");
         PlayerPrefs.SetInt("LevelPassed",0);
         levelPassed = PlayerPrefs.GetInt("LevelPassed");
         for (int i = 0; i <= levelPassed; i++)
@@ -27,7 +28,8 @@ public class SelectLevel : MonoBehaviour
 
     public void levelToLoad (int level)
     {
-        SceneManager.LoadScene(level);
+        Destroy(playerMenu);
+        SceneManager.LoadScene(level);        
     }
  
 }
