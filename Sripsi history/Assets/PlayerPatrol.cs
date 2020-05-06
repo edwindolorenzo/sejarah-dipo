@@ -30,7 +30,6 @@ public class PlayerPatrol : MoveObject
         }
         if (scene.name == "MainMenu" || scene.name == "SelectLevel")
             DontDestroyOnLoad(transform.parent.gameObject);
-        Debug.Log(scene.name);
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         animator.SetFloat("Move", 1);

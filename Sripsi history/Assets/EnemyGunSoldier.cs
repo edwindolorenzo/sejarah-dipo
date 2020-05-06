@@ -33,6 +33,7 @@ public class EnemyGunSoldier : PhysicsObject
     private float jumpCount = 2f;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private AudioManager audioManager;
 
     Enemy soldier = new Enemy();
 
@@ -40,9 +41,10 @@ public class EnemyGunSoldier : PhysicsObject
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
-        protected override void ComputeVelocity()
+    protected override void ComputeVelocity()
     {
         if (attackCounter > 0)
         {
@@ -250,20 +252,23 @@ public class EnemyGunSoldier : PhysicsObject
     void Attack()
     {
         if(!animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Die"))
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        {
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            audioManager.Play("EnemyShoot");
+        }
         firePoint.transform.rotation = Quaternion.Euler(new Vector3(0, AttackRotation, 0));
         firePoint.localPosition = firePosition[0];
         animator.SetBool("ShootUp", false);
         animator.SetBool("ShootMid", false);
         animator.SetBool("ShootDown", false);
         isAttacking = false;
-
     }
 
     public void TakeDamage(float damage)
     {
         soldier.Health -= damage;
         animator.SetTrigger("Hurt");
+        audioManager.Play("EnemyDamaged");
         if (soldier.Health <= 0)
         {
             died = true;

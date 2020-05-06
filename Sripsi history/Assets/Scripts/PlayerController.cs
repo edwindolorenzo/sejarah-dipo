@@ -26,6 +26,7 @@ public class PlayerController : PhysicsObject
     private Animator animator;
     private float lifeCounter;
     Player player = new Player();
+    private AudioManager audioManager;
 
     //MAKE HEART UI
     public Image[] hearts;
@@ -39,6 +40,7 @@ public class PlayerController : PhysicsObject
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
     protected override void ComputeVelocity()
     {
@@ -125,6 +127,8 @@ public class PlayerController : PhysicsObject
         animator.SetBool("Grounded", grounded);
         animator.SetFloat("Move", Mathf.Abs(velocity.x));
         targetVelocity = animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Die") && grounded ? Vector2.zero : move * maxSpeed;
+        if (Mathf.Abs(velocity.x) > 0.1 && grounded)
+            audioManager.Play("PlayerStep");
 
     }
 
@@ -134,6 +138,7 @@ public class PlayerController : PhysicsObject
         // Detect enemies in range attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         //Damage them
+        audioManager.Play("PlayerDamage");
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.GetComponent<EnemyScript>())
@@ -149,6 +154,7 @@ public class PlayerController : PhysicsObject
         {
             player.Health -= damage;
             animator.SetTrigger("Hurt");
+            audioManager.Play("PlayerDamaged");
             // membuat kena damage mundur belum bisa
             //if (spriteRenderer.flipX)
             //{
