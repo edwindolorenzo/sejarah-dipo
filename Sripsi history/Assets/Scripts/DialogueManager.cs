@@ -11,12 +11,16 @@ public class DialogueManager : MonoBehaviour
     public GameObject gamePlayUI;
     public GameObject finishUI;
 
-    bool finished;
+    FinishGame finishGameScript;
+    bool finished = true;
+    bool finishGame;
     private Queue<string> sentences = new Queue<string>();
+    private string sentence;
 
     // Start is called before the first frame update
     void Start()
     {
+        finishGameScript = finishUI.GetComponent<FinishGame>();
     }
 
     private void Update()
@@ -32,7 +36,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue (Dialogue dialogue ,bool finish)
     {
-        finished = finish;
+        finishGame = finish;
         gamePlayUI.SetActive(false);
         animator.SetBool("IsOpen", true);
         nameText.text = dialogue.name;
@@ -48,35 +52,47 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
-        {
-            EndDialogue();
-            return;
-        }
 
-        string sentence = sentences.Dequeue();
+        if (finished)
+        {
+            if (sentences.Count == 0)
+            {
+                EndDialogue();
+                return;
+            }
+            sentence = sentences.Dequeue();
+            StopAllCoroutines();
+            StartCoroutine(TypeSentence(sentence));
+        }
+        else
+        {
+            StopAllCoroutines();
+            dialogueText.text = sentence;
+            finished = true;
+        }
         //just pop out
-        //dialogueText.text = sentence;
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+
     }
 
     IEnumerator TypeSentence (string sentence)
     {
+        finished = false;
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
             yield return null;
         }
+        finished = true;
+        yield return null;
     }
 
     void EndDialogue()
     {
         animator.SetBool("IsOpen", false);
-        if (finished)
+        if (finishGame)
         {
-            finishUI.SetActive(true);
+            finishGameScript.GameFinished();
         }
         else
         {

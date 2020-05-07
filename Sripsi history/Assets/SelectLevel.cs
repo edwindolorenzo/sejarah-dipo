@@ -9,13 +9,26 @@ public class SelectLevel : MonoBehaviour
 
     public Button[] buttons;
     GameObject playerMenu;
-    int levelPassed;
+    int levelPassed = 0;
+    int pickLevel = 1;
+    [SerializeField]Image[] objectiveStars;
+    [SerializeField] Sprite fullStars, emptyStars;
+    [SerializeField] Text[] objectiveTexts;
+    [SerializeField] Text headerLevelText;
+    GameManager gameManager = GameManager.instance;
+    private List<Stage> stages = new List<Stage>();
     // Start is called before the first frame update
     void Start()
     {
+        if (gameManager == null)
+            gameManager = FindObjectOfType<GameManager>();
+        stages = gameManager.AllStage();
         playerMenu = GameObject.Find("MainMenuPlayer");
-        PlayerPrefs.SetInt("LevelPassed",0);
-        levelPassed = PlayerPrefs.GetInt("LevelPassed");
+        foreach(Stage stage in stages)
+        {
+            if (stage.Clear)
+                levelPassed = stage.Level;
+        }
         for (int i = 0; i <= levelPassed; i++)
         {
             buttons[i].interactable = true;
@@ -26,10 +39,39 @@ public class SelectLevel : MonoBehaviour
         }
     }
 
-    public void levelToLoad (int level)
+    public void PickLevel(int level)
+    {
+        Stage stage = stages[level-1];
+        pickLevel = level;
+        if(stage != null)
+        {
+            headerLevelText.text = "Level " + level;
+            int i = 0;
+            foreach(Chalange chalange in stage.Chalanges)
+            {
+                if (chalange.Clear)
+                    objectiveStars[i].sprite = fullStars;
+                else
+                    objectiveStars[i].sprite = emptyStars;
+                objectiveTexts[i].text = chalange.NameChalange;
+                i += 1;
+            }
+        }
+        else
+        {
+            Debug.Log("stage tidak ada isinya");
+        }
+    }
+
+    public void MainMenuLoad()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void levelToLoad ()
     {
         Destroy(playerMenu);
-        SceneManager.LoadScene(level);        
+        SceneManager.LoadScene(pickLevel);        
     }
  
 }

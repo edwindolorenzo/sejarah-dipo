@@ -19,6 +19,7 @@ public class Checkpoint : MonoBehaviour
             respawn.transform.position = transform.position;
             animator.SetTrigger("Raise");
             GetComponent<Checkpoint>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 

@@ -18,6 +18,7 @@ public class EnemyGunSoldier : PhysicsObject
 
     [SerializeField] private float jumpTakeOffSpeed = 10;
     [SerializeField] private float chaseRangeY = 4f;
+    [SerializeField] private AudioSource gunShotSound, damagedSound;
     private float distToPlayer;
     private float attackCounter;
     private float xAttack = 1;
@@ -33,7 +34,6 @@ public class EnemyGunSoldier : PhysicsObject
     private float jumpCount = 2f;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-    private AudioManager audioManager;
 
     Enemy soldier = new Enemy();
 
@@ -41,7 +41,6 @@ public class EnemyGunSoldier : PhysicsObject
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        audioManager = FindObjectOfType<AudioManager>();
     }
 
     protected override void ComputeVelocity()
@@ -254,7 +253,7 @@ public class EnemyGunSoldier : PhysicsObject
         if(!animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Die"))
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            audioManager.Play("EnemyShoot");
+            gunShotSound.Play();
         }
         firePoint.transform.rotation = Quaternion.Euler(new Vector3(0, AttackRotation, 0));
         firePoint.localPosition = firePosition[0];
@@ -268,7 +267,7 @@ public class EnemyGunSoldier : PhysicsObject
     {
         soldier.Health -= damage;
         animator.SetTrigger("Hurt");
-        audioManager.Play("EnemyDamaged");
+        damagedSound.Play();
         if (soldier.Health <= 0)
         {
             died = true;

@@ -13,20 +13,20 @@ public class PlayerController : PhysicsObject
     public LayerMask enemyLayers;
     public float invicibiltyLength;
     public float flashLength = 0.1f;
-    public GameObject respawn;
-    public GameObject dieUI;
+    public GameObject respawn, finishUI;
+    FinishGame finishGame;
 
     //waktu kecepatan untuk menyerang
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
+    [SerializeField] private AudioSource stepSound, damagedSound, damageSound;
     private float flashCounter;
     private float invicibiltyCounter;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private float lifeCounter;
     Player player = new Player();
-    private AudioManager audioManager;
 
     //MAKE HEART UI
     public Image[] hearts;
@@ -40,7 +40,7 @@ public class PlayerController : PhysicsObject
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        audioManager = FindObjectOfType<AudioManager>();
+        finishGame = finishUI.GetComponent<FinishGame>();
     }
     protected override void ComputeVelocity()
     {
@@ -127,9 +127,8 @@ public class PlayerController : PhysicsObject
         animator.SetBool("Grounded", grounded);
         animator.SetFloat("Move", Mathf.Abs(velocity.x));
         targetVelocity = animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Die") && grounded ? Vector2.zero : move * maxSpeed;
-        if (Mathf.Abs(velocity.x) > 0.1 && grounded)
-            audioManager.Play("PlayerStep");
-
+        if (Mathf.Abs(velocity.x) > 0.1 && grounded && stepSound.isPlaying == false)
+            stepSound.Play();
     }
 
     void Attack()
@@ -138,7 +137,7 @@ public class PlayerController : PhysicsObject
         // Detect enemies in range attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         //Damage them
-        audioManager.Play("PlayerDamage");
+        damageSound.Play();
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.GetComponent<EnemyScript>())
@@ -153,8 +152,9 @@ public class PlayerController : PhysicsObject
         if (invicibiltyCounter <= 0)
         {
             player.Health -= damage;
+            finishGame.PlayerDamaged();
             animator.SetTrigger("Hurt");
-            audioManager.Play("PlayerDamaged");
+            damagedSound.Play();
             // membuat kena damage mundur belum bisa
             //if (spriteRenderer.flipX)
             //{
@@ -169,6 +169,7 @@ public class PlayerController : PhysicsObject
                 animator.SetTrigger("Die");
                 animator.SetBool("Died", true);
                 player.Life -= 1;
+                lifeText.text = player.Life+" X";
                 if (player.Life > 0)
                 {
                     //lifeText.text = player.Life + " x";
@@ -200,10 +201,14 @@ public class PlayerController : PhysicsObject
         transform.position = respawn.transform.position;
     }
 
-
     void Die()
     {
-        dieUI.SetActive(true);
+        finishGame.GameOver();
+    }
+
+    public Player givePlayerStatus()
+    {
+        return player;
     }
 
     void OnDrawGizmosSelected()

@@ -69,13 +69,13 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: PlayerDamaged
-    clip: {fileID: 8300000, guid: 2285f27135d74f14fa5655cd9b1d4193, type: 3}
+    clip: {fileID: 8300000, guid: 956731a9e6e39e44d94f46a2f92fc820, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlayerStep
-    clip: {fileID: 8300000, guid: 5a55f411636f6bb4eb585a90d4881d82, type: 3}
+    clip: {fileID: 8300000, guid: b9a1fd942750a2448b970e3a96c82870, type: 3}
     volume: 1
     pitch: 1
     loop: 0
