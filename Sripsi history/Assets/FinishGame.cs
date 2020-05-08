@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class FinishGame : MonoBehaviour
 {
-    public bool finished = false;
-    public bool gameOver = false;
+    public GameObject sceneLoader;
+    LevelLoader levelLoader;
+
     public GameObject [] finishedObjects;
     public GameObject [] gameOverObjects;
     bool damaged = false;
@@ -26,6 +27,7 @@ public class FinishGame : MonoBehaviour
             gameManager = FindObjectOfType<GameManager>();
         stage = gameManager.SelectStage(SceneManager.GetActiveScene().buildIndex);
         playerController = playerObject.GetComponent<PlayerController>();
+        levelLoader = sceneLoader.GetComponent<LevelLoader>();
     }
 
     public void GameFinished()
@@ -113,6 +115,6 @@ public class FinishGame : MonoBehaviour
 
     public void Finish()
     {
-        SceneManager.LoadScene("SelectLevel");
+        levelLoader.LoadSceneName("SelectLevel");
     }
 }

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     List<MiniGame> miniGames = new List<MiniGame>();
     private List<Stage> stages = new List<Stage>();
+
     public static GameManager instance;
 
     // Start is called before the first frame update

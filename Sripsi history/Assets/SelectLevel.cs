@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class SelectLevel : MonoBehaviour
 {
 
+    public GameObject sceneLoader;
+    LevelLoader levelLoader;
+
     public Button[] buttons;
     GameObject playerMenu;
     int levelPassed = 0;
@@ -20,6 +23,7 @@ public class SelectLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelLoader = sceneLoader.GetComponent<LevelLoader>();
         if (gameManager == null)
             gameManager = FindObjectOfType<GameManager>();
         stages = gameManager.AllStage();
@@ -65,13 +69,13 @@ public class SelectLevel : MonoBehaviour
 
     public void MainMenuLoad()
     {
-        SceneManager.LoadScene("MainMenu");
+        levelLoader.LoadSceneName("MainMenu");
     }
 
     public void levelToLoad ()
     {
         Destroy(playerMenu);
-        SceneManager.LoadScene(pickLevel);        
+        levelLoader.LoadSceneNumber(pickLevel);
     }
  
 }
