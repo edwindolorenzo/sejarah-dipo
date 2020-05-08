@@ -52,4 +52,23 @@ public class Chalange
         NameChalange = nameChalange;
         Clear = clear;
     }
+
+    public Chalange(int idChalange, bool clear = false)
+    {
+        IdChalange = idChalange;
+        if(idChalange-1 < orderName.Length)
+        {
+            NameChalange = orderName[idChalange - 1];
+        }
+        Clear = clear;
+
+    }
+
+    string[] orderName = new string[] {
+        "Menyelesaikan permainan",
+        "Menyelesaikan permainan tanpa menggunakan kesempatan hidup",
+        "Menggunakan kesempatan hidup hanya satu kali",
+        "Tidak terkena serangan selama permainan",
+        "Mengalahkan semua prajurit"
+    };
 }

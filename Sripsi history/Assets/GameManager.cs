@@ -5,18 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    List<Chalange> chalanges = new List<Chalange>() {
-        new Chalange(1,"Menyelesaikan permainan"),
-        new Chalange(2,"Menyelesaikan permainan tanpa menggunakan kesempatan hidup"),
-        new Chalange(3,"Menggunakan kesempatan hidup hanya satu kali"),
-        new Chalange(4,"Tidak terkena serangan selama permainan"),
-        new Chalange(5,"Mengalahkan semua prajurit")
-        };
-    List<MiniGame> miniGames = new List<MiniGame>()
-    {
-        new MiniGame(1),
-        new MiniGame(2)
-    };
+    List<MiniGame> miniGames = new List<MiniGame>();
     private List<Stage> stages = new List<Stage>();
     public static GameManager instance;
 
@@ -31,11 +20,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        stages.Add(new Stage(1, new List<Chalange> { chalanges[0], chalanges[1], chalanges[3] }));
-        stages.Add(new Stage(2, new List<Chalange> { chalanges[0], chalanges[1], chalanges[3] }));
-        stages.Add(new Stage(3, new List<Chalange> { chalanges[0], chalanges[1], chalanges[2] }));
-        stages.Add(new Stage(4, new List<Chalange> { chalanges[0], chalanges[1], chalanges[2] }));
-        stages.Add(new Stage(5, new List<Chalange> { chalanges[1], chalanges[2], chalanges[3] }));
+        LoadData();
     }
 
     public List<Stage> AllStage ()
@@ -53,11 +38,51 @@ public class GameManager : MonoBehaviour
     {
         int indexStage = stages.FindIndex(x => x.Level == level);
         stages[indexStage] = stageUpdated;
+        SaveData();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SaveData()
     {
-        
+        SaveSystem.SaveData(stages, miniGames);
     }
+
+    public void LoadData()
+    {
+        GameData data = SaveSystem.LoadData();
+
+        if (data != null)
+        {
+            stages.Clear();
+            for(int i = 0; i< data.level.Length; i++)
+            {
+                int stageLevel = data.level[i];
+                bool levelClear = data.levelClear[i];
+                int chalangeNumber = i * 2 + i;
+                Chalange chalange1 = new Chalange(data.idChalange[chalangeNumber], data.chalangeClear[chalangeNumber]);
+                Chalange chalange2 = new Chalange(data.idChalange[chalangeNumber+1], data.chalangeClear[chalangeNumber+1]);
+                Chalange chalange3 = new Chalange(data.idChalange[chalangeNumber+2], data.chalangeClear[chalangeNumber+2]);
+                stages.Add(new Stage(stageLevel, new List<Chalange> { chalange1, chalange2, chalange3 }, levelClear));
+            }
+            miniGames.Clear();
+            for(int i = 0; i < data.idMiniGame.Length; i++)
+            {
+                float miniGameScore = data.miniGameScore[i];
+                int idMiniGame = data.idMiniGame[i];
+                bool openMiniGame = data.openMiniGame[i];
+            }
+        }
+        else {
+            miniGames = new List<MiniGame>()
+            {
+                new MiniGame(1),
+                new MiniGame(2)
+            };
+            stages.Add(new Stage(1, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(3) }));
+            stages.Add(new Stage(2, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(4) }));
+            stages.Add(new Stage(3, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(3) }));
+            stages.Add(new Stage(4, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(3) }));
+            stages.Add(new Stage(5, new List<Chalange> { new Chalange(2), new Chalange(3), new Chalange(4) }));
+        }
+    }
+
 }

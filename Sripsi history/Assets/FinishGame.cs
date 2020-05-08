@@ -39,7 +39,8 @@ public class FinishGame : MonoBehaviour
             int clearing = 0;
             foreach (Chalange chalange in stage.Chalanges)
             {
-                chalange.Clear = ClearObjective(chalange.IdChalange);
+                if(!chalange.Clear)
+                    chalange.Clear = ClearObjective(chalange.IdChalange);
                 if (chalange.Clear)
                 {
                     objectiveStars[i].sprite = fullStars;
@@ -49,8 +50,6 @@ public class FinishGame : MonoBehaviour
                     objectiveStars[i].sprite = emptyStars;
                 objectiveTexts[i].text = chalange.NameChalange;
                 i += 1;
-                if (clearing == 3)
-                    stage.ChalangeClear = true;
             }
             gameManager.UpdateStage(stage, stage.Level);
         }
