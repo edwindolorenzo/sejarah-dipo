@@ -12,6 +12,11 @@ public class GameManager : MonoBehaviour
         new Chalange(4,"Tidak terkena serangan selama permainan"),
         new Chalange(5,"Mengalahkan semua prajurit")
         };
+    List<MiniGame> miniGames = new List<MiniGame>()
+    {
+        new MiniGame(1),
+        new MiniGame(2)
+    };
     private List<Stage> stages = new List<Stage>();
     public static GameManager instance;
 

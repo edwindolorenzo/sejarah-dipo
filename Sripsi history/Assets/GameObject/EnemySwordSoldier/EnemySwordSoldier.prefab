@@ -105,7 +105,7 @@ GameObject:
   m_Layer: 0
   m_Name: EndPatrol
   m_TagString: Enemies
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -616,7 +616,7 @@ GameObject:
   m_Layer: 0
   m_Name: StartPatrol
   m_TagString: Enemies
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

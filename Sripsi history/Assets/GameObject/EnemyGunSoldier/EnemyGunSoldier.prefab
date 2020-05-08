@@ -42,7 +42,7 @@ GameObject:
   m_Layer: 0
   m_Name: StartPatrol
   m_TagString: Enemies
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -72,7 +72,7 @@ GameObject:
   m_Layer: 9
   m_Name: CheckArea
   m_TagString: Enemies
-  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -276,7 +276,7 @@ MonoBehaviour:
   player: {fileID: 0}
   castPoint: {fileID: 7831601325715626884}
   agroRange: 6
-  attackRange: 3
+  attackRange: 8
   maxSpeed: 1
   firePoint: {fileID: 7831601327772038099}
   startPatrol: {fileID: 7831601326113477081}
@@ -617,7 +617,7 @@ GameObject:
   m_Layer: 0
   m_Name: EndPatrol
   m_TagString: Enemies
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

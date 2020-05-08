@@ -246,6 +246,7 @@ public class EnemyGunSoldier : PhysicsObject
     {
         isAgro = false;
         isSearching = false;
+        isPatrol = true;
     }
 
     void Attack()

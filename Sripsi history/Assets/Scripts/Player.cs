@@ -28,6 +28,7 @@ public class Player : Humanoid
         }
         set
         {
+            if (value <= MaxLife)
             life = value;
         }
     }

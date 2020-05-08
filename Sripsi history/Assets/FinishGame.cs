@@ -25,14 +25,12 @@ public class FinishGame : MonoBehaviour
         if (gameManager == null)
             gameManager = FindObjectOfType<GameManager>();
         stage = gameManager.SelectStage(SceneManager.GetActiveScene().buildIndex);
-        Debug.Log(playerObject);
         playerController = playerObject.GetComponent<PlayerController>();
     }
 
     public void GameFinished()
     {
         player = playerController.givePlayerStatus();
-        Debug.Log(stage.Level);
         backGroundUI.SetActive(true);
         if (stage != null)
         {
@@ -42,7 +40,6 @@ public class FinishGame : MonoBehaviour
             foreach (Chalange chalange in stage.Chalanges)
             {
                 chalange.Clear = ClearObjective(chalange.IdChalange);
-                Debug.Log(chalange.Clear);
                 if (chalange.Clear)
                 {
                     objectiveStars[i].sprite = fullStars;
@@ -51,7 +48,6 @@ public class FinishGame : MonoBehaviour
                 else
                     objectiveStars[i].sprite = emptyStars;
                 objectiveTexts[i].text = chalange.NameChalange;
-                Debug.Log(chalange.NameChalange);
                 i += 1;
                 if (clearing == 3)
                     stage.ChalangeClear = true;

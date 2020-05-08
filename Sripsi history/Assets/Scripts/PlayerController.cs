@@ -211,6 +211,19 @@ public class PlayerController : PhysicsObject
         return player;
     }
 
+    public bool HealtUp(int healt)
+    {
+        if(player.Health >= player.MaxHealth)
+        {
+            return false;
+        }
+        else
+        {
+            player.Health += healt;
+            return true;
+        }
+    }
+
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null)
