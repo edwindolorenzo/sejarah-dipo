@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,6 +24,8 @@ public class EnemyGunSoldier : PhysicsObject
     private float attackCounter;
     private float xAttack = 1;
     private float AttackRotation = 0;
+    private bool moveLeft = true;
+    private bool moveRight = true;
     private bool isAgro = false;
     private bool isSearching = false;
     private bool isAttacking = false;
@@ -64,6 +67,21 @@ public class EnemyGunSoldier : PhysicsObject
         //}
 
         //FOR ATTACKING PLAYER
+
+        canMove(true, true);
+        RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.down, chaseRangeY);
+        if (hit.collider == null)
+        {
+            if (Mathf.Round(transform.rotation.y) < 0)
+            {
+                canMove(false, true);
+            }
+            if (Mathf.Round(transform.rotation.y) >= 0)
+            {
+                canMove(true, false);
+            }
+        }
+
 
         if (!died)
         {
@@ -201,11 +219,15 @@ public class EnemyGunSoldier : PhysicsObject
     void Chase(Transform target)
     {
         Vector2 move = Vector2.zero;
-        if (transform.position.x < target.position.x)
+        if (!grounded)
+        {
+            canMove(true, true);
+        }
+        if (transform.position.x < target.position.x && moveRight)
         {
             move.x = 1f;
         }
-        else
+        if (transform.position.x > target.position.x && moveLeft)
         {
             move.x = -1f;
         }
@@ -226,7 +248,7 @@ public class EnemyGunSoldier : PhysicsObject
         {
             Flip();
         }
-        else if (move.x < 0.01f && facingRight)
+        else if (move.x < -0.01f && facingRight)
         {
             Flip();
         }
@@ -240,6 +262,12 @@ public class EnemyGunSoldier : PhysicsObject
         //{
         //    spriteRenderer.flipX = !spriteRenderer.flipX;
         //}
+    }
+
+    void canMove(bool left = false, bool right = false)
+    {
+        moveLeft = left;
+        moveRight = right;
     }
 
     void StopChasingPlayer()

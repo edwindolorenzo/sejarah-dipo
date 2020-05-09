@@ -17,6 +17,8 @@ public class EnemyScript : PhysicsObject
     private bool died = false;
     private bool reachPatrol = false;
     private bool haveGround = true;
+    private bool moveLeft = true;
+    private bool moveRight = true;
     private CircleCollider2D attackCollider;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -61,6 +63,20 @@ public class EnemyScript : PhysicsObject
         //// distance to player
         float distToPlayer = Vector2.Distance(transform.position, player.transform.position);
         haveGround = true;
+
+        canMove(true, true);
+        RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.down, chaseRangeY);
+        if (hit.collider == null)
+        {
+            if (Mathf.Round(transform.rotation.y) < 0)
+            {
+                canMove(false, true);
+            }
+            if (Mathf.Round(transform.rotation.y) >= 0)
+            {
+                canMove(true, false);
+            }
+        }
 
         //if(distToPlayer < agroRange)
         //{
@@ -183,12 +199,16 @@ public class EnemyScript : PhysicsObject
 
     void Chase(Transform target)
     {
+        if (!grounded)
+        {
+            canMove(true, true);
+        }
         Vector2 move = Vector2.zero;
-        if (transform.position.x < target.position.x)
+        if (transform.position.x < target.position.x && moveRight)
         {
             move.x = 1f;
         }
-        else
+        if(transform.position.x > target.position.x && moveLeft)
         {
             move.x = -1f;
         }
@@ -210,7 +230,7 @@ public class EnemyScript : PhysicsObject
         if (move.x > 0.01f && !facingRight)
         {
             Flip();
-        }else if (move.x < 0.01f && facingRight)
+        }else if (move.x < -0.01f && facingRight)
         {
             Flip();
         }        
@@ -225,6 +245,12 @@ public class EnemyScript : PhysicsObject
             //castPoint.localPosition = new Vector2(-castPoint.localPosition.x, castPoint.localPosition.y);
             //attackPoint.localPosition = new Vector2(-attackPoint.localPosition.x, attackPoint.localPosition.y);
         //}
+    }
+
+    void canMove(bool left = false, bool right = false)
+    {
+        moveLeft = left;
+        moveRight = right;
     }
 
     void StopChasingPlayer()
