@@ -18,6 +18,8 @@ public class FinishGame : MonoBehaviour
     [SerializeField] GameObject playerObject, backGroundUI;
     PlayerController playerController;
     GameManager gameManager = GameManager.instance;
+    AudioManager audioManager = AudioManager.instance;
+
     Player player;
     Stage stage;
     // Start is called before the first frame update
@@ -25,6 +27,8 @@ public class FinishGame : MonoBehaviour
     {
         if (gameManager == null)
             gameManager = FindObjectOfType<GameManager>();
+        if (audioManager == null)
+            audioManager = FindObjectOfType<AudioManager>();
         stage = gameManager.SelectStage(SceneManager.GetActiveScene().buildIndex);
         playerController = playerObject.GetComponent<PlayerController>();
         levelLoader = sceneLoader.GetComponent<LevelLoader>();
@@ -33,6 +37,7 @@ public class FinishGame : MonoBehaviour
     public void GameFinished()
     {
         player = playerController.givePlayerStatus();
+        audioManager.Play("WinGame");
         backGroundUI.SetActive(true);
         if (stage != null)
         {

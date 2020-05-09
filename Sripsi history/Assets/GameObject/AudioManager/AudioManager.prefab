@@ -44,38 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: EnemyShoot
-    clip: {fileID: 8300000, guid: 8e5972f594741d2458ed1c343fdb1a3e, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: EnemyDamaged
-    clip: {fileID: 8300000, guid: 834c98272ad712c4a856660f3fc4b757, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: EnemySwordDamage
-    clip: {fileID: 8300000, guid: 2275914fbc8c2a045ac5df2a7f462c86, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: PlayerDamage
-    clip: {fileID: 8300000, guid: 8958f64f62c79fc4abde8598581c0c9c, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: PlayerDamaged
-    clip: {fileID: 8300000, guid: 956731a9e6e39e44d94f46a2f92fc820, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: PlayerStep
-    clip: {fileID: 8300000, guid: b9a1fd942750a2448b970e3a96c82870, type: 3}
+  - name: WinGame
+    clip: {fileID: 8300000, guid: b0adaaee9b87ac94e97128309cc6d75f, type: 3}
     volume: 1
     pitch: 1
     loop: 0

@@ -6,9 +6,11 @@ public class Checkpoint : MonoBehaviour
 {
     public GameObject respawn;
     Animator animator;
+    AudioSource audioSource;
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
     }
     // Start is called before the first frame update
@@ -17,6 +19,7 @@ public class Checkpoint : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             respawn.transform.position = transform.position;
+            audioSource.Play();
             animator.SetTrigger("Raise");
             GetComponent<Checkpoint>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
