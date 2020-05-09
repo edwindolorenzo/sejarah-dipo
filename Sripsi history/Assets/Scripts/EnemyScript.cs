@@ -10,6 +10,7 @@ public class EnemyScript : PhysicsObject
     [SerializeField] float maxSpeed;
     [SerializeField] private float jumpTakeOffSpeed = 10;
     [SerializeField] private float chaseRangeY = 4f;
+    [SerializeField] private AudioSource SwordSound, damagedSound;
     private bool isAgro = false;
     private bool isSearching = false;
     private bool isPatrol = true;
@@ -24,7 +25,6 @@ public class EnemyScript : PhysicsObject
     private float jumpCounter;
     private float jumpCount = 2f;
     private bool facingRight = true;
-    private AudioManager audioManager;
     //private EnemyState _currentState;
 
     public Transform attackPoint, startPatrol, EndPatrol, groundDetection;
@@ -41,7 +41,6 @@ public class EnemyScript : PhysicsObject
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        audioManager = FindObjectOfType<AudioManager>();
     }
 
     protected override void ComputeVelocity()
@@ -241,7 +240,7 @@ public class EnemyScript : PhysicsObject
         // Detect enemies in range attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         //Damage them
-        audioManager.Play("EnemySwordDamage");
+        SwordSound.Play();
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<PlayerController>().TakeDamage(soldier.Attack);
@@ -252,7 +251,7 @@ public class EnemyScript : PhysicsObject
     {
         soldier.Health -= damage;
         animator.SetTrigger("Hurt");
-        audioManager.Play("EnemyDamaged");
+        damagedSound.Play();
         if (soldier.Health <= 0)
         {
             died = true;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Player : Humanoid
 {
     private int maxLife = 3;
@@ -27,6 +28,7 @@ public class Player : Humanoid
         }
         set
         {
+            if (value <= MaxLife)
             life = value;
         }
     }

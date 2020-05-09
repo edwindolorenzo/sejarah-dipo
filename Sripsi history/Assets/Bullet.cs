@@ -19,7 +19,8 @@ public class Bullet : MonoBehaviour
         {
             playerController.TakeDamage(1);
         }
-        Destroy(gameObject);
+        if(hitInfo.gameObject.layer == LayerMask.NameToLayer("Player") || hitInfo.gameObject.layer == LayerMask.NameToLayer("Platform"))
+            Destroy(gameObject);
     }
 
 }

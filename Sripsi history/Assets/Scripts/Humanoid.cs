@@ -16,7 +16,8 @@ public class Humanoid
         }
         set
         {
-            health = value;
+            if (value <= MaxHealth)
+                health = value;
         }
     }
 

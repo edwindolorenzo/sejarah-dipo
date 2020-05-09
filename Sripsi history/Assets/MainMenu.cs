@@ -5,10 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject sceneLoader;
+    LevelLoader levelLoader;
 
+    private void Start()
+    {
+        levelLoader = sceneLoader.GetComponent<LevelLoader>();
+    }
     public void PlayGame()
     {
-        SceneManager.LoadScene("SelectLevel");
+        levelLoader.LoadSceneName("SelectLevel");
     }
 
     public void QuitGame()
