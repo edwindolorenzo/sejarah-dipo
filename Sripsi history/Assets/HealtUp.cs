@@ -7,10 +7,13 @@ public class HealtUp : MonoBehaviour
     public int healt = 1;
     public float fadeOutTime = 2f;
     private Animator animator;
+    private AudioSource audioSource;
+
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,23 +22,21 @@ public class HealtUp : MonoBehaviour
         {
             bool added = collision.GetComponent<PlayerController>().HealtUp(healt);
             if (added)
-                Destroy(gameObject);
-                //StartCoroutine(animated());
+                StartCoroutine(animated());
         }
     }
 
     IEnumerator animated()
     {
+        audioSource.Play();
         GetComponent<Collider2D>().enabled = false;
-        Color tmpColor = GetComponent<SpriteRenderer>().color;
-        while (tmpColor.a > 0f)
+        SpriteRenderer tmpSprite = GetComponent<SpriteRenderer>();
+        for (float f = 1f; f >= -0.05f; f -= 0.05f)
         {
-            transform.Translate(Vector3.up * Time.deltaTime);
-            tmpColor.a -= Time.deltaTime / fadeOutTime;
-
-            if (tmpColor.a <= 0f)
-                tmpColor.a = 0.0f;
-            yield return null;
+            Color c = tmpSprite.material.color;
+            c.a = f;
+            tmpSprite.material.color = c;
+            yield return new WaitForSeconds(0.05f);
         }
         Destroy(gameObject);
     }
