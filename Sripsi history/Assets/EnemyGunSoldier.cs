@@ -11,7 +11,7 @@ public class EnemyGunSoldier : PhysicsObject
     public float attackRange;
     public float maxSpeed;
     public Transform firePoint, startPatrol, EndPatrol, groundDetection;
-    public GameObject bulletPrefab;
+    public GameObject bulletPrefab, damagedArea;
     public Transform bulletPoint;
     public float attackLength;
     public Vector3[] firePosition;
@@ -37,6 +37,7 @@ public class EnemyGunSoldier : PhysicsObject
     private float jumpCount = 2f;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private BoxCollider2D damagedArearCollider;
 
     Enemy soldier = new Enemy();
 
@@ -44,6 +45,7 @@ public class EnemyGunSoldier : PhysicsObject
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        damagedArearCollider = damagedArea.GetComponent<BoxCollider2D>();
     }
 
     protected override void ComputeVelocity()
@@ -301,6 +303,7 @@ public class EnemyGunSoldier : PhysicsObject
         {
             died = true;
             animator.SetBool("Died", true);
+            damagedArearCollider.enabled = false;
             Invoke("Die", 2);
         }
     }

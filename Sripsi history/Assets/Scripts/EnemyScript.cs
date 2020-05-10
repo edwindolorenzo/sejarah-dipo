@@ -27,6 +27,7 @@ public class EnemyScript : PhysicsObject
     private float jumpCounter;
     private float jumpCount = 2f;
     private bool facingRight = true;
+    private BoxCollider2D damagedArearCollider;
     //private EnemyState _currentState;
 
     public Transform attackPoint, startPatrol, EndPatrol, groundDetection;
@@ -35,6 +36,7 @@ public class EnemyScript : PhysicsObject
     public LayerMask enemyLayers;
     public float attackRate = 2f;
     float nextAttackTime = 0f;
+    public GameObject damagedArea;
 
     Enemy soldier = new Enemy();
 
@@ -43,6 +45,7 @@ public class EnemyScript : PhysicsObject
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        damagedArearCollider = damagedArea.GetComponent<BoxCollider2D>();
     }
 
     protected override void ComputeVelocity()
@@ -282,6 +285,7 @@ public class EnemyScript : PhysicsObject
         {
             died = true;
             animator.SetBool("Died", true);
+            damagedArearCollider.enabled = false;
             Invoke("Die",2);
         }
     }

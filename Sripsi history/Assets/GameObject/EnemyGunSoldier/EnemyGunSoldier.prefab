@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7831601326267230323}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.125, y: -0.125, z: 0.03606322}
+  m_LocalPosition: {x: 0.045, y: -0.125, z: 0.03606322}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7831601326663786474}
@@ -284,6 +284,7 @@ MonoBehaviour:
   groundDetection: {fileID: 7831601326267230320}
   bulletPrefab: {fileID: 702131186262935178, guid: 98321b51f8edec249b3c32187e5610f1,
     type: 3}
+  damagedArea: {fileID: 7831601326941517379}
   bulletPoint: {fileID: 7831601327772038099}
   attackLength: 2
   firePosition:

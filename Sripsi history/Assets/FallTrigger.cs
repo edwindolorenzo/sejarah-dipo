@@ -10,7 +10,7 @@ public class FallTrigger : MonoBehaviour
         {
             collision.GetComponent<PlayerController>().TakeDamage(10);
         }
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        else
         {
             if(collision.GetComponent<EnemyScript>())
             collision.GetComponent<EnemyScript>().TakeDamage(10);
