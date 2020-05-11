@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public Transform platformGenerator;
+    private Vector3 platformStartPoint;
+    private PlatformDestroyer[] platformList;
 
     List<MiniGame> miniGames = new List<MiniGame>();
     private List<Stage> stages = new List<Stage>();
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        platformStartPoint = platformGenerator.position;
         DontDestroyOnLoad(gameObject);
         LoadData();
     }
@@ -93,4 +97,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void RestartEndlessRun()
+    {
+        StartCoroutine("RestartEndlessCo");
+    }
+
+    public IEnumerator RestartEndlessCo()
+    {
+        yield return new WaitForSeconds(2f);
+        platformList = FindObjectsOfType<PlatformDestroyer>();
+        for(int i=0; i<platformList.Length; i++)
+        {
+            platformList[i].gameObject.SetActive(false);
+        }
+        platformGenerator.position = platformStartPoint;
+    }
 }
