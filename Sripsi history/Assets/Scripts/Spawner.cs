@@ -60,9 +60,10 @@ public class Spawner : MonoBehaviour
             {
                 int randspawn = Random.Range(0, spawnPoints.Length);
                 Instantiate(enemyObject,spawnPoints[randspawn].position, Quaternion.identity);
-                yield return new WaitForSeconds(spawnWait);
             }
+            yield return new WaitForSeconds(spawnWait);
         }
+        yield return null;
     }
 
     public void AddSpawn()
