@@ -9,6 +9,9 @@ public class PlayerRideController : PhysicsObject
     public float jumpTakeOffSpeed;
     public float startSpeed;
 
+    public float jumpTime;
+    private float jumpTimeCounter;
+
     //MAKE HEART UI
     public Image[] hearts;
     public Sprite fullHeart;
@@ -23,6 +26,7 @@ public class PlayerRideController : PhysicsObject
     {
         //spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        jumpTimeCounter = jumpTime;
     }
 
     protected override void ComputeVelocity()
@@ -59,6 +63,25 @@ public class PlayerRideController : PhysicsObject
         if (CrossPlatformInputManager.GetButtonDown("Jump") && grounded)
         {
             velocity.y = jumpTakeOffSpeed;
+        }
+
+        if (CrossPlatformInputManager.GetButton("Jump"))
+        {
+            if(jumpTimeCounter > 0)
+            {
+                velocity.y = jumpTakeOffSpeed;
+                jumpTimeCounter -= Time.deltaTime;
+            }
+        }
+
+        if (CrossPlatformInputManager.GetButtonUp("Jump"))
+        {
+            jumpTimeCounter = 0;
+        }
+
+        if (grounded)
+        {
+            jumpTimeCounter = jumpTime;
         }
         anim.SetBool("Grounded", grounded);
     }
