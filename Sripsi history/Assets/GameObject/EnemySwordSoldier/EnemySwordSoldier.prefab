@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368138290436918384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.135, y: -0.11, z: 0}
+  m_LocalPosition: {x: 0.081, y: -0.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2605438477663145830}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 2605438476906316439}
   m_Layer: 0
   m_Name: EnemySwordSoldier
-  m_TagString: Enemies
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 2605438477483638812}
   m_Layer: 0
   m_Name: EndPatrol
-  m_TagString: Enemies
+  m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,6 +363,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attackRate: 10
+  damagedArea: {fileID: 2605438477611383530}
 --- !u!95 &2605438477663145828
 Animator:
   serializedVersion: 3
@@ -617,7 +618,7 @@ GameObject:
   - component: {fileID: 2605438477920573311}
   m_Layer: 0
   m_Name: StartPatrol
-  m_TagString: Enemies
+  m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

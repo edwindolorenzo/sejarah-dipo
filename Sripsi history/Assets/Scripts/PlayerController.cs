@@ -26,6 +26,8 @@ public class PlayerController : PhysicsObject
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private float lifeCounter;
+    private bool moveLeft = true;
+    private bool moveRight = true;
     Player player = new Player();
 
     //MAKE HEART UI
@@ -126,6 +128,12 @@ public class PlayerController : PhysicsObject
 
         animator.SetBool("Grounded", grounded);
         animator.SetFloat("Move", Mathf.Abs(velocity.x));
+        if (!moveLeft)
+            if (move.x <= -0.1)
+                move.x = 0;
+        if (!moveRight)
+            if (move.x >= -0.1)
+                move.x = 0;
         targetVelocity = animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Die") && grounded ? Vector2.zero : move * maxSpeed;
         if (Mathf.Abs(velocity.x) > 0.1 && grounded && stepSound.isPlaying == false)
             stepSound.Play();
@@ -222,6 +230,12 @@ public class PlayerController : PhysicsObject
             player.Health += healt;
             return true;
         }
+    }
+
+    public void Moveable(bool left = true, bool right = true)
+    {
+        moveLeft = left;
+        moveRight = right;
     }
 
     void OnDrawGizmosSelected()

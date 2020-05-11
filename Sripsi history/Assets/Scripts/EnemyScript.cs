@@ -27,6 +27,7 @@ public class EnemyScript : PhysicsObject
     private float jumpCounter;
     private float jumpCount = 2f;
     private bool facingRight = true;
+    private BoxCollider2D damagedArearCollider;
     //private EnemyState _currentState;
 
     public Transform attackPoint, startPatrol, EndPatrol, groundDetection;
@@ -35,14 +36,18 @@ public class EnemyScript : PhysicsObject
     public LayerMask enemyLayers;
     public float attackRate = 2f;
     float nextAttackTime = 0f;
+    public GameObject damagedArea;
 
     Enemy soldier = new Enemy();
 
 
     void Awake()
     {
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        damagedArearCollider = damagedArea.GetComponent<BoxCollider2D>();
     }
 
     protected override void ComputeVelocity()
@@ -221,7 +226,7 @@ public class EnemyScript : PhysicsObject
         RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.up, chaseRangeY);
         if (hit)
         {
-            if (Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY && hit.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && isAgro && jumpCounter <= 0 && grounded)
+            if (player.transform.position.y - transform.position.y > 0.5f && hit.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && isAgro && jumpCounter <= 0 && grounded)
             {
                 velocity.y = jumpTakeOffSpeed;
                 jumpCounter = jumpCount;
@@ -282,6 +287,7 @@ public class EnemyScript : PhysicsObject
         {
             died = true;
             animator.SetBool("Died", true);
+            damagedArearCollider.enabled = false;
             Invoke("Die",2);
         }
     }

@@ -16,8 +16,11 @@ public class TimelineManager : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        playerAnim = playerAnimator.runtimeAnimatorController;
-        playerAnimator.runtimeAnimatorController = null;
+        if(playerAnimator != null)
+        {
+            playerAnim = playerAnimator.runtimeAnimatorController;
+            playerAnimator.runtimeAnimatorController = null;
+        }
         if (gamePlayUI)
         {
             gamePlayUI.SetActive(false);
@@ -38,6 +41,7 @@ public class TimelineManager : MonoBehaviour
                 gamePlayUI.SetActive(true);
             }
             fix = true;
+            if(playerAnimator != null)
             playerAnimator.runtimeAnimatorController = playerAnim;
             dialougueScript.SetActive(true);
             if (cameraSetting)
