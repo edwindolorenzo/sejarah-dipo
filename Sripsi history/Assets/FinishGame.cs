@@ -12,6 +12,7 @@ public class FinishGame : MonoBehaviour
     public GameObject [] finishedObjects;
     public GameObject [] gameOverObjects;
     bool damaged = false;
+    [SerializeField] bool haveMiniGame = false;
     [SerializeField] Image[] objectiveStars;
     [SerializeField] Sprite fullStars, emptyStars;
     [SerializeField] Text[] objectiveTexts;
@@ -22,6 +23,8 @@ public class FinishGame : MonoBehaviour
 
     Player player;
     Stage stage;
+    List<MiniGame> listMiniGames = new List<MiniGame>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,7 @@ public class FinishGame : MonoBehaviour
         if (audioManager == null)
             audioManager = FindObjectOfType<AudioManager>();
         stage = gameManager.SelectStage(SceneManager.GetActiveScene().buildIndex);
+        listMiniGames.AddRange(gameManager.AllMiniGame());
         playerController = playerObject.GetComponent<PlayerController>();
         levelLoader = sceneLoader.GetComponent<LevelLoader>();
     }
@@ -41,24 +45,24 @@ public class FinishGame : MonoBehaviour
         backGroundUI.SetActive(true);
         if (stage != null)
         {
-            stage.Clear = true;
-            int i = 0;
-            int clearing = 0;
-            foreach (Chalange chalange in stage.Chalanges)
+            if (haveMiniGame)
             {
-                if(!chalange.Clear)
-                    chalange.Clear = ClearObjective(chalange.IdChalange);
-                if (chalange.Clear)
+                int x = 0;
+                foreach(MiniGame miniGame in listMiniGames)
                 {
-                    objectiveStars[i].sprite = fullStars;
-                    clearing += 1;
+                    if (!miniGame.Opened)
+                    {
+                        listMiniGames[x].Opened = true;
+                        Debug.Log(listMiniGames[1].Opened);
+                        break;
+                    }
+                    x += 1;
                 }
-                else
-                    objectiveStars[i].sprite = emptyStars;
-                objectiveTexts[i].text = chalange.NameChalange;
-                i += 1;
             }
-            gameManager.UpdateStage(stage, stage.Level);
+
+            stage.Clear = true;
+            CheckObjective(true);
+            gameManager.UpdateStage(stage, stage.Level, listMiniGames);
         }
         else
             Debug.Log("Stage Tidak Ditemukan");
@@ -74,6 +78,7 @@ public class FinishGame : MonoBehaviour
 
     public void GameOver()
     {
+        CheckObjective(false);
         backGroundUI.SetActive(true);
         for (int i = 0; i < finishedObjects.Length; i++)
         {
@@ -116,6 +121,24 @@ public class FinishGame : MonoBehaviour
                 break;
         }
         return cleared;
+    }
+
+    private void CheckObjective(bool finish = false)
+    {
+        int i = 0;
+        foreach (Chalange chalange in stage.Chalanges)
+        {
+            if (!chalange.Clear && finish)
+                chalange.Clear = ClearObjective(chalange.IdChalange);
+            if (chalange.Clear)
+            {
+                objectiveStars[i].sprite = fullStars;
+            }
+            else
+                objectiveStars[i].sprite = emptyStars;
+            objectiveTexts[i].text = chalange.NameChalange;
+            i += 1;
+        }
     }
 
     public void Finish()

@@ -30,15 +30,21 @@ public class GameManager : MonoBehaviour
     }
 
     public Stage SelectStage(int level)
-    {
+    {        
         Stage stage = stages[level-1];
         return stage;
     }
 
-    public void UpdateStage(Stage stageUpdated, int level)
+    public List<MiniGame> AllMiniGame()
+    {
+        return miniGames;
+    }
+
+    public void UpdateStage(Stage stageUpdated, int level, List<MiniGame> listMiniGames)
     {
         int indexStage = stages.FindIndex(x => x.Level == level);
         stages[indexStage] = stageUpdated;
+        miniGames = listMiniGames;
         SaveData();
     }
 
@@ -70,6 +76,7 @@ public class GameManager : MonoBehaviour
                 float miniGameScore = data.miniGameScore[i];
                 int idMiniGame = data.idMiniGame[i];
                 bool openMiniGame = data.openMiniGame[i];
+                miniGames.Add(new MiniGame(idMiniGame, miniGameScore, openMiniGame));
             }
         }
         else {

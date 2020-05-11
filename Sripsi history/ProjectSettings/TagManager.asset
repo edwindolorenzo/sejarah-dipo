@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Soil
   - Enemies
+  - EnemiesSword
+  - EnemiesGun
   layers:
   - Default
   - TransparentFX

@@ -43,6 +43,8 @@ public class EnemyGunSoldier : PhysicsObject
 
     void Awake()
     {
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         damagedArearCollider = damagedArea.GetComponent<BoxCollider2D>();
@@ -98,7 +100,7 @@ public class EnemyGunSoldier : PhysicsObject
             }
             else {
                 isAttacking = AttackRange(attackRange);
-                if (distToPlayer <= agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= 3)
+                if (distToPlayer <= agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
                 {
                     isAgro = true;
                     isPatrol = false;
@@ -240,7 +242,7 @@ public class EnemyGunSoldier : PhysicsObject
         RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.up, chaseRangeY);
         if (hit)
         {
-            if (Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY && hit.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && isAgro && jumpCounter <= 0 && grounded)
+            if (player.transform.position.y - transform.position.y > 0.5f && hit.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && isAgro && jumpCounter <= 0 && grounded)
             {
                 velocity.y = jumpTakeOffSpeed;
                 jumpCounter = jumpCount;
