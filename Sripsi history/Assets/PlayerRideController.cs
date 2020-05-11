@@ -7,7 +7,12 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerRideController : PhysicsObject
 {
     public float jumpTakeOffSpeed;
-    public float startSpeed;
+
+    public float moveSpeed;
+    public float speedMultiplier;
+    public float speedIncreaseMilestone;
+    private float speedMilestoneCount;
+    public float maxSpeedAllowed;
 
     public float jumpTime;
     private float jumpTimeCounter;
@@ -27,6 +32,7 @@ public class PlayerRideController : PhysicsObject
         //spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         jumpTimeCounter = jumpTime;
+        speedMilestoneCount = speedIncreaseMilestone;
     }
 
     protected override void ComputeVelocity()
@@ -57,7 +63,16 @@ public class PlayerRideController : PhysicsObject
 
         move.x = 1;
 
-        targetVelocity = move * startSpeed;
+        if(transform.position.x > speedMilestoneCount)
+        {
+            speedMilestoneCount += speedIncreaseMilestone;
+
+            speedIncreaseMilestone = speedIncreaseMilestone * speedMultiplier;
+            moveSpeed *= speedMultiplier;
+            if (moveSpeed > maxSpeedAllowed) moveSpeed = maxSpeedAllowed;
+        }
+
+        targetVelocity = move * moveSpeed;
 
         // Jumping Horse
         if (CrossPlatformInputManager.GetButtonDown("Jump") && grounded)

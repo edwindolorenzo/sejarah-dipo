@@ -6925,7 +6925,7 @@ PrefabInstance:
     - target: {fileID: 2842298825581321673, guid: f53467857700ff240a54bc978dceda30,
         type: 3}
       propertyPath: moveSpeed
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2842298825581321673, guid: f53467857700ff240a54bc978dceda30,
         type: 3}
@@ -6963,6 +6963,21 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpTime
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842298825581321673, guid: f53467857700ff240a54bc978dceda30,
+        type: 3}
+      propertyPath: speedMultiplier
+      value: 1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842298825581321673, guid: f53467857700ff240a54bc978dceda30,
+        type: 3}
+      propertyPath: speedIncreaseMilestone
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842298825581321673, guid: f53467857700ff240a54bc978dceda30,
+        type: 3}
+      propertyPath: maxSpeedAllowed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2842298825581321678, guid: f53467857700ff240a54bc978dceda30,
         type: 3}
