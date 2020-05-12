@@ -12,9 +12,9 @@ public class MainMenu : MonoBehaviour
     {
         levelLoader = sceneLoader.GetComponent<LevelLoader>();
     }
-    public void PlayGame()
+    public void PlayGame(string name)
     {
-        levelLoader.LoadSceneName("SelectLevel");
+        levelLoader.LoadSceneName(name);
     }
 
     public void QuitGame()

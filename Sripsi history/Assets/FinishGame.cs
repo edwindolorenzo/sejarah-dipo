@@ -45,7 +45,7 @@ public class FinishGame : MonoBehaviour
         backGroundUI.SetActive(true);
         if (stage != null)
         {
-            if (haveMiniGame)
+            if (haveMiniGame && !stage.Clear)
             {
                 int x = 0;
                 foreach(MiniGame miniGame in listMiniGames)
@@ -53,7 +53,6 @@ public class FinishGame : MonoBehaviour
                     if (!miniGame.Opened)
                     {
                         listMiniGames[x].Opened = true;
-                        Debug.Log(listMiniGames[1].Opened);
                         break;
                     }
                     x += 1;
