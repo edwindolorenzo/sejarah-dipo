@@ -6,30 +6,40 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : PhysicsObject
 {
+    //movement
     public float maxSpeed = 7;
     public float jumpTakeOffSpeed = 7;
+    private bool moveLeft = true;
+    private bool moveRight = true;
+
+    //attack range
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
+
+    //time invicible
     public float invicibiltyLength;
+    private float invicibiltyCounter;
     public float flashLength = 0.1f;
+    private float flashCounter;
+    private SpriteRenderer spriteRenderer;
+
     public GameObject respawn, finishUI;
+
+    //script if dead
     FinishGame finishGame;
     FinishMiniGame finishMiniGame;
+    bool die = false;
+    private float lifeCounter;
 
     //waktu kecepatan untuk menyerang
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
     [SerializeField] private AudioSource stepSound, damagedSound, damageSound;
-    private float flashCounter;
-    private float invicibiltyCounter;
-    private SpriteRenderer spriteRenderer;
     private Animator animator;
-    private float lifeCounter;
-    private bool moveLeft = true;
-    private bool moveRight = true;
 
+    //validate player life
     public int playerLife = 3;
     Player player;
 
@@ -40,7 +50,6 @@ public class PlayerController : PhysicsObject
     public Image lifeUI;
     public Text lifeText;
 
-    bool die = false;
 
     // Start is called before the first frame update
     void Awake()

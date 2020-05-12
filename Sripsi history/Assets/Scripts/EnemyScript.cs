@@ -4,38 +4,48 @@ using UnityEngine;
 
 public class EnemyScript : PhysicsObject
 {
+    //chase range
     [SerializeField] public Transform player;
-    [SerializeField] Transform castPoint;
     [SerializeField] float agroRange;
+    [SerializeField] private float chaseRangeY = 4f;
+
+    //range view enemy
+    [SerializeField] Transform castPoint;
+
+    //move enemy
     [SerializeField] float maxSpeed;
     [SerializeField] private float jumpTakeOffSpeed = 10;
-    [SerializeField] private float chaseRangeY = 4f;
+    private bool moveLeft = true;
+    private bool moveRight = true;
+    private float jumpCounter;
+    private float jumpCount = 2f;
+
+    //attack area
+    private CircleCollider2D attackCollider;
+    private BoxCollider2D damagedArearCollider;
     [SerializeField] private AudioSource SwordSound, damagedSound;
+    private float attackCounter;
+    private float attackCount = 2f;
+    public float attackRange = 0.5f;
+    public float attackRate = 2f;
+    float nextAttackTime = 0f;
+    public LayerMask enemyLayers;
+
+    //state enemy
     private bool isAgro = false;
     private bool isSearching = false;
     private bool isPatrol = true;
     private bool died = false;
     private bool reachPatrol = false;
     private bool haveGround = true;
-    private bool moveLeft = true;
-    private bool moveRight = true;
-    private CircleCollider2D attackCollider;
+    private bool facingRight = true;
+
+    //dead enemy
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-    private float attackCounter;
-    private float attackCount = 2f;
-    private float jumpCounter;
-    private float jumpCount = 2f;
-    private bool facingRight = true;
-    private BoxCollider2D damagedArearCollider;
     //private EnemyState _currentState;
 
     public Transform attackPoint, startPatrol, EndPatrol, groundDetection;
-    public float attackRange = 0.5f;
-    public LayerMask grondMask;
-    public LayerMask enemyLayers;
-    public float attackRate = 2f;
-    float nextAttackTime = 0f;
     public GameObject damagedArea;
 
     Enemy soldier = new Enemy();
@@ -65,7 +75,7 @@ public class EnemyScript : PhysicsObject
             jumpCounter -= Time.deltaTime;
         }
         //Enemy AGRO RUSH IN DISTANCE
-        //// distance to player
+        //// distance to player (range chase player)
         float distToPlayer = Vector2.Distance(transform.position, player.transform.position);
         haveGround = true;
 

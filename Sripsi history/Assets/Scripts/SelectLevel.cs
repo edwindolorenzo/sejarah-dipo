@@ -7,20 +7,30 @@ using UnityEngine.SceneManagement;
 public class SelectLevel : MonoBehaviour
 {
 
+    // scene animation
     public GameObject sceneLoader;
     LevelLoader levelLoader;
 
+    // all level
     public Button[] buttons;
+
+    //player behind screen
     GameObject playerMenu;
+
+    //check unlock level
     int levelPassed = 0;
+
+    // UI level selected
     int pickLevel = 1;
     [SerializeField]Image[] objectiveStars;
     [SerializeField] Sprite fullStars, emptyStars;
     [SerializeField] Text[] objectiveTexts;
     [SerializeField] Text headerLevelText;
+
+
     GameManager gameManager = GameManager.instance;
     private List<Stage> stages = new List<Stage>();
-    // Start is called before the first frame update
+
     void Start()
     {
         levelLoader = sceneLoader.GetComponent<LevelLoader>();

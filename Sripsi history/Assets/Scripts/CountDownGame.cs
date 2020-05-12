@@ -6,15 +6,18 @@ using UnityEngine.UI;
 public class CountDownGame : MonoBehaviour
 {
     public float timeCountdown = 180f;
+    float counting = 0f;
     public Text timerText;
+
     bool playing = false;
     bool ended = false;
     bool respawn = false;
+
     public GameObject[] respawnObjects;
     public GameObject dialogue, gamePlayUI;
+
     public Camera cam;
     CameraFollow cameraFollow;
-    float counting = 0f;
 
     // Start is called before the first frame update
     void Start()

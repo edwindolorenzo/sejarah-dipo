@@ -5,27 +5,40 @@ using UnityEngine;
 
 public class EnemyGunSoldier : PhysicsObject
 {
+    //chase range
     public Transform player;
-    public Transform castPoint;
     public float agroRange;
-    public float attackRange;
-    public float maxSpeed;
-    public Transform firePoint, startPatrol, EndPatrol, groundDetection;
-    public GameObject bulletPrefab, damagedArea;
-    public Transform bulletPoint;
-    public float attackLength;
-    public Vector3[] firePosition;
-
-
-    [SerializeField] private float jumpTakeOffSpeed = 10;
     [SerializeField] private float chaseRangeY = 4f;
-    [SerializeField] private AudioSource gunShotSound, damagedSound;
     private float distToPlayer;
-    private float attackCounter;
+
+    //range view enemy
+    public Transform castPoint;
+    public float attackRange;
     private float xAttack = 1;
-    private float AttackRotation = 0;
+
+    //move enemy
+    public float maxSpeed;
+    [SerializeField] private float jumpTakeOffSpeed = 10;
     private bool moveLeft = true;
     private bool moveRight = true;
+    private float jumpCounter;
+    private float jumpCount = 2f;
+
+    public Transform firePoint, startPatrol, EndPatrol, groundDetection;
+    public GameObject bulletPrefab, damagedArea;
+    private BoxCollider2D damagedArearCollider;
+
+    // attack point
+    public Vector3[] firePosition;
+    public Transform bulletPoint;
+    [SerializeField] private AudioSource gunShotSound, damagedSound;
+    private float AttackRotation = 0;
+
+    //attack count
+    public float attackLength;
+    private float attackCounter;
+
+    //state enemy
     private bool isAgro = false;
     private bool isSearching = false;
     private bool isAttacking = false;
@@ -33,11 +46,11 @@ public class EnemyGunSoldier : PhysicsObject
     private bool facingRight = true;
     private bool isPatrol = true;
     private bool reachPatrol = false;
-    private float jumpCounter;
-    private float jumpCount = 2f;
+
+    // dead enemy
     private SpriteRenderer spriteRenderer;
+
     private Animator animator;
-    private BoxCollider2D damagedArearCollider;
 
     Enemy soldier = new Enemy();
 

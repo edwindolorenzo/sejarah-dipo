@@ -5,18 +5,23 @@ using UnityEngine.UI;
 
 public class SelectMiniGame : MonoBehaviour
 {
+    public GameObject sceneLoader;
+    LevelLoader levelLoader;
+
+    // all minigames
     public Button[] buttons;
+    private List<MiniGame> listMiniGames = new List<MiniGame>();
+
+    // mini game selected
     public Sprite[] miniGameImages;
     public Text descriptionText, highscore;
     public Image descImage;
-    public GameObject sceneLoader;
-
-    private List<MiniGame> listMiniGames = new List<MiniGame>();
-    GameObject playerMenu;
-    GameManager gameManager = GameManager.instance;
-    LevelLoader levelLoader;
     int gameId;
 
+    // player behind sence
+    GameObject playerMenu;
+
+    GameManager gameManager = GameManager.instance;
     // Start is called before the first frame update
     void Start()
     {
