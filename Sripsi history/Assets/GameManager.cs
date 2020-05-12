@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator RestartEndlessCo()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         platformList = FindObjectsOfType<PlatformDestroyer>();
         for(int i=0; i<platformList.Length; i++)
         {

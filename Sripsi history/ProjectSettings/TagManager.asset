@@ -8,6 +8,7 @@ TagManager:
   - Enemies
   - EnemiesSword
   - EnemiesGun
+  - Traps
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Platform
   - EnemiesCollider
   - EnemiesBullet
-  - 
+  - Traps
   - 
   - 
   - 
