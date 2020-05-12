@@ -38,4 +38,10 @@ public class Player : Humanoid
         Life = MaxLife;
         Health = MaxHealth;
     }
+
+    public Player(int life)
+    {
+        Life = life;
+        Health = MaxHealth;
+    }
 }

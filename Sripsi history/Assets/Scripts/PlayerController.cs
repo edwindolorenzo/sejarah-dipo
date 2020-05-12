@@ -15,6 +15,7 @@ public class PlayerController : PhysicsObject
     public float flashLength = 0.1f;
     public GameObject respawn, finishUI;
     FinishGame finishGame;
+    FinishMiniGame finishMiniGame;
 
     //waktu kecepatan untuk menyerang
     public float attackRate = 2f;
@@ -28,7 +29,9 @@ public class PlayerController : PhysicsObject
     private float lifeCounter;
     private bool moveLeft = true;
     private bool moveRight = true;
-    Player player = new Player();
+
+    public int playerLife = 3;
+    Player player;
 
     //MAKE HEART UI
     public Image[] hearts;
@@ -37,12 +40,18 @@ public class PlayerController : PhysicsObject
     public Image lifeUI;
     public Text lifeText;
 
+    bool die = false;
+
     // Start is called before the first frame update
     void Awake()
     {
+        player = new Player(playerLife);
+        lifeText.text = player.Life+" X";
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         finishGame = finishUI.GetComponent<FinishGame>();
+        if (finishGame == null)
+            finishMiniGame = finishUI.GetComponent<FinishMiniGame>();
     }
     protected override void ComputeVelocity()
     {
@@ -157,10 +166,9 @@ public class PlayerController : PhysicsObject
 
     public void TakeDamage(float damage)
     {
-        if (invicibiltyCounter <= 0)
+        if (invicibiltyCounter <= 0 && !die)
         {
             player.Health -= damage;
-            finishGame.PlayerDamaged();
             animator.SetTrigger("Hurt");
             damagedSound.Play();
             // membuat kena damage mundur belum bisa
@@ -211,7 +219,11 @@ public class PlayerController : PhysicsObject
 
     void Die()
     {
-        finishGame.GameOver();
+        die = true;
+        if (finishGame != null)
+            finishGame.GameOver();
+        else
+            finishMiniGame.GameOver();
     }
 
     public Player givePlayerStatus()

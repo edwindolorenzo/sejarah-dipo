@@ -43,7 +43,7 @@ public class SelectMiniGame : MonoBehaviour
         {
             gameId = miniGame.Id;
             descriptionText.text = miniGame.Description;
-            highscore.text = miniGame.Highscore.ToString();
+            highscore.text = "Nilai Tertinggi : " + miniGame.Highscore.ToString("0");
             descImage.sprite = miniGameImages[miniGame.Id - 1];
         }
     }

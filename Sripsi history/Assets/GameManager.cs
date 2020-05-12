@@ -40,11 +40,28 @@ public class GameManager : MonoBehaviour
         return miniGames;
     }
 
+    public MiniGame SelectMiniGame(int id)
+    {
+        foreach(MiniGame miniGame in miniGames)
+        {
+            if (miniGame.Id == id)
+                return miniGame;
+        }
+        return null;
+    }
+
     public void UpdateStage(Stage stageUpdated, int level, List<MiniGame> listMiniGames)
     {
         int indexStage = stages.FindIndex(x => x.Level == level);
         stages[indexStage] = stageUpdated;
         miniGames = listMiniGames;
+        SaveData();
+    }
+
+    public void UpdateMiniGame(MiniGame miniGame)
+    {
+        int indexMiniGame = miniGames.FindIndex(x => x.Id == miniGame.Id);
+        miniGames[indexMiniGame] = miniGame;
         SaveData();
     }
 

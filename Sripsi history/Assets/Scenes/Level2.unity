@@ -1088,7 +1088,9 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1884539613}
   spawnWait: 2
+  maxWait: 2
   numberUnit: 2
+  maxUnit: 20
   tagEnemies: EnemiesGun
 --- !u!4 &394917123
 Transform:
@@ -1644,7 +1646,7 @@ Camera:
   m_GameObject: {fileID: 619154378}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
@@ -1938,7 +1940,9 @@ MonoBehaviour:
   - {fileID: 985592945}
   - {fileID: 1270690632}
   spawnWait: 2
+  maxWait: 2
   numberUnit: 5
+  maxUnit: 20
   tagEnemies: EnemiesSword
 --- !u!4 &693297655
 Transform:
@@ -42892,10 +42896,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1561171269916563536, guid: e4a859f9abd9bb349bb66ee54d772c3a,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1778362614}
+    - target: {fileID: 1561171269916563536, guid: e4a859f9abd9bb349bb66ee54d772c3a,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetDownState
+      objectReference: {fileID: 0}
     - target: {fileID: 1561171269916563538, guid: e4a859f9abd9bb349bb66ee54d772c3a,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1561171269916563551, guid: e4a859f9abd9bb349bb66ee54d772c3a,
+        type: 3}
+      propertyPath: Name
+      value: Menu
       objectReference: {fileID: 0}
     - target: {fileID: 1561171270003983010, guid: e4a859f9abd9bb349bb66ee54d772c3a,
         type: 3}
@@ -43059,6 +43078,18 @@ PrefabInstance:
       objectReference: {fileID: 1134094453}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a859f9abd9bb349bb66ee54d772c3a, type: 3}
+--- !u!114 &1778362614 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1561171269916563551, guid: e4a859f9abd9bb349bb66ee54d772c3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1778362609}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bf3be603548374ca46f521a3aa7fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1788454485 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2396494719822455765, guid: 39ba28b69f0aaf441a779eb7dd569b28,
@@ -44424,7 +44455,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.17, y: 0.25}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 0.17, y: 0.33}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
