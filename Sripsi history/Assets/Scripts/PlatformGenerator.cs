@@ -26,6 +26,14 @@ public class PlatformGenerator : MonoBehaviour
     public float maxHeightChange;
     private float heightChange;
 
+    //private TrapGenerator theTrapGenerator;
+
+    private ObjectGenerator theHealthGenerator;
+    public float randomHealthThreshold;
+
+    public float randomTrapThreshold;
+    public ObjectPooler trapPool;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +48,8 @@ public class PlatformGenerator : MonoBehaviour
 
         minHeight = transform.position.y;
         maxHeight = maxHeightPoint.position.y;
+
+        theHealthGenerator = GameObject.Find("HeartGenerator").GetComponent<ObjectGenerator>();
     }
 
     // Update is called once per frame
@@ -65,13 +75,28 @@ public class PlatformGenerator : MonoBehaviour
             transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector]/2) + distanceBetween, heightChange, transform.position.z);
 
             //Instantiate(theObjectPools[platformSelector], transform.position, transform.rotation);
-
              
             GameObject newPlatform = theObjectPools[platformSelector].GetPooledObject();
 
             newPlatform.transform.position = transform.position;
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
+
+            if(Random.Range(0, 100) < randomHealthThreshold)
+                theHealthGenerator.SpawnObjects(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z));
+
+            if (Random.Range(0, 100) < randomTrapThreshold)
+            {
+                GameObject newTrap = trapPool.GetPooledObject();
+
+                float trapXPosition = Random.Range(-platformWidths[platformSelector]/2 + 1f, platformWidths[platformSelector]/2 - 1f);
+
+                Vector3 trapPosition = new Vector3(trapXPosition, 0.75f, 0f);
+
+                newTrap.transform.position = transform.position + trapPosition;
+                newTrap.transform.rotation = transform.rotation;
+                newTrap.SetActive(true);
+            }
 
             transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2), transform.position.y, transform.position.z);
         }

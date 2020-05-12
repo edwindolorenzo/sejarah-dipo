@@ -8,7 +8,7 @@ public class HealtUp : MonoBehaviour
     public float fadeOutTime = 2f;
     private Animator animator;
     private AudioSource audioSource;
-
+    private bool added = false;
 
     private void Start()
     {
@@ -20,7 +20,14 @@ public class HealtUp : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            bool added = collision.GetComponent<PlayerController>().HealtUp(healt);
+            if (collision.GetComponent<PlayerRideController>())
+            {
+                added = collision.GetComponent<PlayerRideController>().HealtUp(healt);
+            }
+            if (collision.GetComponent<PlayerController>())
+            {
+                added = collision.GetComponent<PlayerController>().HealtUp(healt);
+            }
             if (added)
                 StartCoroutine(animated());
         }

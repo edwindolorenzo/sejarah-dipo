@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public Transform platformGenerator;
     private Vector3 platformStartPoint;
-    private PlatformDestroyer[] platformList;
+    private ObjectDestroyer[] objectWithDestroyerList;
 
     List<MiniGame> miniGames = new List<MiniGame>();
     private List<Stage> stages = new List<Stage>();
@@ -107,10 +107,10 @@ public class GameManager : MonoBehaviour
     public IEnumerator RestartEndlessCo()
     {
         yield return new WaitForSeconds(1f);
-        platformList = FindObjectsOfType<PlatformDestroyer>();
-        for(int i=0; i<platformList.Length; i++)
+        objectWithDestroyerList = FindObjectsOfType<ObjectDestroyer>();
+        for (int i = 0; i < objectWithDestroyerList.Length; i++)
         {
-            platformList[i].gameObject.SetActive(false);
+            objectWithDestroyerList[i].gameObject.SetActive(false);
         }
         platformGenerator.position = platformStartPoint;
     }

@@ -152,11 +152,11 @@ public class PlayerRideController : PhysicsObject
                 lifeText.text = playerRidingHorse.Life + " X";
                 if (playerRidingHorse.Life > 0)
                 {
-                    Invoke("Respawn", 2);
+                    Invoke("Respawn", 1);
                 }
                 else
                 {
-                    Invoke("Die", 2);
+                    Invoke("Die", 1);
                 }
             }
             invicibiltyCounter = invicibiltyLength;
@@ -170,6 +170,8 @@ public class PlayerRideController : PhysicsObject
     void Respawn()
     {
         theGameManager.RestartEndlessRun();
+        moveSpeed = 0;
+        StartCoroutine(WaitFor(3));
         lifeCounter = 3f;
         playerRidingHorse.Health = playerRidingHorse.MaxHealth;
         moveSpeed = moveSpeedStore;
@@ -181,5 +183,23 @@ public class PlayerRideController : PhysicsObject
     void Die()
     {
         finishGame.GameOver();
+    }
+
+    public bool HealtUp(int healt)
+    {
+        if (playerRidingHorse.Health >= playerRidingHorse.MaxHealth)
+        {
+            return false;
+        }
+        else
+        {
+            playerRidingHorse.Health += healt;
+            return true;
+        }
+    }
+
+    public IEnumerator WaitFor (float delayInSeconds)
+    {
+        yield return new WaitForSeconds(delayInSeconds);
     }
 }

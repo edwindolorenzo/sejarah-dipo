@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 298f0bffe7103b34cafdb014090747f6
+guid: f61a052b29fb5874182be613dc94380d
 TextureImporter:
   fileIDToRecycleName:
-    21300000: trap_0
-    21300002: trap_1
-    21300004: trap_2
-    21300006: trap_3
-    21300008: trap_4
+    21300000: trap 1_0
+    21300002: trap 1_1
+    21300004: trap 1_2
+    21300006: trap 1_3
+    21300008: trap 1_4
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -50,7 +50,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: trap_0
+      name: trap 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,19 +114,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 883ec529cb370bf4f835900ac6073370
+      spriteID: 672fbc3b7cfcaaa4f91c1776ca8168f3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: trap_1
+      name: trap 1_1
       rect:
         serializedVersion: 2
-        x: 24
+        x: 16
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,19 +134,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a254294f2521f5f49a87c58cf2ff8859
+      spriteID: 1d64f1bc3ae0f6e44a60bcbc6527b662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: trap_2
+      name: trap 1_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0bbb93745e98f94a87705a231cbde4e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trap 1_3
       rect:
         serializedVersion: 2
         x: 48
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,19 +174,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6ded35f17d6c854e8668e5635fd671e
+      spriteID: f6fe342b74f007b438ede5400dc4de59
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: trap_3
+      name: trap 1_4
       rect:
         serializedVersion: 2
-        x: 72
+        x: 64
         y: 0
-        width: 24
-        height: 24
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,27 +194,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 473663da62262014c9143d87f5f5b25f
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: trap_4
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1fd0c8c2c381a7247903103724df1b81
+      spriteID: 6e4d8441416a9cc48a4f8d6ba6989ca4
       vertices: []
       indices: 
       edges: []
@@ -202,7 +202,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 607ecc532f12d914793275b89d67bd61
+    spriteID: c0ea13d928d80dc41b2b580d0cba8e22
     vertices: []
     indices: 
     edges: []
