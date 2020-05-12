@@ -7,6 +7,8 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerRideController : PhysicsObject
 {
     public float jumpTakeOffSpeed;
+    public float jumpTime;
+    private float jumpTimeCounter;
 
     private float moveSpeedStore;
     public float moveSpeed;
@@ -15,12 +17,8 @@ public class PlayerRideController : PhysicsObject
 
     public float speedIncreaseMilestone;
     private float speedIncreaseMilestoneStore;
-
     private float speedMilestoneCount;
     private float speedMilestoneCountStore;
-
-    public float jumpTime;
-    private float jumpTimeCounter;
 
     //MAKE HEART UI
     public Image[] hearts;
@@ -148,22 +146,12 @@ public class PlayerRideController : PhysicsObject
         {
             playerRidingHorse.Health -= damage;
             finishGame.PlayerDamaged();
-            //anim.SetTrigger("Hurt");
-            //damagedSound.Play();
             if (playerRidingHorse.Health <= 0)
             {
-                //anim.SetTrigger("Die");
-                //anim.SetBool("Died", true);
                 playerRidingHorse.Life -= 1;
                 lifeText.text = playerRidingHorse.Life + " X";
                 if (playerRidingHorse.Life > 0)
                 {
-                    //lifeText.text = playerRidingHorse.Life + " x";
-                    //for (float i = 0; i >= 1; i += Time.deltaTime)
-                    //{
-                    //    lifeUI.color = new Color(1, 1, 1, i);
-                    //    lifeText.color = new Color(0, 0, 0, i);
-                    //}
                     Invoke("Respawn", 2);
                 }
                 else
@@ -181,7 +169,6 @@ public class PlayerRideController : PhysicsObject
 
     void Respawn()
     {
-        //anim.SetBool("Died", false);
         theGameManager.RestartEndlessRun();
         lifeCounter = 3f;
         playerRidingHorse.Health = playerRidingHorse.MaxHealth;

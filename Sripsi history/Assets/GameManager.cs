@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        platformStartPoint = platformGenerator.position;
+        if(platformGenerator != null)
+            platformStartPoint = platformGenerator.position;
         DontDestroyOnLoad(gameObject);
         LoadData();
     }
@@ -99,6 +100,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartEndlessRun()
     {
+        //Method that can run by itself and run independently at the rest of script
         StartCoroutine("RestartEndlessCo");
     }
 
