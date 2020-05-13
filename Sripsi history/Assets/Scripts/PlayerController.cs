@@ -173,9 +173,9 @@ public class PlayerController : PhysicsObject
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool fallDamage = false)
     {
-        if (invicibiltyCounter <= 0 && !die)
+        if ((invicibiltyCounter <= 0 || fallDamage) && !die)
         {
             player.Health -= damage;
             animator.SetTrigger("Hurt");

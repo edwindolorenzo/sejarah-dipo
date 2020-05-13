@@ -8,7 +8,7 @@ public class FallTrigger : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            collision.GetComponent<PlayerController>().TakeDamage(10);
+            collision.GetComponent<PlayerController>().TakeDamage(10,true);
         }
         else
         {

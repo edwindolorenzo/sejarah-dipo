@@ -39,13 +39,15 @@ public class EnemyGunSoldier : PhysicsObject
     private float attackCounter;
 
     //state enemy
+    private bool reachPatrol = false;
+    private bool facingRight = true;
+
+    // can be deleted ( use in if else case)
     private bool isAgro = false;
     private bool isSearching = false;
     private bool isAttacking = false;
     private bool died = false;
-    private bool facingRight = true;
     private bool isPatrol = true;
-    private bool reachPatrol = false;
 
     // dead enemy
     private SpriteRenderer spriteRenderer;
@@ -65,26 +67,17 @@ public class EnemyGunSoldier : PhysicsObject
 
     protected override void ComputeVelocity()
     {
+        // check attack counter
         if (attackCounter > 0)
         {
             attackCounter -= Time.deltaTime;
         }
-            //Enemy AGRO RUSH IN DISTANCE
-            //// distance to player
-            distToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        if (jumpCounter > 0)
+        {
+            jumpCounter -= Time.deltaTime;
+        }
 
-        //if(distToPlayer < agroRange)
-        //{
-        //    //chase player
-        //    ChasePlayer();
-        //}
-        //else
-        //{
-        //    StopChasingPlayer();
-        //}
-
-        //FOR ATTACKING PLAYER
-
+        // check if front edge
         canMove(true, true);
         RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.down, chaseRangeY);
         if (hit.collider == null)
@@ -99,68 +92,101 @@ public class EnemyGunSoldier : PhysicsObject
             }
         }
 
-
-        if (!died)
+        distToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        switch (soldier.state)
         {
-
-            if (isAttacking)
-            {
-                if(attackCounter <= 0)
+            case Enemy.State.Patrol:
+                if (reachPatrol)
                 {
-                    attackCounter = attackLength;
-                    Invoke("Attack",1);
-                }
-            }
-            else {
-                isAttacking = AttackRange(attackRange);
-                if (distToPlayer <= agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
-                {
-                    isAgro = true;
-                    isPatrol = false;
+                    Chase(startPatrol);
                 }
                 else
                 {
-                    if (isAgro)
-                    {
-                        if (!isSearching)
-                        {
-                            isSearching = true;
-                            Invoke("StopChasingPlayer", 3);
-                        }
-                    }
-                    if (isPatrol)
-                    {
-                        if (reachPatrol)
-                        {
-                            Chase(startPatrol);
-                        }
-                        else
-                        {
-                            Chase(EndPatrol);
-                        }
-                    }
+                    Chase(EndPatrol);
                 }
-
-                if (isAgro)
+                if (distToPlayer <= agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
+                    soldier.state = Enemy.State.Chase;
+                break;
+            case Enemy.State.Chase:
+                Chase(player);
+                StartCoroutine(ChaseCase());
+                break;
+            case Enemy.State.Attack:
+                if(attackCounter <= 0)
                 {
-
-                    //if (Time.time >= nextAttackTime)
-                    //{
-                    //    float distToPlayer = Vector2.Distance(transform.position, player.transform.position);
-                    //    if (distToPlayer <= 1.5f)
-                    //    {
-                    //        //animator.SetTrigger("Attack");
-                    //        Attack();
-                    //    }
-                    //}
-                    Chase(player);
+                    StartCoroutine(Attacking());
                 }
-            }
+                break;
+            case Enemy.State.Dead:
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+                break;
+            default:
+                break;
         }
-        else
-        {
-            spriteRenderer.enabled = !spriteRenderer.enabled;
-        }
+
+        // USE IF ELSE CAN BE DELETED
+        //if (!died)
+        //{
+
+        //    if (isAttacking)
+        //    {
+        //        if(attackCounter <= 0)
+        //        {
+        //            attackCounter = attackLength;
+        //            Invoke("Attack",1);
+        //        }
+        //    }
+        //    else {
+        //        isAttacking = AttackRange(attackRange);
+        //        if (distToPlayer <= agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
+        //        {
+        //            isAgro = true;
+        //            isPatrol = false;
+        //        }
+        //        else
+        //        {
+        //            if (isAgro)
+        //            {
+        //                if (!isSearching)
+        //                {
+        //                    isSearching = true;
+        //                    Invoke("StopChasingPlayer", 3);
+        //                }
+        //            }
+        //            if (isPatrol)
+        //            {
+        //                if (reachPatrol)
+        //                {
+        //                    Chase(startPatrol);
+        //                }
+        //                else
+        //                {
+        //                    Chase(EndPatrol);
+        //                }
+        //            }
+        //        }
+
+        //        if (isAgro)
+        //        {
+
+        //            //if (Time.time >= nextAttackTime)
+        //            //{
+        //            //    float distToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        //            //    if (distToPlayer <= 1.5f)
+        //            //    {
+        //            //        //animator.SetTrigger("Attack");
+        //            //        Attack();
+        //            //    }
+        //            //}
+        //            Chase(player);
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    spriteRenderer.enabled = !spriteRenderer.enabled;
+        //}
+
         animator.SetFloat("Move", Mathf.Abs(velocity.x));
         animator.SetBool("Grounded", grounded);
     }
@@ -255,7 +281,7 @@ public class EnemyGunSoldier : PhysicsObject
         RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.up, chaseRangeY);
         if (hit)
         {
-            if (player.transform.position.y - transform.position.y > 0.5f && hit.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && isAgro && jumpCounter <= 0 && grounded)
+            if (player.transform.position.y - transform.position.y > 0.5f && hit.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && soldier.state == Enemy.State.Chase && jumpCounter <= 0 && grounded)
             {
                 velocity.y = jumpTakeOffSpeed;
                 jumpCounter = jumpCount;
@@ -269,7 +295,7 @@ public class EnemyGunSoldier : PhysicsObject
         {
             Flip();
         }
-        if (Mathf.Round(transform.position.x) == Mathf.Round(target.position.x) && isPatrol)
+        if (Mathf.Round(transform.position.x) == Mathf.Round(target.position.x) && soldier.state == Enemy.State.Patrol)
         {
             reachPatrol = !reachPatrol;
         }
@@ -287,28 +313,6 @@ public class EnemyGunSoldier : PhysicsObject
         moveRight = right;
     }
 
-    void StopChasingPlayer()
-    {
-        isAgro = false;
-        isSearching = false;
-        isPatrol = true;
-    }
-
-    void Attack()
-    {
-        if(!animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Die"))
-        {
-            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            gunShotSound.Play();
-        }
-        firePoint.transform.rotation = Quaternion.Euler(new Vector3(0, AttackRotation, 0));
-        firePoint.localPosition = firePosition[0];
-        animator.SetBool("ShootUp", false);
-        animator.SetBool("ShootMid", false);
-        animator.SetBool("ShootDown", false);
-        isAttacking = false;
-    }
-
     public void TakeDamage(float damage)
     {
         soldier.Health -= damage;
@@ -317,6 +321,7 @@ public class EnemyGunSoldier : PhysicsObject
         if (soldier.Health <= 0)
         {
             died = true;
+            soldier.state = Enemy.State.Dead;
             animator.SetBool("Died", true);
             damagedArearCollider.enabled = false;
             Invoke("Die", 2);
@@ -337,6 +342,67 @@ public class EnemyGunSoldier : PhysicsObject
         xAttack = -xAttack;
         //firePoint.localPosition = new Vector2(-firePoint.localPosition.x, firePoint.localPosition.y);
     }
+
+    IEnumerator Attacking()
+    {
+        attackCounter = attackLength;
+        yield return new WaitForSeconds(1f);
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Die"))
+        {
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            gunShotSound.Play();
+        }
+        firePoint.transform.rotation = Quaternion.Euler(new Vector3(0, AttackRotation, 0));
+        firePoint.localPosition = firePosition[0];
+        animator.SetBool("ShootUp", false);
+        animator.SetBool("ShootMid", false);
+        animator.SetBool("ShootDown", false);
+        soldier.state = Enemy.State.Chase;
+        yield return null;
+    }
+
+    IEnumerator ChaseCase()
+    {
+        if (AttackRange(attackRange))
+        {
+            soldier.state = Enemy.State.Attack;
+            yield return null;
+        }
+        if (!(distToPlayer <= agroRange) && !(Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY))
+        {
+            Debug.Log("Masuk");
+            yield return new WaitForSeconds(3f);
+            soldier.state = Enemy.State.Patrol;
+            yield return null;
+        }
+
+    }
+
+    //====================================================================
+    // USE IN IF ELSE CASE CAN BE DELETED
+    //void StopChasingPlayer()
+    //{
+    //    isAgro = false;
+    //    isSearching = false;
+    //    isPatrol = true;
+    //}
+
+    //void Attack()
+    //{
+    //    if(!animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Die"))
+    //    {
+    //        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    //        gunShotSound.Play();
+    //    }
+    //    firePoint.transform.rotation = Quaternion.Euler(new Vector3(0, AttackRotation, 0));
+    //    firePoint.localPosition = firePosition[0];
+    //    animator.SetBool("ShootUp", false);
+    //    animator.SetBool("ShootMid", false);
+    //    animator.SetBool("ShootDown", false);
+    //    isAttacking = false;
+    //}
+
+
 
     void OnDrawGizmosSelected()
     {

@@ -232,10 +232,12 @@ MonoBehaviour:
     yang melewati makam leluhur Pangeran Diponegoro.
 
 
-    Pangeran Diponegoro yang belum mengetahui hal ini langsung murka.
+    Pangeran Diponegoro yang belum mengetahui hal ini langsung murka. Kemurkaan Pangeran
+    Diponegoro bertambah dengan adanya eksploitasi berlebihan dengan pajak tinggi
+    terhadap rakyat.
 
 
-    Pangeran Diponegoro menggantikan patok - patok untuk memasang jalan dengan tombak
+    Pangeran Diponegoro akhirnya menggantikan patok - patok yang ada dengan tombak
     sebagai tanda perang.
 
 
@@ -253,13 +255,13 @@ MonoBehaviour:
 
     Pihak istana ingin menangkap Pangeran Diponegoro di Tegalrejo. Meskipun kediaman
     Diponegoro dibakar, tetapi Pangeran Diponegoro dan pengikutnya dapat berhasil
-    lolos.
+    lolos dengan cara menghancurkan tembok belakang rumah Diponegoro.
 
 
 
     Pangeran Diponegoro pun yang lolos dari kejaran menjadikan Goa Selarong yang terletak
-    di Dusun Kentolan Lor, Guwosari Pajangan Bantul sebagai tempatnya, lalu goa Kakung
-    sebagai tempat pertapaan Pangeran Diponegoro.
+    di Dusun Kentolan Lor, Guwosari Pajangan Bantul sebagai tempat persembunyian mereka,
+    lalu goa Kakung sebagai tempat pertapaan Pangeran Diponegoro.
 
 '
 --- !u!222 &112310131
@@ -44455,7 +44457,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 0.17, y: 0.25}
     newSize: {x: 0.17, y: 0.33}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

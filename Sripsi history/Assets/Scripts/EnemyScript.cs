@@ -32,18 +32,19 @@ public class EnemyScript : PhysicsObject
     public LayerMask enemyLayers;
 
     //state enemy
+    private bool reachPatrol = false;
+    private bool facingRight = true;
+    float distToPlayer;
+
+    //can be deleted use in if else case
     private bool isAgro = false;
     private bool isSearching = false;
     private bool isPatrol = true;
     private bool died = false;
-    private bool reachPatrol = false;
-    private bool haveGround = true;
-    private bool facingRight = true;
 
     //dead enemy
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-    //private EnemyState _currentState;
 
     public Transform attackPoint, startPatrol, EndPatrol, groundDetection;
     public GameObject damagedArea;
@@ -62,10 +63,6 @@ public class EnemyScript : PhysicsObject
 
     protected override void ComputeVelocity()
     {
-        if (died)
-        {
-            spriteRenderer.enabled = !spriteRenderer.enabled;
-        }
         if (attackCounter > 0)
         {
             attackCounter -= Time.deltaTime;
@@ -76,10 +73,11 @@ public class EnemyScript : PhysicsObject
         }
         //Enemy AGRO RUSH IN DISTANCE
         //// distance to player (range chase player)
-        float distToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        haveGround = true;
+        distToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
         canMove(true, true);
+
+        // check front of soldier
         RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.down, chaseRangeY);
         if (hit.collider == null)
         {
@@ -93,124 +91,93 @@ public class EnemyScript : PhysicsObject
             }
         }
 
-        //if(distToPlayer < agroRange)
+        // try with switch case
+
+        switch (soldier.state)
+        {
+            case Enemy.State.Attack:
+                attackCounter = attackCount;
+                animator.SetTrigger("Attack");
+                Attack();
+                break;
+            case Enemy.State.Chase:
+                Chase(player);
+                StartCoroutine(ChaseCase());
+                    break;
+            case Enemy.State.Patrol:
+                if (reachPatrol)
+                {
+                    Chase(startPatrol);
+                }
+                else
+                {
+                    Chase(EndPatrol);
+                }
+                if (distToPlayer < agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
+                    soldier.state = Enemy.State.Chase;
+                break;
+            case Enemy.State.Dead:
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+                break;
+            default:
+                break;
+        }
+
+        // IF ELSE CASE
+        //if (!died)
         //{
-        //    //chase player
-        //    ChasePlayer();
+        //    if (distToPlayer < agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
+        //    {
+        //        isAgro = true;
+        //        isPatrol = false;
+        //    }
+        //    else
+        //    {
+        //        if(isAgro)
+        //        {
+        //            if (!isSearching)
+        //            {
+        //                isSearching = true;
+        //                Invoke("StopChasingPlayer", 3);
+        //            }
+        //        }
+        //        if (isPatrol)
+        //        {
+        //            if (reachPatrol)
+        //            {
+        //                Chase(startPatrol);
+        //            }
+        //            else
+        //            {
+        //                Chase(EndPatrol);
+        //            }
+        //        }
+        //    }
+
+        //    if (isAgro)
+        //    {
+        //        if (attackCounter <= 0)
+        //        {
+        //            //float distToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        //            if (distToPlayer <= 1f && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt"))
+        //            {
+        //                attackCounter = attackCount;
+        //                animator.SetTrigger("Attack");
+        //                Attack();
+        //                //nextAttackTime = Time.time + 1f / attackRate;
+        //            }
+        //        }
+        //        Chase(player);
+        //    }
         //}
         //else
         //{
-        //    StopChasingPlayer();
+        //    spriteRenderer.enabled = !spriteRenderer.enabled;
         //}
-
-        //FOR ATTACKING PLAYER
-
-        // try with switch case
-
-        //switch (_currentState)
-        //{
-        //    case EnemyState.Patrol:
-        //        {
-
-        //        break;
-        //        }
-        //    case EnemyState.Chase:
-        //        {
-        //            break;
-        //        }
-        //    case EnemyState.Attack:
-        //        {
-        //            break;
-        //        }
-        //    case EnemyState.Die:
-        //        {
-        //            break;
-        //        }
-        //}
-
-        //if (CanSeePlayer(agroRange))
-        RaycastHit2D walkground = Physics2D.Raycast(groundDetection.position, Vector2.down, 10f);
-        if(!walkground)
-        {
-            haveGround = false;
-        }
-        if (!died)
-        {
-            if (distToPlayer < agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
-            {
-                isAgro = true;
-                isPatrol = false;
-            }
-            else
-            {
-                if(isAgro)
-                {
-                    if (!isSearching)
-                    {
-                        isSearching = true;
-                        Invoke("StopChasingPlayer", 3);
-                    }
-                }
-                if (isPatrol)
-                {
-                    if (reachPatrol)
-                    {
-                        Chase(startPatrol);
-                    }
-                    else
-                    {
-                        Chase(EndPatrol);
-                    }
-                }
-            }
-
-            if (isAgro)
-            {
-                if (attackCounter <= 0)
-                {
-                    //float distToPlayer = Vector2.Distance(transform.position, player.transform.position);
-                    if (distToPlayer <= 1f && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt"))
-                    {
-                        attackCounter = attackCount;
-                        animator.SetTrigger("Attack");
-                        Attack();
-                        //nextAttackTime = Time.time + 1f / attackRate;
-                    }
-                }
-                Chase(player);
-            }
-        }
         animator.SetFloat("Move", Mathf.Abs(velocity.x));
         animator.SetBool("Grounded", grounded);
     }
 
-    bool CanSeePlayer(float distance)
-    {
-        bool val = false;
-        float castDist = distance;
-
-        Vector2 endPos = castPoint.position + Vector3.right * distance;
-
-        RaycastHit2D hit = Physics2D.Linecast(castPoint.position, endPos, 1 << LayerMask.NameToLayer("Player"));
-
-        if(hit.collider != null)
-        {
-            if (hit.collider.gameObject.CompareTag("Player"))
-            {
-                val = true;
-            }
-            else
-            {
-                val = false;
-            }
-            Debug.DrawLine(castPoint.position, endPos, Color.yellow);
-        }
-        else
-        {
-            Debug.DrawLine(castPoint.position, endPos, Color.blue);
-        }
-        return val;
-    }
 
     void Chase(Transform target)
     {
@@ -236,7 +203,7 @@ public class EnemyScript : PhysicsObject
         RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.up, chaseRangeY);
         if (hit)
         {
-            if (player.transform.position.y - transform.position.y > 0.5f && hit.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && isAgro && jumpCounter <= 0 && grounded)
+            if (player.transform.position.y - transform.position.y > 0.5f && hit.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && soldier.state.Equals(Enemy.State.Chase) && jumpCounter <= 0 && grounded)
             {
                 velocity.y = jumpTakeOffSpeed;
                 jumpCounter = jumpCount;
@@ -249,7 +216,7 @@ public class EnemyScript : PhysicsObject
         {
             Flip();
         }        
-        if (Mathf.Round(transform.position.x) == Mathf.Round(target.position.x) && isPatrol)
+        if (Mathf.Round(transform.position.x) == Mathf.Round(target.position.x) && soldier.state.Equals(Enemy.State.Patrol))
         {
             reachPatrol = !reachPatrol;
         }
@@ -268,13 +235,6 @@ public class EnemyScript : PhysicsObject
         moveRight = right;
     }
 
-    void StopChasingPlayer()
-    {
-        isAgro = false;
-        isSearching = false;
-        isPatrol = true;
-    }
-
     void Attack()
     {
         //Play an attack animation (check yt MELEE COMBAT in Unity Brackeys)
@@ -285,6 +245,22 @@ public class EnemyScript : PhysicsObject
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<PlayerController>().TakeDamage(soldier.Attack);
+        }
+        soldier.state = Enemy.State.Chase;
+    }
+
+    IEnumerator ChaseCase()
+    {
+        if (attackCounter <= 0 && distToPlayer <= 1f && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt"))
+        {
+            soldier.state = Enemy.State.Attack;
+            yield return null;
+        }
+        if (!(distToPlayer < agroRange) && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
+        {
+            yield return new WaitForSeconds(3f);
+            soldier.state = Enemy.State.Patrol;
+            yield return null;
         }
     }
 
@@ -298,6 +274,7 @@ public class EnemyScript : PhysicsObject
             died = true;
             animator.SetBool("Died", true);
             damagedArearCollider.enabled = false;
+            soldier.state = Enemy.State.Dead;
             Invoke("Die",2);
         }
     }
@@ -313,20 +290,50 @@ public class EnemyScript : PhysicsObject
             transform.Rotate(new Vector3(0, 180, 0));
     }
 
+
+    // CAN BE DELETED
+    //void StopChasingPlayer()
+    //{
+    //    isAgro = false;
+    //    isSearching = false;
+    //    isPatrol = true;
+    //}
+
+    // CAN BE DELETED USE IN IF ELSE CASE
+    //bool CanSeePlayer(float distance)
+    //{
+    //    bool val = false;
+    //    float castDist = distance;
+
+    //    Vector2 endPos = castPoint.position + Vector3.right * distance;
+
+    //    RaycastHit2D hit = Physics2D.Linecast(castPoint.position, endPos, 1 << LayerMask.NameToLayer("Player"));
+
+    //    if(hit.collider != null)
+    //    {
+    //        if (hit.collider.gameObject.CompareTag("Player"))
+    //        {
+    //            val = true;
+    //        }
+    //        else
+    //        {
+    //            val = false;
+    //        }
+    //        Debug.DrawLine(castPoint.position, endPos, Color.yellow);
+    //    }
+    //    else
+    //    {
+    //        Debug.DrawLine(castPoint.position, endPos, Color.blue);
+    //    }
+    //    return val;
+    //}
+
     void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, agroRange);
         if (attackPoint == null)
             return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
-
-    public enum EnemyState
-    {
-        Patrol,
-        Chase,
-        Attack,
-        Die
     }
 
 }
