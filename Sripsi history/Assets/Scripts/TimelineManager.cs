@@ -5,10 +5,16 @@ using UnityEngine.Playables;
 
 public class TimelineManager : MonoBehaviour
 {
-    private bool fix = false;
+
+    // disable and enable animation
     public Animator playerAnimator;
     public RuntimeAnimatorController playerAnim;
+
+    //check directior
     public PlayableDirector director;
+    private bool fix = false;
+
+    // check before and after cutscene
     public GameObject gamePlayUI;
     public GameObject dialougueScript;
     public GameObject cameraSetting;

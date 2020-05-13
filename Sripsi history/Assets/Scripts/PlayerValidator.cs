@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerValidator : MonoBehaviour
 {
-
+    //validator check player edge camera
     public bool moveLeft, moveRight;
     private void OnTriggerEnter2D(Collider2D collision)
     {

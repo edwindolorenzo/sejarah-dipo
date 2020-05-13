@@ -46,7 +46,15 @@ MonoBehaviour:
   sounds:
   - name: WinGame
     clip: {fileID: 8300000, guid: b0adaaee9b87ac94e97128309cc6d75f, type: 3}
+    output: {fileID: 24300002, guid: c8d260dadfe92664d9546b263d28a7c4, type: 2}
     volume: 1
     pitch: 1
     loop: 0
+    source: {fileID: 0}
+  - name: MainMenu
+    clip: {fileID: 8300000, guid: daaeacb14ccd22946875b28b943f1ab0, type: 3}
+    output: {fileID: 24300002, guid: c8d260dadfe92664d9546b263d28a7c4, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
     source: {fileID: 0}

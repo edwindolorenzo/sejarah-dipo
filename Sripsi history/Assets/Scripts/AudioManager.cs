@@ -1,4 +1,6 @@
 ﻿using UnityEngine.Audio;
+using System.Collections;
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 
@@ -28,7 +30,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Play (string name)
+    public void Play (string name, bool animated = false)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
@@ -36,6 +38,25 @@ public class AudioManager : MonoBehaviour
             Debug.Log("Sound: " + name + "not found");
             return;
         }
-        s.source.Play();
+        if (animated)
+        {
+            StartCoroutine(FadeIn(s, 10f));
+        }
+        else
+            s.source.Play();
     }
+
+    IEnumerator FadeIn(Sound s , float fadeIn)
+    {
+        float maxSound = s.source.volume;
+        s.source.volume = 0;
+        s.source.Play();
+        while (s.source.volume < 1)
+        {
+            s.source.volume += Time.deltaTime / 1000f;
+            Debug.Log(s.source.volume);
+        }
+        yield return null;
+    }
+
 }

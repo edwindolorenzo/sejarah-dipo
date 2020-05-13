@@ -8,16 +8,15 @@ public class DialogueManager : MonoBehaviour
     public Text nameText;
     public Text dialogueText;
     public Animator animator;
+    bool finished = true;
+    private string sentence;
+    private Queue<string> sentences = new Queue<string>();
+
     public GameObject gamePlayUI;
     public GameObject finishUI;
-
     FinishGame finishGameScript;
-    bool finished = true;
     bool finishGame;
-    private Queue<string> sentences = new Queue<string>();
-    private string sentence;
 
-    // Start is called before the first frame update
     void Start()
     {
         finishGameScript = finishUI.GetComponent<FinishGame>();
@@ -66,11 +65,11 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+        //just pop out
             StopAllCoroutines();
             dialogueText.text = sentence;
             finished = true;
         }
-        //just pop out
 
     }
 

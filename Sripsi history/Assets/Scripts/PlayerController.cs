@@ -6,29 +6,42 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : PhysicsObject
 {
+    //movement
     public float maxSpeed = 7;
     public float jumpTakeOffSpeed = 7;
+    private bool moveLeft = true;
+    private bool moveRight = true;
+
+    //attack range
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
+
+    //time invicible
     public float invicibiltyLength;
+    private float invicibiltyCounter;
     public float flashLength = 0.1f;
+    private float flashCounter;
+    private SpriteRenderer spriteRenderer;
+
     public GameObject respawn, finishUI;
+
+    //script if dead
     FinishGame finishGame;
+    FinishMiniGame finishMiniGame;
+    bool die = false;
+    private float lifeCounter;
 
     //waktu kecepatan untuk menyerang
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
     [SerializeField] private AudioSource stepSound, damagedSound, damageSound;
-    private float flashCounter;
-    private float invicibiltyCounter;
-    private SpriteRenderer spriteRenderer;
     private Animator animator;
-    private float lifeCounter;
-    private bool moveLeft = true;
-    private bool moveRight = true;
-    Player player = new Player();
+
+    //validate player life
+    public int playerLife = 3;
+    Player player;
 
     //MAKE HEART UI
     public Image[] hearts;
@@ -37,12 +50,17 @@ public class PlayerController : PhysicsObject
     public Image lifeUI;
     public Text lifeText;
 
+
     // Start is called before the first frame update
     void Awake()
     {
+        player = new Player(playerLife);
+        lifeText.text = player.Life+" X";
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         finishGame = finishUI.GetComponent<FinishGame>();
+        if (finishGame == null)
+            finishMiniGame = finishUI.GetComponent<FinishMiniGame>();
     }
     protected override void ComputeVelocity()
     {
@@ -155,12 +173,11 @@ public class PlayerController : PhysicsObject
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool fallDamage = false)
     {
-        if (invicibiltyCounter <= 0)
+        if ((invicibiltyCounter <= 0 || fallDamage) && !die)
         {
             player.Health -= damage;
-            finishGame.PlayerDamaged();
             animator.SetTrigger("Hurt");
             damagedSound.Play();
             // membuat kena damage mundur belum bisa
@@ -211,7 +228,11 @@ public class PlayerController : PhysicsObject
 
     void Die()
     {
-        finishGame.GameOver();
+        die = true;
+        if (finishGame != null)
+            finishGame.GameOver();
+        else
+            finishMiniGame.GameOver();
     }
 
     public Player givePlayerStatus()

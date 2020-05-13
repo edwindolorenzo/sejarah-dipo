@@ -13,9 +13,12 @@ public class FinishGame : MonoBehaviour
     public GameObject [] gameOverObjects;
     bool damaged = false;
     [SerializeField] bool haveMiniGame = false;
+
+
     [SerializeField] Image[] objectiveStars;
     [SerializeField] Sprite fullStars, emptyStars;
     [SerializeField] Text[] objectiveTexts;
+
     [SerializeField] GameObject playerObject, backGroundUI;
     PlayerController playerController;
     GameManager gameManager = GameManager.instance;
@@ -38,14 +41,20 @@ public class FinishGame : MonoBehaviour
         levelLoader = sceneLoader.GetComponent<LevelLoader>();
     }
 
-    public void GameFinished()
+    void Update()
     {
         player = playerController.givePlayerStatus();
+        if (player.Health < 3)
+            damaged = true;
+    }
+
+    public void GameFinished()
+    {
         audioManager.Play("WinGame");
         backGroundUI.SetActive(true);
         if (stage != null)
         {
-            if (haveMiniGame)
+            if (haveMiniGame && !stage.Clear)
             {
                 int x = 0;
                 foreach(MiniGame miniGame in listMiniGames)
@@ -53,7 +62,6 @@ public class FinishGame : MonoBehaviour
                     if (!miniGame.Opened)
                     {
                         listMiniGames[x].Opened = true;
-                        Debug.Log(listMiniGames[1].Opened);
                         break;
                     }
                     x += 1;
@@ -88,11 +96,6 @@ public class FinishGame : MonoBehaviour
         {
             gameOverObjects[i].SetActive(true);
         }
-    }
-
-    public void PlayerDamaged()
-    {
-        damaged = true;
     }
 
     bool ClearObjective(int idChalange)

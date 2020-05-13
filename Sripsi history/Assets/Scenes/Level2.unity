@@ -154,7 +154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &112310128
 RectTransform:
   m_ObjectHideFlags: 0
@@ -232,10 +232,12 @@ MonoBehaviour:
     yang melewati makam leluhur Pangeran Diponegoro.
 
 
-    Pangeran Diponegoro yang belum mengetahui hal ini langsung murka.
+    Pangeran Diponegoro yang belum mengetahui hal ini langsung murka. Kemurkaan Pangeran
+    Diponegoro bertambah dengan adanya eksploitasi berlebihan dengan pajak tinggi
+    terhadap rakyat.
 
 
-    Pangeran Diponegoro menggantikan patok - patok untuk memasang jalan dengan tombak
+    Pangeran Diponegoro akhirnya menggantikan patok - patok yang ada dengan tombak
     sebagai tanda perang.
 
 
@@ -253,13 +255,13 @@ MonoBehaviour:
 
     Pihak istana ingin menangkap Pangeran Diponegoro di Tegalrejo. Meskipun kediaman
     Diponegoro dibakar, tetapi Pangeran Diponegoro dan pengikutnya dapat berhasil
-    lolos.
+    lolos dengan cara menghancurkan tembok belakang rumah Diponegoro.
 
 
 
     Pangeran Diponegoro pun yang lolos dari kejaran menjadikan Goa Selarong yang terletak
-    di Dusun Kentolan Lor, Guwosari Pajangan Bantul sebagai tempatnya, lalu goa Kakung
-    sebagai tempat pertapaan Pangeran Diponegoro.
+    di Dusun Kentolan Lor, Guwosari Pajangan Bantul sebagai tempat persembunyian mereka,
+    lalu goa Kakung sebagai tempat pertapaan Pangeran Diponegoro.
 
 '
 --- !u!222 &112310131
@@ -745,7 +747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &203624284
 Transform:
   m_ObjectHideFlags: 0
@@ -1088,7 +1090,9 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1884539613}
   spawnWait: 2
+  maxWait: 2
   numberUnit: 2
+  maxUnit: 20
   tagEnemies: EnemiesGun
 --- !u!4 &394917123
 Transform:
@@ -1644,7 +1648,7 @@ Camera:
   m_GameObject: {fileID: 619154378}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
@@ -1938,7 +1942,9 @@ MonoBehaviour:
   - {fileID: 985592945}
   - {fileID: 1270690632}
   spawnWait: 2
+  maxWait: 2
   numberUnit: 5
+  maxUnit: 20
   tagEnemies: EnemiesSword
 --- !u!4 &693297655
 Transform:
@@ -42157,12 +42163,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2317044002757281800, guid: 9f3ae3ffa235d5041a84ec0eaa9a9d7b,
-        type: 3}
-      propertyPath: sounds.Array.data[0].output
-      value: 
-      objectReference: {fileID: 24300002, guid: c8d260dadfe92664d9546b263d28a7c4,
-        type: 2}
     - target: {fileID: 2317044002757281801, guid: 9f3ae3ffa235d5041a84ec0eaa9a9d7b,
         type: 3}
       propertyPath: m_Name
@@ -43488,6 +43488,8 @@ PlayableDirector:
     value: {fileID: 619154378}
   - key: {fileID: 114519641629143118, guid: 64eaba8fd7aaff44b96a4a4760102450, type: 2}
     value: {fileID: 203624283}
+  - key: {fileID: 114937764547269896, guid: 64eaba8fd7aaff44b96a4a4760102450, type: 2}
+    value: {fileID: 112310127}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1990221110

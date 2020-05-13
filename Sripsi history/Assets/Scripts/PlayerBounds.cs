@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerBounds : MonoBehaviour
 {
+    //boundaries player to camera (cant go out camera)
     private Vector2 screenBounds;
     [SerializeField] Transform leftBounds, rightBounds;
 
