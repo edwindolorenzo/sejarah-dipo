@@ -11,7 +11,7 @@ public class TrapController : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             collision.GetComponent<PlayerRideController>().TakeDamage(damageTrap);
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

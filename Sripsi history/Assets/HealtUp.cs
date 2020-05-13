@@ -45,6 +45,6 @@ public class HealtUp : MonoBehaviour
             tmpSprite.material.color = c;
             yield return new WaitForSeconds(0.05f);
         }
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
