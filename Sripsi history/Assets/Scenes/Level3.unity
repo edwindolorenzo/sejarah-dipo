@@ -1197,7 +1197,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.30657804}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1208,7 +1208,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 84.96, y: 1}
+  m_Size: {x: 84.96, y: 1.6132493}
   m_EdgeRadius: 0
 --- !u!1 &1580580831
 GameObject:
@@ -1603,6 +1603,7 @@ MonoBehaviour:
   - {fileID: 1661155556}
   maxHeightPoint: {fileID: 845571380}
   maxHeightChange: 3
+  randomObjectThreshold: 30
   randomHealthThreshold: 30
   randomTrapThreshold: 50
   trapPool: {fileID: 404449740}

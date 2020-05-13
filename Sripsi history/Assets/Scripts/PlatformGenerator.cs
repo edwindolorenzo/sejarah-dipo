@@ -28,8 +28,11 @@ public class PlatformGenerator : MonoBehaviour
 
     //private TrapGenerator theTrapGenerator;
 
+    public float randomObjectThreshold;
+
     private ObjectGenerator theHealthGenerator;
     public float randomHealthThreshold;
+    private bool healthExist;
 
     public float randomTrapThreshold;
     public ObjectPooler trapPool;
@@ -50,6 +53,8 @@ public class PlatformGenerator : MonoBehaviour
         maxHeight = maxHeightPoint.position.y;
 
         theHealthGenerator = GameObject.Find("HeartGenerator").GetComponent<ObjectGenerator>();
+
+        healthExist = false;
     }
 
     // Update is called once per frame
@@ -82,22 +87,32 @@ public class PlatformGenerator : MonoBehaviour
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
 
-            if(Random.Range(0, 100) < randomHealthThreshold)
-                theHealthGenerator.SpawnObjects(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z));
-
-            if (Random.Range(0, 100) < randomTrapThreshold)
+            if (Random.Range(0, 100) < randomObjectThreshold)
             {
-                GameObject newTrap = trapPool.GetPooledObject();
+                if ((Random.Range(0, 100) < randomHealthThreshold) && healthExist)
+                {
+                    theHealthGenerator.SpawnObjects(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z));
+                }else
+                {
+                    healthExist = false;
+                }
 
-                float trapXPosition = Random.Range(-platformWidths[platformSelector]/2 + 1f, platformWidths[platformSelector]/2 - 1f);
+                if ((Random.Range(0, 100) < randomTrapThreshold) && !healthExist)
+                {
+                    GameObject newTrap = trapPool.GetPooledObject();
 
-                Vector3 trapPosition = new Vector3(trapXPosition, 0.75f, 0f);
+                    float trapXPosition = Random.Range(-platformWidths[platformSelector] / 2 + 1f, platformWidths[platformSelector] / 2 - 1f);
 
-                newTrap.transform.position = transform.position + trapPosition;
-                newTrap.transform.rotation = transform.rotation;
-                newTrap.SetActive(true);
+                    Vector3 trapPosition = new Vector3(trapXPosition, 0.75f, 0f);
+
+                    newTrap.transform.position = transform.position + trapPosition;
+                    newTrap.transform.rotation = transform.rotation;
+                    newTrap.SetActive(true);
+                }else
+                {
+                    healthExist = true;
+                }
             }
-
             transform.position = new Vector3(transform.position.x + (platformWidths[platformSelector] / 2), transform.position.y, transform.position.z);
         }
     }

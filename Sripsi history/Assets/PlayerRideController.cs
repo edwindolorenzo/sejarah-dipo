@@ -9,6 +9,8 @@ public class PlayerRideController : PhysicsObject
     public float jumpTakeOffSpeed;
     public float jumpTime;
     private float jumpTimeCounter;
+    private bool stoppedJumping;
+    //private bool canDoubleJump;
 
     private float moveSpeedStore;
     public float moveSpeed;
@@ -48,11 +50,17 @@ public class PlayerRideController : PhysicsObject
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
         anim = GetComponent<Animator>();
+
         finishGame = finishUI.GetComponent<FinishGame>();
+
         jumpTimeCounter = jumpTime;
-        speedMilestoneCount = speedIncreaseMilestone;
+        stoppedJumping = true;
+
         moveSpeedStore = moveSpeed;
+
+        speedMilestoneCount = speedIncreaseMilestone;
         speedMilestoneCountStore = speedMilestoneCount;
         speedIncreaseMilestoneStore = speedIncreaseMilestone;
     }
@@ -114,12 +122,25 @@ public class PlayerRideController : PhysicsObject
         targetVelocity = move * moveSpeed;
 
         // Jumping Horse
-        if (CrossPlatformInputManager.GetButtonDown("Jump") && grounded)
+        if (CrossPlatformInputManager.GetButtonDown("Jump"))
         {
-            velocity.y = jumpTakeOffSpeed;
+            if (grounded)
+            {
+                velocity.y = jumpTakeOffSpeed;
+                stoppedJumping = false;
+            }
+
+            // double jump
+            //if(!grounded && canDoubleJump)
+            //{
+            //    velocity.y = jumpTakeOffSpeed;
+            //    jumpTimeCounter = jumpTime;
+            //    stoppedJumping = false;
+            //    canDoubleJump = false;
+            //}
         }
 
-        if (CrossPlatformInputManager.GetButton("Jump"))
+        if (CrossPlatformInputManager.GetButton("Jump") && !stoppedJumping)
         {
             if(jumpTimeCounter > 0)
             {
@@ -131,11 +152,13 @@ public class PlayerRideController : PhysicsObject
         if (CrossPlatformInputManager.GetButtonUp("Jump"))
         {
             jumpTimeCounter = 0;
+            stoppedJumping = true;
         }
 
         if (grounded)
         {
             jumpTimeCounter = jumpTime;
+            //canDoubleJump = true;
         }
         anim.SetBool("Grounded", grounded);
     }
@@ -164,6 +187,25 @@ public class PlayerRideController : PhysicsObject
             spriteRenderer.enabled = false;
 
             flashCounter = flashLength;
+        }
+    }
+
+    public void TakeDamageWithoutInvincibility(int damage)
+    {
+        playerRidingHorse.Health -= damage;
+        finishGame.PlayerDamaged();
+        if (playerRidingHorse.Health <= 0)
+        {
+            playerRidingHorse.Life -= 1;
+            lifeText.text = playerRidingHorse.Life + " X";
+            if (playerRidingHorse.Life > 0)
+            {
+                Invoke("Respawn", 1);
+            }
+            else
+            {
+                Invoke("Die", 1);
+            }
         }
     }
 
