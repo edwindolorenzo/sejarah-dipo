@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Transform platformGenerator;
-    private Vector3 platformStartPoint;
-    private ObjectDestroyer[] objectWithDestroyerList;
-
     List<MiniGame> miniGames = new List<MiniGame>();
     private List<Stage> stages = new List<Stage>();
 
@@ -23,8 +19,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        if(platformGenerator != null)
-            platformStartPoint = platformGenerator.position;
         DontDestroyOnLoad(gameObject);
         LoadData();
     }
@@ -96,22 +90,5 @@ public class GameManager : MonoBehaviour
             stages.Add(new Stage(4, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(3) }));
             stages.Add(new Stage(5, new List<Chalange> { new Chalange(2), new Chalange(3), new Chalange(4) }));
         }
-    }
-
-    public void RestartEndlessRun()
-    {
-        //Method that can run by itself and run independently at the rest of script
-        StartCoroutine("RestartEndlessCo");
-    }
-
-    public IEnumerator RestartEndlessCo()
-    {
-        yield return new WaitForSeconds(1f);
-        objectWithDestroyerList = FindObjectsOfType<ObjectDestroyer>();
-        for (int i = 0; i < objectWithDestroyerList.Length; i++)
-        {
-            objectWithDestroyerList[i].gameObject.SetActive(false);
-        }
-        platformGenerator.position = platformStartPoint;
     }
 }

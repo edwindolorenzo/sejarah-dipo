@@ -43,12 +43,15 @@ public class PlayerRideController : PhysicsObject
     private Animator anim;
     private SpriteRenderer spriteRenderer;
 
-    public GameManager theGameManager;
+    PlatformGameManager thePlatformGameManager;
 
     FinishGame finishGame;
 
     private void Awake()
     {
+        if (thePlatformGameManager == null)
+            thePlatformGameManager = FindObjectOfType<PlatformGameManager>();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         anim = GetComponent<Animator>();
@@ -211,7 +214,7 @@ public class PlayerRideController : PhysicsObject
 
     void Respawn()
     {
-        theGameManager.RestartEndlessRun();
+        thePlatformGameManager.RestartEndlessRun();
         moveSpeed = 0;
         StartCoroutine(WaitFor(3));
         lifeCounter = 3f;

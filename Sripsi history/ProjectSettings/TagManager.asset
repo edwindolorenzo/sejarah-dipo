@@ -9,6 +9,7 @@ TagManager:
   - EnemiesSword
   - EnemiesGun
   - Traps
+  - PlatformGenerator
   layers:
   - Default
   - TransparentFX
