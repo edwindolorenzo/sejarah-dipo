@@ -50,11 +50,8 @@ public class FinishGame : MonoBehaviour
         if(playerController != null)
             player = playerController.givePlayerStatus();
         else if (playerRideController != null)
-        {
             player = playerRideController.givePlayerStatus();
-            Debug.Log(playerRideController.givePlayerStatus());
-        }
-        Debug.Log(player);
+        
         if (player.Health < 3)
             damaged = true;
     }
