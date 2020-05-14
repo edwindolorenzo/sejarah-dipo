@@ -19,8 +19,9 @@ public class FinishGame : MonoBehaviour
     [SerializeField] Sprite fullStars, emptyStars;
     [SerializeField] Text[] objectiveTexts;
 
-    [SerializeField] GameObject playerObject, backGroundUI;
+    [SerializeField] GameObject playerObject, playerRideObject, backGroundUI;
     PlayerController playerController;
+    PlayerRideController playerRideController;
     GameManager gameManager = GameManager.instance;
     AudioManager audioManager = AudioManager.instance;
 
@@ -37,13 +38,23 @@ public class FinishGame : MonoBehaviour
             audioManager = FindObjectOfType<AudioManager>();
         stage = gameManager.SelectStage(SceneManager.GetActiveScene().buildIndex);
         listMiniGames.AddRange(gameManager.AllMiniGame());
-        playerController = playerObject.GetComponent<PlayerController>();
+        if (playerObject != null)
+            playerController = playerObject.GetComponent<PlayerController>();
+        if (playerRideObject != null)
+            playerRideController = playerRideObject.GetComponent<PlayerRideController>();
         levelLoader = sceneLoader.GetComponent<LevelLoader>();
     }
 
     void Update()
     {
-        player = playerController.givePlayerStatus();
+        if(playerController != null)
+            player = playerController.givePlayerStatus();
+        else if (playerRideController != null)
+        {
+            player = playerRideController.givePlayerStatus();
+            Debug.Log(playerRideController.givePlayerStatus());
+        }
+        Debug.Log(player);
         if (player.Health < 3)
             damaged = true;
     }

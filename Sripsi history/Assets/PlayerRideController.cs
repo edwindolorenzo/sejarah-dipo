@@ -6,17 +6,20 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerRideController : PhysicsObject
 {
+    // jumping
     public float jumpTakeOffSpeed;
     public float jumpTime;
     private float jumpTimeCounter;
     private bool stoppedJumping;
     //private bool canDoubleJump;
 
+    // move
     private float moveSpeedStore;
     public float moveSpeed;
     public float speedMultiplier;
     public float maxSpeedAllowed;
 
+    // increase speed
     public float speedIncreaseMilestone;
     private float speedIncreaseMilestoneStore;
     private float speedMilestoneCount;
@@ -28,14 +31,14 @@ public class PlayerRideController : PhysicsObject
     public Sprite emptyHeart;
     public Text lifeText;
     public Image lifeUI;
-    private float lifeCounter;
 
+    // kebal
     private float invicibiltyCounter;
     public float invicibiltyLength;
     public float flashLength = 0.1f;
     private float flashCounter;
 
-    Player playerRidingHorse = new Player();
+    Player player = new Player();
 
     public LayerMask enemyLayer;
     public GameObject respawn, finishUI;
@@ -45,7 +48,11 @@ public class PlayerRideController : PhysicsObject
 
     PlatformGameManager thePlatformGameManager;
 
+    // ded script
     FinishGame finishGame;
+    FinishMiniGame finishMiniGame;
+    bool die = false;
+    private float lifeCounter;
 
     private void Awake()
     {
@@ -74,7 +81,7 @@ public class PlayerRideController : PhysicsObject
         // HEART UI SHOW
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (i < playerRidingHorse.MaxHealth)
+            if (i < player.MaxHealth)
             {
                 hearts[i].enabled = true;
             }
@@ -82,7 +89,7 @@ public class PlayerRideController : PhysicsObject
             {
                 hearts[i].enabled = false;
             }
-            if (i < playerRidingHorse.Health)
+            if (i < player.Health)
             {
                 hearts[i].sprite = fullHeart;
             }
@@ -102,7 +109,7 @@ public class PlayerRideController : PhysicsObject
                 spriteRenderer.enabled = !spriteRenderer.enabled;
                 flashCounter = flashLength;
             }
-            if (invicibiltyCounter <= 0 || playerRidingHorse.Life <= 0)
+            if (invicibiltyCounter <= 0 || player.Life <= 0)
             {
                 spriteRenderer.enabled = true;
             }
@@ -166,17 +173,16 @@ public class PlayerRideController : PhysicsObject
         anim.SetBool("Grounded", grounded);
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool fallDamage = false)
     {
-        if (invicibiltyCounter <= 0)
+        if (invicibiltyCounter <= 0 || fallDamage)
         {
-            playerRidingHorse.Health -= damage;
-            finishGame.PlayerDamaged();
-            if (playerRidingHorse.Health <= 0)
+            player.Health -= damage;
+            if (player.Health <= 0)
             {
-                playerRidingHorse.Life -= 1;
-                lifeText.text = playerRidingHorse.Life + " X";
-                if (playerRidingHorse.Life > 0)
+                player.Life -= 1;
+                lifeText.text = player.Life + " X";
+                if (player.Life > 0)
                 {
                     Invoke("Respawn", 1);
                 }
@@ -193,32 +199,12 @@ public class PlayerRideController : PhysicsObject
         }
     }
 
-    public void TakeDamageWithoutInvincibility(int damage)
-    {
-        playerRidingHorse.Health -= damage;
-        finishGame.PlayerDamaged();
-        if (playerRidingHorse.Health <= 0)
-        {
-            playerRidingHorse.Life -= 1;
-            lifeText.text = playerRidingHorse.Life + " X";
-            if (playerRidingHorse.Life > 0)
-            {
-                Invoke("Respawn", 1);
-            }
-            else
-            {
-                Invoke("Die", 1);
-            }
-        }
-    }
-
     void Respawn()
     {
         thePlatformGameManager.RestartEndlessRun();
         moveSpeed = 0;
-        StartCoroutine(WaitFor(3));
         lifeCounter = 3f;
-        playerRidingHorse.Health = playerRidingHorse.MaxHealth;
+        player.Health = player.MaxHealth;
         moveSpeed = moveSpeedStore;
         speedMilestoneCount = speedMilestoneCountStore;
         speedIncreaseMilestone = speedIncreaseMilestoneStore;
@@ -227,24 +213,28 @@ public class PlayerRideController : PhysicsObject
 
     void Die()
     {
-        finishGame.GameOver();
+        die = true;
+        if (finishGame != null)
+            finishGame.GameOver();
+        else
+            finishMiniGame.GameOver();
     }
 
     public bool HealtUp(int healt)
     {
-        if (playerRidingHorse.Health >= playerRidingHorse.MaxHealth)
+        if (player.Health >= player.MaxHealth)
         {
             return false;
         }
         else
         {
-            playerRidingHorse.Health += healt;
+            player.Health += healt;
             return true;
         }
     }
 
-    public IEnumerator WaitFor (float delayInSeconds)
+    public Player givePlayerStatus()
     {
-        yield return new WaitForSeconds(delayInSeconds);
+        return player;
     }
 }
