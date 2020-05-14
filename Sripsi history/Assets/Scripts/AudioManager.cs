@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
     public static AudioManager instance;
+    public float faddingTime = 0.3f;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -30,7 +32,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Play (string name, bool animated = false)
+    public void Play(string name, bool animated = false)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
@@ -38,25 +40,60 @@ public class AudioManager : MonoBehaviour
             Debug.Log("Sound: " + name + "not found");
             return;
         }
-        if (animated)
+        if (!s.source.isPlaying)
         {
-            StartCoroutine(FadeIn(s, 10f));
+            if (animated)
+            {
+                StartCoroutine(FadeIn(s,faddingTime));
+            }
+            else
+                s.source.Play();
         }
-        else
-            s.source.Play();
     }
 
-    IEnumerator FadeIn(Sound s , float fadeIn)
+    public void Stop(string name, bool animated = false)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.Log("Sound: " + name + "not found");
+            return;
+        }
+        if (s.source.isPlaying)
+        {
+            if (animated)
+            {
+                StartCoroutine(FadeOut(s,faddingTime));
+            }
+            else
+                s.source.Stop();
+        }
+    }
+
+    IEnumerator FadeIn(Sound s, float speedFade)
     {
         float maxSound = s.source.volume;
         s.source.volume = 0;
         s.source.Play();
         while (s.source.volume < 1)
         {
-            s.source.volume += Time.deltaTime / 1000f;
-            Debug.Log(s.source.volume);
+            s.source.volume += Time.deltaTime / speedFade;
+            yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    IEnumerator FadeOut(Sound s, float speedFade)
+    {
+        float maxSound = s.source.volume;
+        while (s.source.volume > 0)
+        {
+            s.source.volume -= Time.deltaTime / speedFade;
+            yield return new WaitForSeconds(0.1f);
+        }
+        s.source.Stop();
+        s.source.volume = maxSound;
         yield return null;
     }
+
 
 }
