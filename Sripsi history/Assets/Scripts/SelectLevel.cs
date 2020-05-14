@@ -27,6 +27,9 @@ public class SelectLevel : MonoBehaviour
     [SerializeField] Text[] objectiveTexts;
     [SerializeField] Text headerLevelText;
 
+    //Audio Script
+    AudioManager audioManager = AudioManager.instance;
+
 
     GameManager gameManager = GameManager.instance;
     private List<Stage> stages = new List<Stage>();
@@ -36,6 +39,8 @@ public class SelectLevel : MonoBehaviour
         levelLoader = sceneLoader.GetComponent<LevelLoader>();
         if (gameManager == null)
             gameManager = FindObjectOfType<GameManager>();
+        if (audioManager == null)
+            audioManager = FindObjectOfType<AudioManager>();
         stages = gameManager.AllStage();
         playerMenu = GameObject.Find("MainMenuPlayer");
         foreach(Stage stage in stages)
@@ -86,6 +91,7 @@ public class SelectLevel : MonoBehaviour
     public void levelToLoad ()
     {
         Destroy(playerMenu);
+        audioManager.Stop("MainMenu",true);
         levelLoader.LoadSceneNumber(pickLevel);
     }
  
