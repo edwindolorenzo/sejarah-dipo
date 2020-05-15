@@ -47,6 +47,7 @@ public class PlayerRideController : PhysicsObject
     private SpriteRenderer spriteRenderer;
 
     PlatformGameManager thePlatformGameManager;
+    private float playerX;
 
     // ded script
     FinishGame finishGame;
@@ -138,6 +139,7 @@ public class PlayerRideController : PhysicsObject
             {
                 velocity.y = jumpTakeOffSpeed;
                 stoppedJumping = false;
+                Debug.Log(gameObject.transform.position.x);
             }
 
             // double jump
@@ -218,6 +220,14 @@ public class PlayerRideController : PhysicsObject
             finishGame.GameOver();
         else
             finishMiniGame.GameOver();
+    }
+
+    public void MakePlayerNotMoving()
+    {
+        // play anim idle
+        // make player move to 0
+        if (moveSpeed > 0.01)
+            moveSpeed = 0;
     }
 
     public bool HealtUp(int healt)
