@@ -120,7 +120,7 @@ public class PlayerRideController : PhysicsObject
         Vector2 move = Vector2.zero;
 
         move.x = 1;
-
+        anim.SetFloat("Move", Mathf.Abs(moveSpeed));
         if(transform.position.x > speedMilestoneCount)
         {
             speedMilestoneCount += speedIncreaseMilestone;
@@ -139,7 +139,6 @@ public class PlayerRideController : PhysicsObject
             {
                 velocity.y = jumpTakeOffSpeed;
                 stoppedJumping = false;
-                Debug.Log(gameObject.transform.position.x);
             }
 
             // double jump
@@ -190,6 +189,7 @@ public class PlayerRideController : PhysicsObject
                 }
                 else
                 {
+                    moveSpeed = 0;
                     Invoke("Die", 1);
                 }
             }
@@ -226,8 +226,14 @@ public class PlayerRideController : PhysicsObject
     {
         // play anim idle
         // make player move to 0
-        if (moveSpeed > 0.01)
+        if (moveSpeed != 0)
+        {
             moveSpeed = 0;
+            velocity.x = 0;
+        }
+        if (velocity.y != 0)
+            velocity.y = 0;
+        anim.SetFloat("Move", Mathf.Abs(moveSpeed));
     }
 
     public bool HealtUp(int healt)

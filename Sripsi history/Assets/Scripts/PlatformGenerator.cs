@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
 {
-    public Transform thePlayerRidingHorse;
-    public GameObject endOfJourneyObject;
+    public bool eojPooled;
+    public ObjectPooler endOfJourneyObject;
     public float endOfJourney;
 
     public GameObject thePlatformThatWillGenerate;
@@ -54,6 +54,7 @@ public class PlatformGenerator : MonoBehaviour
         theHealthGenerator = GameObject.Find("HeartGenerator").GetComponent<ObjectGenerator>();
 
         healthExist = false;
+        eojPooled = false;
     }
 
     // Update is called once per frame
@@ -83,15 +84,17 @@ public class PlatformGenerator : MonoBehaviour
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
 
-            if (thePlayerRidingHorse.position.x >= endOfJourney)
+            if (transform.position.x >= endOfJourney && !eojPooled)
             {
+                eojPooled = true;
+                GameObject newEndGame = endOfJourneyObject.GetPooledObject();
                 float endOfJourneyX = platformWidths[platformSelector] / 2;
 
                 Vector3 endOfJourneyPosition = new Vector3(endOfJourneyX, 1, 0);
 
-                endOfJourneyObject.transform.position = transform.position + endOfJourneyPosition;
-                endOfJourneyObject.transform.rotation = transform.rotation;
-                endOfJourneyObject.SetActive(true);
+                newEndGame.transform.position = transform.position + endOfJourneyPosition;
+                newEndGame.transform.rotation = transform.rotation;
+                newEndGame.SetActive(true);
             }
             else { 
                 if (Random.Range(0, 100) < randomObjectThreshold)
