@@ -370,7 +370,6 @@ public class EnemyGunSoldier : PhysicsObject
         }
         if (!(distToPlayer <= agroRange) && !(Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY))
         {
-            Debug.Log("Masuk");
             yield return new WaitForSeconds(3f);
             soldier.state = Enemy.State.Patrol;
             yield return null;
