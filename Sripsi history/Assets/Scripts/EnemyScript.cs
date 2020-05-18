@@ -34,13 +34,13 @@ public class EnemyScript : PhysicsObject
     //state enemy
     private bool reachPatrol = false;
     private bool facingRight = true;
+    private bool died = false;
     float distToPlayer;
 
     //can be deleted use in if else case
     private bool isAgro = false;
     private bool isSearching = false;
     private bool isPatrol = true;
-    private bool died = false;
 
     //dead enemy
     private SpriteRenderer spriteRenderer;
@@ -266,16 +266,19 @@ public class EnemyScript : PhysicsObject
 
     public void TakeDamage(float damage)
     {
-        soldier.Health -= damage;
-        animator.SetTrigger("Hurt");
-        damagedSound.Play();
-        if (soldier.Health <= 0)
+        if (!died)
         {
-            died = true;
-            animator.SetBool("Died", true);
-            damagedArearCollider.enabled = false;
-            soldier.state = Enemy.State.Dead;
-            Invoke("Die",2);
+            soldier.Health -= damage;
+            animator.SetTrigger("Hurt");
+            damagedSound.Play();
+            if (soldier.Health <= 0)
+            {
+                died = true;
+                animator.SetBool("Died", true);
+                damagedArearCollider.enabled = false;
+                soldier.state = Enemy.State.Dead;
+                Invoke("Die",2);
+            }
         }
     }
 

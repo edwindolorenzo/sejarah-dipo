@@ -41,12 +41,12 @@ public class EnemyGunSoldier : PhysicsObject
     //state enemy
     private bool reachPatrol = false;
     private bool facingRight = true;
+    private bool died = false;
 
     // can be deleted ( use in if else case)
     private bool isAgro = false;
     private bool isSearching = false;
     private bool isAttacking = false;
-    private bool died = false;
     private bool isPatrol = true;
 
     // dead enemy
@@ -315,16 +315,19 @@ public class EnemyGunSoldier : PhysicsObject
 
     public void TakeDamage(float damage)
     {
-        soldier.Health -= damage;
-        animator.SetTrigger("Hurt");
-        damagedSound.Play();
-        if (soldier.Health <= 0)
+        if (!died)
         {
-            died = true;
-            soldier.state = Enemy.State.Dead;
-            animator.SetBool("Died", true);
-            damagedArearCollider.enabled = false;
-            Invoke("Die", 2);
+            soldier.Health -= damage;
+            animator.SetTrigger("Hurt");
+            damagedSound.Play();
+            if (soldier.Health <= 0)
+            {
+                died = true;
+                soldier.state = Enemy.State.Dead;
+                animator.SetBool("Died", true);
+                damagedArearCollider.enabled = false;
+                Invoke("Die", 2);
+            }
         }
     }
 
