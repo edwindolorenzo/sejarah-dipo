@@ -58,3 +58,11 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: 35719b32bc1849a4b9edc12722a8199f, type: 3}
+    output: {fileID: 24300002, guid: c8d260dadfe92664d9546b263d28a7c4, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  faddingTime: 0.3

@@ -94,6 +94,7 @@ public class FinishGame : MonoBehaviour
 
     public void GameOver()
     {
+        audioManager.Play("GameOver");
         CheckObjective(false);
         backGroundUI.SetActive(true);
         for (int i = 0; i < finishedObjects.Length; i++)

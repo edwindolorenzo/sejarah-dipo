@@ -56,4 +56,12 @@ public class TimelineManager : MonoBehaviour
             }
         }
     }
+
+    public void ChangeTimeLine(PlayableDirector newDirector, GameObject newDialogueScript)
+    {
+        director = newDirector;
+        dialougueScript = newDialogueScript;
+        director.Play();
+        fix = false;
+    }
 }
