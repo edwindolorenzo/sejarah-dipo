@@ -6,10 +6,8 @@ using UnityEngine.UI;
 public class RunnerMiniGamePlay : MonoBehaviour
 {
     public Text scoreText;
-    public float pointPerSecond;
 
-    //public Transform startPosition;
-    //public Transform playerPosition;
+    public Transform playerRidingHorse;
 
     private float scoreCount;
 
@@ -21,6 +19,8 @@ public class RunnerMiniGamePlay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = playerRidingHorse.position;
+        scoreCount = 0;
         StartCoroutine(startGame());
         gamePlayUI.SetActive(false);
     }
@@ -30,7 +30,7 @@ public class RunnerMiniGamePlay : MonoBehaviour
     {
         if (scoreIncreasing)
         {
-            scoreCount += pointPerSecond * Time.deltaTime;
+            scoreCount = Vector3.Distance(playerRidingHorse.position, transform.position);
             scoreText.text = scoreCount.ToString("0");
         }
     }
