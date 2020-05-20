@@ -11,9 +11,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject sceneLoader;
     LevelLoader levelLoader;
 
+    AudioManager audioManager = AudioManager.instance;
+
+
     private void Start()
     {
         levelLoader = sceneLoader.GetComponent<LevelLoader>();
+        if (audioManager == null)
+            audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -43,12 +48,14 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
+        audioManager.Stop("GameMusic",true);
         levelLoader.LoadSceneName(SceneManager.GetActiveScene().name);
     }
 
     public void MainMenu()
     {
         Time.timeScale = 1f;
+        audioManager.Stop("GameMusic",true);
         levelLoader.LoadSceneName("MainMenu");
     }
 }

@@ -155,6 +155,7 @@ public class FinishGame : MonoBehaviour
 
     public void Finish()
     {
+        audioManager.Stop("GameMusic",true);
         levelLoader.LoadSceneName("SelectLevel");
     }
 }

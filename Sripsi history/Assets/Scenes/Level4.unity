@@ -746,6 +746,7 @@ MonoBehaviour:
   gamePlayUI: {fileID: 1834472477}
   dialougueScript: {fileID: 2121315604}
   cameraSetting: {fileID: 841066073}
+  sceneMusic: 0
 --- !u!320 &428775015
 PlayableDirector:
   m_ObjectHideFlags: 0
