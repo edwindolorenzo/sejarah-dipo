@@ -24,9 +24,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SelectLevel.unity
     guid: 5c1536c1e7da2ff43ac1828491bf4791
   - enabled: 1
-    path: Assets/Scenes/MenuMiniGame.unity
-    guid: 61dbc88609beafa43a44f198c6c905ab
-  - enabled: 1
     path: Assets/Scenes/MiniGame1.unity
     guid: b62353794541838408fc7348610d95bd
+  - enabled: 1
+    path: Assets/Scenes/MiniGame2.unity
+    guid: 9bba5ebef46de7343a729c809a75ccac
+  - enabled: 1
+    path: Assets/Scenes/MenuMiniGame.unity
+    guid: 61dbc88609beafa43a44f198c6c905ab
   m_configObjects: {}

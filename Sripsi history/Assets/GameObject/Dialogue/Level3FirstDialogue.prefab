@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2396494719822455763}
   - component: {fileID: 2396494719822455762}
   m_Layer: 0
-  m_Name: SecondDialogue
+  m_Name: Level3FirstDialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,5 @@ MonoBehaviour:
   dialogue:
     name: Game Master
     sentences:
-    - Waduh hari ini kita dikejar kompeni!
-    - "HAAHH?? Di depan kita sudah ada orang?! Siapa yang melempari semua ini?\t"
-    - Tenang saja! Kita bisa menghindari semua kayu yang mereka lempar!
+    - Ayo kita ke Kasuruan untuk melawan Belanda di sana!
   finished: 0

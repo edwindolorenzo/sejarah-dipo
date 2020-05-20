@@ -33,7 +33,10 @@ public class TimelineManager : MonoBehaviour
         }
         if (cameraSetting)
         {
-            cameraSetting.GetComponent<CameraFollow>().enabled = false;
+            if (cameraSetting.GetComponent<CameraFollowHorse>() != null)
+                cameraSetting.GetComponent<CameraFollowHorse>().enabled = false;
+            if(cameraSetting.GetComponent<CameraFollow>() != null)
+                cameraSetting.GetComponent<CameraFollow>().enabled = false;
         }
     }
 
@@ -52,7 +55,10 @@ public class TimelineManager : MonoBehaviour
             dialougueScript.SetActive(true);
             if (cameraSetting)
             {
-                cameraSetting.GetComponent<CameraFollow>().enabled = true;
+                if (cameraSetting.GetComponent<CameraFollowHorse>() != null)
+                    cameraSetting.GetComponent<CameraFollowHorse>().enabled = true;
+                if (cameraSetting.GetComponent<CameraFollow>() != null)
+                    cameraSetting.GetComponent<CameraFollow>().enabled = true;
             }
         }
     }

@@ -38,7 +38,8 @@ public class PlayerRideController : PhysicsObject
     public float flashLength = 0.1f;
     private float flashCounter;
 
-    Player player = new Player();
+    public int playerLife = 3;
+    Player player;
 
     public LayerMask enemyLayer;
     public GameObject respawn, finishUI;
@@ -51,7 +52,7 @@ public class PlayerRideController : PhysicsObject
 
     // ded script
     FinishGame finishGame;
-    FinishMiniGame finishMiniGame;
+    FinishRunnerMiniGame finishRunnerMiniGame;
     bool die = false;
     private float lifeCounter;
 
@@ -60,11 +61,16 @@ public class PlayerRideController : PhysicsObject
         if (thePlatformGameManager == null)
             thePlatformGameManager = FindObjectOfType<PlatformGameManager>();
 
+        player = new Player(playerLife);
+        lifeText.text = player.Life + " X";
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         anim = GetComponent<Animator>();
 
         finishGame = finishUI.GetComponent<FinishGame>();
+        if (finishGame == null)
+            finishRunnerMiniGame = finishUI.GetComponent<FinishRunnerMiniGame>();
 
         jumpTimeCounter = jumpTime;
         stoppedJumping = true;
@@ -211,6 +217,8 @@ public class PlayerRideController : PhysicsObject
         speedMilestoneCount = speedMilestoneCountStore;
         speedIncreaseMilestone = speedIncreaseMilestoneStore;
         transform.position = respawn.transform.position;
+
+        MakePlayerMove();
     }
 
     void Die()
@@ -219,13 +227,20 @@ public class PlayerRideController : PhysicsObject
         if (finishGame != null)
             finishGame.GameOver();
         else
-            finishMiniGame.GameOver();
+            finishRunnerMiniGame.GameOver();
+    }
+
+    public void MakePlayerMove()
+    {
+        if (moveSpeed == 0)
+        {
+            moveSpeed = 8;
+        }
+        anim.SetFloat("Move", Mathf.Abs(moveSpeed));
     }
 
     public void MakePlayerNotMoving()
     {
-        // play anim idle
-        // make player move to 0
         if (moveSpeed != 0)
         {
             moveSpeed = 0;

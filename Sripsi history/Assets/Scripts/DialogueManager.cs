@@ -95,6 +95,8 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            if (GameObject.FindObjectOfType<PlayerRideController>() != null)
+                GameObject.FindObjectOfType<PlayerRideController>().MakePlayerMove();
             gamePlayUI.SetActive(true);
         }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
 {
+    public bool isMiniGame;
     public bool eojPooled;
     public ObjectPooler endOfJourneyObject;
     public float endOfJourney;
@@ -84,17 +85,20 @@ public class PlatformGenerator : MonoBehaviour
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
 
-            if (transform.position.x >= endOfJourney && !eojPooled)
+            if ((transform.position.x >= endOfJourney || !isMiniGame) && !eojPooled )
             {
                 eojPooled = true;
-                GameObject newEndGame = endOfJourneyObject.GetPooledObject();
-                float endOfJourneyX = platformWidths[platformSelector] / 2;
+                if(endOfJourneyObject != null)
+                {
+                    GameObject newEndGame = endOfJourneyObject.GetPooledObject();
+                    float endOfJourneyX = platformWidths[platformSelector] / 2;
 
-                Vector3 endOfJourneyPosition = new Vector3(endOfJourneyX, 1, 0);
+                    Vector3 endOfJourneyPosition = new Vector3(endOfJourneyX, 1, 0);
 
-                newEndGame.transform.position = transform.position + endOfJourneyPosition;
-                newEndGame.transform.rotation = transform.rotation;
-                newEndGame.SetActive(true);
+                    newEndGame.transform.position = transform.position + endOfJourneyPosition;
+                    newEndGame.transform.rotation = transform.rotation;
+                    newEndGame.SetActive(true);
+                }
             }
             else { 
                 if (Random.Range(0, 100) < randomObjectThreshold)
