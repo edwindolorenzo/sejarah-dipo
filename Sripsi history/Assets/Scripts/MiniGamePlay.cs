@@ -18,10 +18,15 @@ public class MiniGamePlay : MonoBehaviour
     public GameObject gamePlayUI;
     public GameObject[] spawnPonts;
 
+    AudioManager audioManager = AudioManager.instance;
+
     void Start()
     {
         StartCoroutine(startPlay());
         gamePlayUI.SetActive(false);
+        if (audioManager == null)
+            audioManager = FindObjectOfType<AudioManager>();
+        audioManager.Play("GameMusic", true);
     }
 
     // Update is called once per frame

@@ -23621,6 +23621,7 @@ MonoBehaviour:
   gamePlayUI: {fileID: 0}
   dialougueScript: {fileID: 243778147}
   cameraSetting: {fileID: 519420028}
+  sceneMusic: 0
 --- !u!1 &1870578966 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1561171270393831345, guid: e4a859f9abd9bb349bb66ee54d772c3a,

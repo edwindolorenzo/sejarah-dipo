@@ -19,6 +19,9 @@ public class TimelineManager : MonoBehaviour
     public GameObject dialougueScript;
     public GameObject cameraSetting;
 
+    AudioManager audioManager = AudioManager.instance;
+    [SerializeField] bool sceneMusic = true;
+
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -38,6 +41,12 @@ public class TimelineManager : MonoBehaviour
             if(cameraSetting.GetComponent<CameraFollow>() != null)
                 cameraSetting.GetComponent<CameraFollow>().enabled = false;
         }
+        if (audioManager == null)
+            audioManager = FindObjectOfType<AudioManager>();
+        if (sceneMusic)
+            audioManager.Play("MainMenu", true);
+        else
+            audioManager.Play("GameMusic", true);
     }
 
     // Update is called once per frame
@@ -53,6 +62,11 @@ public class TimelineManager : MonoBehaviour
             if(playerAnimator != null)
             playerAnimator.runtimeAnimatorController = playerAnim;
             dialougueScript.SetActive(true);
+            if (sceneMusic)
+            {
+                audioManager.Stop("MainMenu", true);
+                audioManager.Play("GameMusic", true);
+            }
             if (cameraSetting)
             {
                 if (cameraSetting.GetComponent<CameraFollowHorse>() != null)
@@ -61,5 +75,18 @@ public class TimelineManager : MonoBehaviour
                     cameraSetting.GetComponent<CameraFollow>().enabled = true;
             }
         }
+    }
+
+    public void ChangeTimeLine(PlayableDirector newDirector, GameObject newDialogueScript, bool stopGameMusic = false)
+    {
+        director = newDirector;
+        if (stopGameMusic)
+        {
+            audioManager.Stop("GameMusic", true);
+            audioManager.Play("MainMenu", true);
+        }
+        dialougueScript = newDialogueScript;
+        director.Play();
+        fix = false;
     }
 }

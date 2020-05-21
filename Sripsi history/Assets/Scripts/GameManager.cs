@@ -81,10 +81,20 @@ public class GameManager : MonoBehaviour
                 int stageLevel = data.level[i];
                 bool levelClear = data.levelClear[i];
                 int chalangeNumber = i * 2 + i;
-                Chalange chalange1 = new Chalange(data.idChalange[chalangeNumber], data.chalangeClear[chalangeNumber]);
-                Chalange chalange2 = new Chalange(data.idChalange[chalangeNumber+1], data.chalangeClear[chalangeNumber+1]);
-                Chalange chalange3 = new Chalange(data.idChalange[chalangeNumber+2], data.chalangeClear[chalangeNumber+2]);
-                stages.Add(new Stage(stageLevel, new List<Chalange> { chalange1, chalange2, chalange3 }, levelClear));
+                if(data.chalangeDescription.Length > 0)
+                {
+                    Chalange chalange1 = new Chalange(data.idChalange[chalangeNumber], data.chalangeDescription[chalangeNumber], data.chalangeClear[chalangeNumber]);
+                    Chalange chalange2 = new Chalange(data.idChalange[chalangeNumber+1], data.chalangeDescription[chalangeNumber+1], data.chalangeClear[chalangeNumber+1]);
+                    Chalange chalange3 = new Chalange(data.idChalange[chalangeNumber+2], data.chalangeDescription[chalangeNumber+2], data.chalangeClear[chalangeNumber+2]);
+                    stages.Add(new Stage(stageLevel, new List<Chalange> { chalange1, chalange2, chalange3 }, levelClear));
+                }
+                else
+                {
+                    Chalange chalange1 = new Chalange(data.idChalange[chalangeNumber], data.chalangeClear[chalangeNumber]);
+                    Chalange chalange2 = new Chalange(data.idChalange[chalangeNumber + 1], data.chalangeClear[chalangeNumber + 1]);
+                    Chalange chalange3 = new Chalange(data.idChalange[chalangeNumber + 2], data.chalangeClear[chalangeNumber + 2]);
+                    stages.Add(new Stage(stageLevel, new List<Chalange> { chalange1, chalange2, chalange3 }, levelClear));
+                }
             }
             miniGames.Clear();
             for(int i = 0; i < data.idMiniGame.Length; i++)
@@ -92,7 +102,8 @@ public class GameManager : MonoBehaviour
                 float miniGameScore = data.miniGameScore[i];
                 int idMiniGame = data.idMiniGame[i];
                 bool openMiniGame = data.openMiniGame[i];
-                miniGames.Add(new MiniGame(idMiniGame, miniGameScore, openMiniGame));
+                string miniGameDescription = data.miniGameDescription[i];
+                miniGames.Add(new MiniGame(idMiniGame,miniGameDescription, miniGameScore, openMiniGame));
             }
         }
         else {
@@ -104,8 +115,8 @@ public class GameManager : MonoBehaviour
             stages.Add(new Stage(1, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(3) }));
             stages.Add(new Stage(2, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(4) }));
             stages.Add(new Stage(3, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(3) }));
-            stages.Add(new Stage(4, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(3) }));
-            stages.Add(new Stage(5, new List<Chalange> { new Chalange(2), new Chalange(3), new Chalange(4) }));
+            stages.Add(new Stage(4, new List<Chalange> { new Chalange(1), new Chalange(3), new Chalange(5) }));
+            stages.Add(new Stage(5, new List<Chalange> { new Chalange(2), new Chalange(2), new Chalange(4) }));
         }
     }
 }
