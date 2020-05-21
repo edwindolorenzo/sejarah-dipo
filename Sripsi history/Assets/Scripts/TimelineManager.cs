@@ -41,7 +41,10 @@ public class TimelineManager : MonoBehaviour
         if (audioManager == null)
             audioManager = FindObjectOfType<AudioManager>();
         if (sceneMusic)
+        {
             audioManager.Play("MainMenu", true);
+            audioManager.Stop("GameMusic", true);
+        }
         else
             audioManager.Play("GameMusic", true);
     }
