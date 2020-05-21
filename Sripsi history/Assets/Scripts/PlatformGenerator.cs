@@ -85,11 +85,11 @@ public class PlatformGenerator : MonoBehaviour
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
 
-            if ((transform.position.x >= endOfJourney || !isMiniGame) && !eojPooled )
+            if (transform.position.x >= endOfJourney && (!eojPooled || !isMiniGame) )
             {
-                eojPooled = true;
-                if(endOfJourneyObject != null)
+                if(endOfJourneyObject != null && !eojPooled)
                 {
+                    eojPooled = true;
                     GameObject newEndGame = endOfJourneyObject.GetPooledObject();
                     float endOfJourneyX = platformWidths[platformSelector] / 2;
 
