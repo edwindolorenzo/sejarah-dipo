@@ -144,6 +144,10 @@ public class PlayerController : PhysicsObject
             attackPoint.localPosition = new Vector2(-attackPoint.localPosition.x, attackPoint.localPosition.y);
         }
 
+
+        if ((animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && grounded) || animator.GetCurrentAnimatorStateInfo(0).IsTag("Die"))
+            move.x = 0;
+
         animator.SetBool("Grounded", grounded);
         animator.SetFloat("Move", Mathf.Abs(velocity.x));
         if (!moveLeft)
@@ -152,7 +156,7 @@ public class PlayerController : PhysicsObject
         if (!moveRight)
             if (move.x >= -0.1)
                 move.x = 0;
-        targetVelocity = animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") || animator.GetCurrentAnimatorStateInfo(0).IsTag("Die") && grounded ? Vector2.zero : move * maxSpeed;
+        targetVelocity = move * maxSpeed;
         if (Mathf.Abs(velocity.x) > 0.1 && grounded && stepSound.isPlaying == false)
             stepSound.Play();
     }
