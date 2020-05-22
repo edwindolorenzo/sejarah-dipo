@@ -1147,6 +1147,9 @@ MonoBehaviour:
   buttons:
   - {fileID: 987052153}
   - {fileID: 537333169}
+  - {fileID: 1794840920}
+  - {fileID: 1909669669}
+  - {fileID: 762758700}
   objectiveStars:
   - {fileID: 112437880}
   - {fileID: 942395943}
