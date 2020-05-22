@@ -42,7 +42,7 @@ public class TimelineManager : MonoBehaviour
             audioManager = FindObjectOfType<AudioManager>();
         if (sceneMusic)
         {
-            audioManager.Play("MainMenu", true);
+            audioManager.Play("CutSceneMusic", true);
             audioManager.Stop("GameMusic", true);
         }
         else
@@ -64,7 +64,7 @@ public class TimelineManager : MonoBehaviour
             dialougueScript.SetActive(true);
             if (sceneMusic)
             {
-                audioManager.Stop("MainMenu", true);
+                audioManager.Stop("CutSceneMusic", true);
                 audioManager.Play("GameMusic", true);
             }
             if (cameraSetting)
@@ -80,7 +80,7 @@ public class TimelineManager : MonoBehaviour
         if (stopGameMusic)
         {
             audioManager.Stop("GameMusic", true);
-            audioManager.Play("MainMenu", true);
+            audioManager.Play("CutSceneMusic", true);
         }
         dialougueScript = newDialogueScript;
         director.Play();
