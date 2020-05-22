@@ -31,7 +31,7 @@ public class ActiveTimeline : MonoBehaviour
         gamePlayUI.SetActive(false);
         yield return new WaitForSeconds(2f);
         timelineManager.ChangeTimeLine(director, dialougueScript);
-        gameObject.active = false;
+        gameObject.SetActive(false);
         yield return null;
     }
 }

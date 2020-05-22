@@ -64,15 +64,15 @@ public class MiniGamePlay : MonoBehaviour
 
     IEnumerator startPlay()
     {
-        countDownPlay.gameObject.active = true;
+        countDownPlay.gameObject.SetActive(true);
         countDownPlay.text = "Bersiap - siap";
         yield return new WaitForSeconds(2f);
         countDownPlay.text = "Mulai";
         yield return new WaitForSeconds(1f);
-        countDownPlay.gameObject.active = false;
+        countDownPlay.gameObject.SetActive(false);
         for(int i = 0; i< spawnPonts.Length; i++)
         {
-            spawnPonts[i].active = true;
+            spawnPonts[i].SetActive(true);
         }
         gamePlayUI.SetActive(true);
         start = true;
