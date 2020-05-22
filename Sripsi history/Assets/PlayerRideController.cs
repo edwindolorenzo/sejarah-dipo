@@ -54,7 +54,6 @@ public class PlayerRideController : PhysicsObject
     FinishGame finishGame;
     FinishRunnerMiniGame finishRunnerMiniGame;
     bool die = false;
-    private float lifeCounter;
 
     private void Awake()
     {
@@ -211,7 +210,6 @@ public class PlayerRideController : PhysicsObject
     {
         thePlatformGameManager.RestartEndlessRun();
         moveSpeed = 0;
-        lifeCounter = 3f;
         player.Health = player.MaxHealth;
         moveSpeed = moveSpeedStore;
         speedMilestoneCount = speedMilestoneCountStore;

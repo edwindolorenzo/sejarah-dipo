@@ -14,7 +14,8 @@ public class FinishRunnerMiniGame : MonoBehaviour
     MiniGame miniGame;
     int idMiniGame;
 
-    [SerializeField] GameObject playerObject, backGroundUI;
+    public GameObject playerObject;
+    public GameObject backGroundUI;
     public Text scoreText;
     public Text highscoreText;
     public Text newRecordText;

@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class CameraFollowHorse : MonoBehaviour
 {
-    [SerializeField]
-    GameObject player;
+    public GameObject player;
 
-    [SerializeField]
-    float timeOffset;
+    public float timeOffset = 0.1f;
 
-    [SerializeField]
-    Vector2 posOffset;
+    public Vector2 posOffset = new Vector2(9, 1);
 
     //[SerializeField]
     //float leftLimit;
