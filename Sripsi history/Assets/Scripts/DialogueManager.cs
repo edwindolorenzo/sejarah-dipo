@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> sentences = new Queue<string>();
 
     public GameObject gamePlayUI;
+
     public GameObject finishUI;
     FinishGame finishGameScript;
     bool finishGame;
@@ -28,7 +29,8 @@ public class DialogueManager : MonoBehaviour
         {
             if (touch.phase == TouchPhase.Began)
             {
-                DisplayNextSentence();
+                if(animator.GetCurrentAnimatorStateInfo(0).IsTag("ShowText"))
+                    DisplayNextSentence();
             }
         }
     }
