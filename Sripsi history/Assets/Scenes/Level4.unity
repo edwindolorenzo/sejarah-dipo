@@ -385,7 +385,8 @@ PrefabInstance:
     - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
         type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: Kita berhasil mengalahkan musuh. Kota ini sekarang milik rakyat Indonesia
+      value: Kita berhasil mengalahkan penjajah. Untuk saat ini daerah ini aman dari
+        penjajah.
       objectReference: {fileID: 0}
     - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
         type: 3}

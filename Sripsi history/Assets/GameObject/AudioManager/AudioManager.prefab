@@ -72,4 +72,11 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: CutSceneMusic
+    clip: {fileID: 8300000, guid: 14e18076bb4fae84fb00326275ebd9da, type: 3}
+    output: {fileID: 24300002, guid: c8d260dadfe92664d9546b263d28a7c4, type: 2}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
   faddingTime: 0.3

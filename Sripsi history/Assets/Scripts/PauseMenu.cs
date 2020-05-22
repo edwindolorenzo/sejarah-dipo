@@ -48,7 +48,6 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        audioManager.Stop("GameMusic",true);
         levelLoader.LoadSceneName(SceneManager.GetActiveScene().name);
     }
 

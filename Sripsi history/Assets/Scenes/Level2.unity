@@ -218,7 +218,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -2341,7 +2341,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Saya harus dapat mengalahkan musuh - musuh di sini, untuk mempermudah
-        pejuang - pejuang untuk mengalahkan.
+        pejuang - pejuang untuk mengalahkan Belanda.
       objectReference: {fileID: 0}
     - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
         type: 3}
@@ -2553,7 +2553,7 @@ Transform:
   m_Children:
   - {fileID: 2074335296}
   m_Father: {fileID: 1918526079}
-  m_RootOrder: 20
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1246174294
 PrefabInstance:
@@ -42438,7 +42438,7 @@ PrefabInstance:
     - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
         type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: Saya tidak akan membiarkan Belanda melakukan hak seenaknya saja.
+      value: Saya tidak akan membiarkan Belanda melakukan hal seenaknya saja.
       objectReference: {fileID: 0}
     - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
         type: 3}
@@ -43146,10 +43146,10 @@ Transform:
   - {fileID: 1744216111}
   - {fileID: 560401556}
   - {fileID: 1252406574}
+  - {fileID: 1234825542}
   - {fileID: 1097479713}
   - {fileID: 2040571491}
   - {fileID: 1253562319}
-  - {fileID: 1234825542}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

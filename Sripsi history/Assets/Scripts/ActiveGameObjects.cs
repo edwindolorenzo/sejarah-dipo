@@ -15,7 +15,7 @@ public class ActiveGameObjects : MonoBehaviour
             {
                 gameobjects[i].SetActive(true);
             }
-        gameObject.active = false;
+        gameObject.SetActive(false);
         }
     }
     // Update is called once per frame
