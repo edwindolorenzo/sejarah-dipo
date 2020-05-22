@@ -219,8 +219,9 @@ MonoBehaviour:
   dialogue:
     name: Game Master
     sentences:
-    - Jika nyawa berkurang ambilah tambahan nyawa yang berada di perjalanan seperti
-      di depan tersebut. Ini akan membantu untuk menyelesaikan permainan.
+    - Jika nyawa Pangeran Diponegoro berkurang ambilah tambahan nyawa yang berada
+      di perjalanan seperti di depan tersebut. Ini akan membantu untuk menyelesaikan
+      permainan.
   finished: 0
 --- !u!4 &110198690
 Transform:
@@ -23541,8 +23542,9 @@ MonoBehaviour:
     name: Game Master
     sentences:
     - Bendera di depan tersebut adalah titik aman kita.
-    - Jika Nyawa Diponegoro sudah habis tetapi masih memiliki kesempatan, makan Diponegoro
-      akan kembali ke titik aman.
+    - Jika Nyawa Pangeran Diponegoro sudah habis tetapi masih memiliki kesempatan
+      untuk bermain lagi, makan Diponegoro akan kembali ke titik aman yang terakhir
+      Pangeran Diponegoro dapatkan.
   finished: 0
 --- !u!95 &1745652558 stripped
 Animator:
@@ -23803,9 +23805,11 @@ MonoBehaviour:
     sentences:
     - Lihatlah didepan ada musuh.
     - Berhati hatila untuk melawannya. Jaga jarak untuk tidak terluka.
-    - Walaupun pangeran Diponegoro pemimpin perang Diponegoro atau dapat disebut perang
-      Jawa pada  periode tahun 1825 hingga 1830, dia tetap bisa terluka dan kalah.
-    - Maka dari itu tetaplah waspada lihat juga nyawa dan kesempatan untuk hidup.
+    - Pangeran Diponegoro pemimpin perang Diponegoro atau dapat disebut perang Jawa.
+      Pada periode tahun 1825 hingga 1830, perang ini melawan pemerintahan Hindia
+      Belanda.
+    - Jangan lupa, jagalah jarak dalam menyerang karena Pangeran Diponegoro dapat
+      terluka dan kalah.
   finished: 0
 --- !u!4 &2058007977
 Transform:
@@ -24168,6 +24172,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 659213524}
     m_Modifications:
+    - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[2]
+      value: Diponegoro atau pangeran Diponegoro adalah salah seorang pahlawan nasional
+        replubik Indonesia
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[1]
+      value: Mari kita mempellajari bagaimana bermain game ini dan mengetahui siapa
+        sih Pangeran Diponegoro.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[3]
+      value: Pangeran Diponegoro lahir pada tanggal 11 November 1785.
+      objectReference: {fileID: 0}
     - target: {fileID: 2396494719822455763, guid: 39ba28b69f0aaf441a779eb7dd569b28,
         type: 3}
       propertyPath: m_LocalPosition.x
