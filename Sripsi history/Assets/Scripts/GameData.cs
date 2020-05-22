@@ -36,7 +36,6 @@ public class GameData
                 idChalangeList.Add(chalange.IdChalange);
                 chalangeClearList.Add(chalange.Clear);
                 chalangeDescriptionList.Add(chalange.NameChalange);
-                Debug.Log("nama chalange = " + chalange.NameChalange);
             }
         }
         foreach(MiniGame miniGame in miniGames)
