@@ -10,14 +10,8 @@ public class CameraFollowHorse : MonoBehaviour
 
     public Vector2 posOffset = new Vector2(9, 1);
 
-    //[SerializeField]
-    //float leftLimit;
-    //[SerializeField]
-    //float rightLimit;
-    //[SerializeField]
-    //float bottomLimit;
-    //[SerializeField]
-    //float topLimit;
+    public float bottomLimit;
+    public float topLimit;
 
     private Vector3 velocity;
 
@@ -36,18 +30,18 @@ public class CameraFollowHorse : MonoBehaviour
         endPos.y += posOffset.y;
         endPos.z = transform.position.z;
         // normal
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+        //transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
         // use lerp
         //transform.position = Vector3.Lerp(startPos, endPos, timeOffset * Time.deltaTime);
 
         transform.position = Vector3.SmoothDamp(startPos, endPos, ref velocity, timeOffset);
 
-        //transform.position = new Vector3
-        //(
-        //    Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
-        //    Mathf.Clamp(transform.position.y, bottomLimit, topLimit),
-        //    transform.position.z
-        //);
+        transform.position = new Vector3
+        (
+            transform.position.x,
+            Mathf.Clamp(transform.position.y, bottomLimit, topLimit),
+            transform.position.z
+        );
     }
 
     //private void OnDrawGizmos()
