@@ -6,9 +6,9 @@ public class CameraFollowHorse : MonoBehaviour
 {
     public GameObject player;
 
-    public float timeOffset = 0.1f;
+    public float timeOffset;
 
-    public Vector2 posOffset = new Vector2(9, 1);
+    public Vector2 posOffset;
 
     public float bottomLimit;
     public float topLimit;
