@@ -58,6 +58,7 @@ public class FinishGame : MonoBehaviour
 
     public void GameFinished()
     {
+        audioManager.Stop("GameMusic");
         audioManager.Play("WinGame");
         backGroundUI.SetActive(true);
         if (stage != null)
@@ -94,6 +95,7 @@ public class FinishGame : MonoBehaviour
 
     public void GameOver()
     {
+        audioManager.Stop("GameMusic");
         audioManager.Play("GameOver");
         CheckObjective(false);
         backGroundUI.SetActive(true);

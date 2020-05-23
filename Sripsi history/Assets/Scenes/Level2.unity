@@ -1853,7 +1853,7 @@ MonoBehaviour:
   - {fileID: 1270690632}
   spawnWait: 2
   maxWait: 2
-  numberUnit: 5
+  numberUnit: 3
   maxUnit: 20
   tagEnemies: EnemiesSword
 --- !u!4 &693297655
@@ -2553,7 +2553,7 @@ Transform:
   m_Children:
   - {fileID: 2074335296}
   m_Father: {fileID: 1918526079}
-  m_RootOrder: 17
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1246174294
 PrefabInstance:
@@ -43144,9 +43144,9 @@ Transform:
   - {fileID: 1871261377}
   - {fileID: 175529931}
   - {fileID: 1744216111}
+  - {fileID: 1234825542}
   - {fileID: 560401556}
   - {fileID: 1252406574}
-  - {fileID: 1234825542}
   - {fileID: 1097479713}
   - {fileID: 2040571491}
   - {fileID: 1253562319}
