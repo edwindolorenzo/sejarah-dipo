@@ -21,4 +21,10 @@ public class Enemy : Humanoid
         state = State.Patrol;
     }
 
+    public Enemy(float health)
+    {
+        Health = health;
+        state = State.Patrol;
+    }
+
 }

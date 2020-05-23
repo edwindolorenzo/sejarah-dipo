@@ -214,26 +214,24 @@ MonoBehaviour:
   minGroundNormalY: 0.65
   gravityModifier: 1
   player: {fileID: 0}
-  castPoint: {fileID: 4410286983514917424}
   agroRange: 50
+  chaseRangeY: 5
+  castPoint: {fileID: 4410286983514917424}
   maxSpeed: 1
   jumpTakeOffSpeed: 10
-  chaseRangeY: 5
   SwordSound: {fileID: 4410286983444312442}
   damagedSound: {fileID: 4410286983444312441}
+  attackRange: 0.3
+  attackRate: 10
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 256
   attackPoint: {fileID: 4410286983360575627}
   startPatrol: {fileID: 4410286985294165158}
   EndPatrol: {fileID: 4410286984843298237}
   groundDetection: {fileID: 4410286983634817217}
-  attackRange: 0.3
-  grondMask:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  attackRate: 10
   damagedArea: {fileID: 4410286985194633916}
+  health: 2
 --- !u!95 &4410286983444312443
 Animator:
   serializedVersion: 3
