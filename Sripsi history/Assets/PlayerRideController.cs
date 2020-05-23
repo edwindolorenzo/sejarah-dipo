@@ -13,6 +13,10 @@ public class PlayerRideController : PhysicsObject
     private bool stoppedJumping;
     //private bool canDoubleJump;
 
+    // sound
+    [SerializeField]
+    private AudioSource stepSound, damagedSound;
+
     // move
     private float moveSpeedStore;
     public float moveSpeed;
@@ -126,7 +130,9 @@ public class PlayerRideController : PhysicsObject
 
         move.x = 1;
         anim.SetFloat("Move", Mathf.Abs(moveSpeed));
-        if(transform.position.x > speedMilestoneCount)
+        if (Mathf.Abs(moveSpeed) > 0.1 && grounded && stepSound.isPlaying == false)
+            stepSound.Play();
+        if (transform.position.x > speedMilestoneCount)
         {
             speedMilestoneCount += speedIncreaseMilestone;
 
@@ -184,6 +190,7 @@ public class PlayerRideController : PhysicsObject
         if (invicibiltyCounter <= 0 || fallDamage)
         {
             player.Health -= damage;
+            damagedSound.Play();
             if (player.Health <= 0)
             {
                 player.Life -= 1;
