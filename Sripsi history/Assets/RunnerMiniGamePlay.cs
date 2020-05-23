@@ -16,12 +16,17 @@ public class RunnerMiniGamePlay : MonoBehaviour
     public GameObject gamePlayUI;
     public bool scoreIncreasing;
 
+    AudioManager audioManager = AudioManager.instance;
+
     // Start is called before the first frame update
     void Start()
     {
         transform.position = playerRidingHorse.position;
         scoreCount = 0;
         StartCoroutine(startGame());
+        if (audioManager == null)
+            audioManager = FindObjectOfType<AudioManager>();
+        audioManager.Play("GameMusic", true);
         gamePlayUI.SetActive(false);
     }
 
