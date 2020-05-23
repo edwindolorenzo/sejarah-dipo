@@ -54,10 +54,12 @@ public class EnemyGunSoldier : PhysicsObject
 
     private Animator animator;
 
-    Enemy soldier = new Enemy();
+    [SerializeField] int health = 3;
+    Enemy soldier;
 
     void Awake()
     {
+        soldier = new Enemy(health);
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();

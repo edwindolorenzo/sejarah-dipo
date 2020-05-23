@@ -18,6 +18,8 @@ public class Humanoid
         {
             if (value <= MaxHealth)
                 health = value;
+            else
+                health = MaxHealth;
         }
     }
 

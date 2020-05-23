@@ -371,10 +371,12 @@ MonoBehaviour:
   minGroundNormalY: 0.65
   gravityModifier: 1
   player: {fileID: 0}
-  castPoint: {fileID: 911525785262518251}
   agroRange: 50
+  chaseRangeY: 10
+  castPoint: {fileID: 911525785262518251}
   attackRange: 15
   maxSpeed: 1
+  jumpTakeOffSpeed: 10
   firePoint: {fileID: 911525784952768444}
   startPatrol: {fileID: 911525785403434422}
   EndPatrol: {fileID: 911525784948277720}
@@ -382,16 +384,15 @@ MonoBehaviour:
   bulletPrefab: {fileID: 702131186262935178, guid: 98321b51f8edec249b3c32187e5610f1,
     type: 3}
   damagedArea: {fileID: 911525784038916652}
-  bulletPoint: {fileID: 911525784952768444}
-  attackLength: 2
   firePosition:
   - {x: 0.13, y: 0.033, z: 0}
   - {x: 0.1, y: 0.088, z: 0}
   - {x: 0.078, y: -0.107, z: 0}
-  jumpTakeOffSpeed: 10
-  chaseRangeY: 10
+  bulletPoint: {fileID: 911525784952768444}
   gunShotSound: {fileID: 4360966992501368094}
   damagedSound: {fileID: 5541307033888583033}
+  attackLength: 2
+  health: 2
 --- !u!95 &911525785924905863
 Animator:
   serializedVersion: 3
