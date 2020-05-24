@@ -392,7 +392,7 @@ MonoBehaviour:
   gunShotSound: {fileID: 4360966992501368094}
   damagedSound: {fileID: 5541307033888583033}
   attackLength: 2
-  health: 2
+  health: 1
 --- !u!95 &911525785924905863
 Animator:
   serializedVersion: 3
