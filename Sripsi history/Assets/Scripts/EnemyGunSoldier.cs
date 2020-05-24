@@ -202,10 +202,13 @@ public class EnemyGunSoldier : PhysicsObject
         Vector2 endPosUp = castPoint.position + new Vector3(xAttack, 1,0) * distance;
         Vector2 endPosDown = castPoint.position + new Vector3(xAttack, -1,0) * distance;
 
+        int mask1 = 1 << LayerMask.NameToLayer("Player");
+        int mask2 = 1 << LayerMask.NameToLayer("Platform");
+        int combinedMask = mask1 | mask2;
 
-        RaycastHit2D hitStraight = Physics2D.Linecast(castPoint.position, endPosStraight, 1 << LayerMask.NameToLayer("Player"));
-        RaycastHit2D hitUp = Physics2D.Linecast(castPoint.position, endPosUp, 1 << LayerMask.NameToLayer("Player"));
-        RaycastHit2D hitDown = Physics2D.Linecast(castPoint.position, endPosDown, 1 << LayerMask.NameToLayer("Player"));
+        RaycastHit2D hitStraight = Physics2D.Linecast(castPoint.position, endPosStraight, combinedMask);
+        RaycastHit2D hitUp = Physics2D.Linecast(castPoint.position, endPosUp, combinedMask);
+        RaycastHit2D hitDown = Physics2D.Linecast(castPoint.position, endPosDown, combinedMask);
 
         if(hitStraight.collider != null)
         {
