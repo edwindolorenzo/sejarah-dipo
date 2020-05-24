@@ -7694,7 +7694,7 @@ MonoBehaviour:
   isMiniGame: 0
   eojPooled: 0
   endOfJourneyObject: {fileID: 1393182658}
-  endOfJourney: 900
+  endOfJourney: 600
   thePlatformThatWillGenerate: {fileID: 362134119929932842, guid: 24429b1e9bfe7924492bded75adc1673,
     type: 3}
   generationPoint: {fileID: 942562867}
@@ -14456,7 +14456,7 @@ PrefabInstance:
     - target: {fileID: 2842298825581321673, guid: f53467857700ff240a54bc978dceda30,
         type: 3}
       propertyPath: jumpTakeOffSpeed
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2842298825581321673, guid: f53467857700ff240a54bc978dceda30,
         type: 3}
