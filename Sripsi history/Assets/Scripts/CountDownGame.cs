@@ -14,7 +14,10 @@ public class CountDownGame : MonoBehaviour
     bool respawn = false;
 
     public GameObject[] respawnObjects;
-    public GameObject dialogue, gamePlayUI;
+    public GameObject dialogue, gamePlayUI, playerObject;
+
+    PlayerController playerController;
+    Player player;
 
     public Camera cam;
     CameraFollow cameraFollow;
@@ -25,44 +28,49 @@ public class CountDownGame : MonoBehaviour
         timerText.text = timeCountdown.ToString("F2");
         cameraFollow = cam.GetComponent<CameraFollow>();
         cameraFollow.enabled = false;
+        playerController = playerObject.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
-    {        
-        if(counting > 0)
+    {
+        player = playerController.givePlayerStatus();
+        if(player.Life != 0)
         {
-            counting -= Time.deltaTime;
-        }
-        if (gamePlayUI.active)
-        {
-            playing = true;
-            respawn = true;
-        }
-        if (playing && !ended)
-        {
-            timeCountdown -= Time.deltaTime;
-            timerText.text = timeCountdown.ToString("F2");
-            if (timeCountdown % 60 < 0.01f && counting <= 0)
+            if(counting > 0)
             {
-                counting = 60f;
-                foreach (GameObject respawnObject in respawnObjects)
+                counting -= Time.deltaTime;
+            }
+            if (gamePlayUI.active)
+            {
+                playing = true;
+                respawn = true;
+            }
+            if (playing && !ended)
+            {
+                timeCountdown -= Time.deltaTime;
+                timerText.text = timeCountdown.ToString("F2");
+                if (timeCountdown % 60 < 0.01f && counting <= 0)
                 {
-                    respawnObject.GetComponent<Spawner>().AddSpawn();
+                    counting = 60f;
+                    foreach (GameObject respawnObject in respawnObjects)
+                    {
+                        respawnObject.GetComponent<Spawner>().AddSpawn();
+                    }
                 }
             }
-        }
-        if (respawn && !ended)
-        {            
-            CallRespawnObjects();
-        }
-        if(timeCountdown < 0)
-        {
-            ended = true;
-            dialogue.SetActive(true);
-            for(int i = 0; i < respawnObjects.Length; i++)
+            if (respawn && !ended)
+            {            
+                CallRespawnObjects();
+            }
+            if(timeCountdown < 0)
             {
-                respawnObjects[i].GetComponent<Spawner>().StopGame();
+                ended = true;
+                dialogue.SetActive(true);
+                for(int i = 0; i < respawnObjects.Length; i++)
+                {
+                    respawnObjects[i].GetComponent<Spawner>().StopGame();
+                }
             }
         }
     }

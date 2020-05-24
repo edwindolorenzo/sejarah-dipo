@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1477416061647035142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7854526476492254234}
+  m_Layer: 9
+  m_Name: jumpDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7854526476492254234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477416061647035142}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.045, y: 0.134, z: 0.03606322}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7831601326663786474}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7070198076571320323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3072832107173201813}
+  m_Layer: 9
+  m_Name: header detection
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3072832107173201813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7070198076571320323}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.082, y: 0.134, z: 0.03606322}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7831601326663786474}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7831601325715626887
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7831601326267230323}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.045, y: -0.125, z: 0.03606322}
+  m_LocalPosition: {x: 0.045, y: -0.092, z: 0.03606322}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7831601326663786474}
@@ -161,6 +221,8 @@ Transform:
   - {fileID: 7831601327772038099}
   - {fileID: 7831601326941517376}
   - {fileID: 7831601326267230320}
+  - {fileID: 7854526476492254234}
+  - {fileID: 3072832107173201813}
   m_Father: {fileID: 7831601326602156011}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -274,27 +336,30 @@ MonoBehaviour:
   minGroundNormalY: 0.65
   gravityModifier: 1
   player: {fileID: 0}
-  castPoint: {fileID: 7831601325715626884}
   agroRange: 6
+  chaseRangeY: 4
+  castPoint: {fileID: 7831601325715626884}
   attackRange: 8
   maxSpeed: 1
+  jumpTakeOffSpeed: 10
   firePoint: {fileID: 7831601327772038099}
   startPatrol: {fileID: 7831601326113477081}
   EndPatrol: {fileID: 7831601327776986551}
   groundDetection: {fileID: 7831601326267230320}
+  jumpDetection: {fileID: 7854526476492254234}
+  headDetection: {fileID: 3072832107173201813}
   bulletPrefab: {fileID: 702131186262935178, guid: 98321b51f8edec249b3c32187e5610f1,
     type: 3}
   damagedArea: {fileID: 7831601326941517379}
-  bulletPoint: {fileID: 7831601327772038099}
-  attackLength: 2
   firePosition:
   - {x: 0.13, y: 0.033, z: 0}
   - {x: 0.1, y: 0.088, z: 0}
   - {x: 0.078, y: -0.107, z: 0}
-  jumpTakeOffSpeed: 10
-  chaseRangeY: 4
+  bulletPoint: {fileID: 7831601327772038099}
   gunShotSound: {fileID: 6668784764487668081}
   damagedSound: {fileID: 3237984046392875286}
+  attackLength: 2
+  health: 3
 --- !u!95 &7831601326663786472
 Animator:
   serializedVersion: 3
