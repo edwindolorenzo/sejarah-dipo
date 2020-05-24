@@ -11,7 +11,7 @@ public class PlayerRideController : PhysicsObject
     public float jumpTime;
     private float jumpTimeCounter;
     private bool stoppedJumping;
-    //private bool canDoubleJump;
+    private bool canDoubleJump;
 
     // sound
     [SerializeField]
@@ -153,13 +153,13 @@ public class PlayerRideController : PhysicsObject
             }
 
             // double jump
-            //if(!grounded && canDoubleJump)
-            //{
-            //    velocity.y = jumpTakeOffSpeed;
-            //    jumpTimeCounter = jumpTime;
-            //    stoppedJumping = false;
-            //    canDoubleJump = false;
-            //}
+            if (!grounded && canDoubleJump)
+            {
+                velocity.y = jumpTakeOffSpeed;
+                jumpTimeCounter = jumpTime;
+                stoppedJumping = false;
+                canDoubleJump = false;
+            }
         }
 
         if (CrossPlatformInputManager.GetButton("Jump") && !stoppedJumping)
@@ -180,7 +180,7 @@ public class PlayerRideController : PhysicsObject
         if (grounded)
         {
             jumpTimeCounter = jumpTime;
-            //canDoubleJump = true;
+            canDoubleJump = true;
         }
         anim.SetBool("Grounded", grounded);
     }
