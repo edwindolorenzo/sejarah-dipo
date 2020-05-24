@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : Humanoid
 {
-    public enum State
+    public enum StateEnemy
     {
         Patrol,
         Chase,
@@ -13,18 +13,21 @@ public class Enemy : Humanoid
         Dead
     }
 
-    public State state;
+    private StateEnemy state;
+
+    public StateEnemy State { get; set; }
+
 
     public Enemy()
     {
         Health = MaxHealth;
-        state = State.Patrol;
+        State = StateEnemy.Patrol;
     }
 
     public Enemy(float health)
     {
         Health = health;
-        state = State.Patrol;
+        State = StateEnemy.Patrol;
     }
 
 }

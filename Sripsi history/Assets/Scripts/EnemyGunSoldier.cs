@@ -95,9 +95,9 @@ public class EnemyGunSoldier : PhysicsObject
         }
 
         distToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        switch (soldier.state)
+        switch (soldier.State)
         {
-            case Enemy.State.Patrol:
+            case Enemy.StateEnemy.Patrol:
                 if (reachPatrol)
                 {
                     Chase(startPatrol);
@@ -107,19 +107,19 @@ public class EnemyGunSoldier : PhysicsObject
                     Chase(EndPatrol);
                 }
                 if (distToPlayer <= agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
-                    soldier.state = Enemy.State.Chase;
+                    soldier.State = Enemy.StateEnemy.Chase;
                 break;
-            case Enemy.State.Chase:
+            case Enemy.StateEnemy.Chase:
                 Chase(player);
                 StartCoroutine(ChaseCase());
                 break;
-            case Enemy.State.Attack:
+            case Enemy.StateEnemy.Attack:
                 if(attackCounter <= 0)
                 {
                     StartCoroutine(Attacking());
                 }
                 break;
-            case Enemy.State.Dead:
+            case Enemy.StateEnemy.Dead:
                 spriteRenderer.enabled = !spriteRenderer.enabled;
                 break;
             default:
@@ -291,7 +291,7 @@ public class EnemyGunSoldier : PhysicsObject
             RaycastHit2D headerCheck = Physics2D.Raycast(headDetection.position, Vector2.up, chaseRangeY / 2);
             if(headerCheck.collider == null)
             {
-                if (player.transform.position.y - transform.position.y > 0.5f && hitPlatform.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && soldier.state == Enemy.State.Chase && jumpCounter <= 0 && grounded)
+                if (player.transform.position.y - transform.position.y > 0.5f && hitPlatform.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && soldier.State == Enemy.StateEnemy.Chase && jumpCounter <= 0 && grounded)
                 {
                     velocity.y = jumpTakeOffSpeed;
                     jumpCounter = jumpCount;
@@ -310,7 +310,7 @@ public class EnemyGunSoldier : PhysicsObject
         }
 
         // if patroling
-        if (Mathf.Round(transform.position.x) == Mathf.Round(target.position.x) && soldier.state == Enemy.State.Patrol)
+        if (Mathf.Round(transform.position.x) == Mathf.Round(target.position.x) && soldier.State == Enemy.StateEnemy.Patrol)
         {
             reachPatrol = !reachPatrol;
         }
@@ -338,7 +338,7 @@ public class EnemyGunSoldier : PhysicsObject
             if (soldier.Health <= 0)
             {
                 died = true;
-                soldier.state = Enemy.State.Dead;
+                soldier.State = Enemy.StateEnemy.Dead;
                 animator.SetBool("Died", true);
                 damagedArearCollider.enabled = false;
                 Invoke("Die", 2);
@@ -375,7 +375,7 @@ public class EnemyGunSoldier : PhysicsObject
         animator.SetBool("ShootUp", false);
         animator.SetBool("ShootMid", false);
         animator.SetBool("ShootDown", false);
-        soldier.state = Enemy.State.Chase;
+        soldier.State = Enemy.StateEnemy.Chase;
         yield return null;
     }
 
@@ -383,13 +383,13 @@ public class EnemyGunSoldier : PhysicsObject
     {
         if (AttackRange(attackRange))
         {
-            soldier.state = Enemy.State.Attack;
+            soldier.State = Enemy.StateEnemy.Attack;
             yield return null;
         }
         if (!(distToPlayer <= agroRange) && !(Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY))
         {
             yield return new WaitForSeconds(3f);
-            soldier.state = Enemy.State.Patrol;
+            soldier.State = Enemy.StateEnemy.Patrol;
             yield return null;
         }
 
