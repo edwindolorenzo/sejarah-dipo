@@ -24,11 +24,71 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368138290436918384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.081, y: -0.11, z: 0}
+  m_LocalPosition: {x: 0.081, y: -0.075, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2605438477663145830}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &844983218671599951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7459377580835965757}
+  m_Layer: 9
+  m_Name: jumpDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7459377580835965757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844983218671599951}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.081, y: 0.126, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2605438477663145830}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1342609488118828077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2713419684975815092}
+  m_Layer: 9
+  m_Name: HeadDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2713419684975815092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342609488118828077}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.04, y: 0.12599999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2605438477663145830}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2605438476906316438
 GameObject:
@@ -231,6 +291,8 @@ Transform:
   - {fileID: 2605438477371634769}
   - {fileID: 2605438477611383531}
   - {fileID: 2580143943327011572}
+  - {fileID: 7459377580835965757}
+  - {fileID: 2713419684975815092}
   m_Father: {fileID: 2605438476906316439}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -344,26 +406,26 @@ MonoBehaviour:
   minGroundNormalY: 0.65
   gravityModifier: 1
   player: {fileID: 0}
-  castPoint: {fileID: 2605438477856267701}
   agroRange: 6
+  chaseRangeY: 4
+  castPoint: {fileID: 2605438477856267701}
   maxSpeed: 1
   jumpTakeOffSpeed: 10
-  chaseRangeY: 4
   SwordSound: {fileID: 7588885097513090103}
   damagedSound: {fileID: 2551264815166257868}
+  attackRange: 0.3
+  attackRate: 10
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 256
   attackPoint: {fileID: 2605438477371634769}
   startPatrol: {fileID: 2605438477920573311}
   EndPatrol: {fileID: 2605438477483638812}
   groundDetection: {fileID: 2580143943327011572}
-  attackRange: 0.3
-  grondMask:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  attackRate: 10
+  jumpDetection: {fileID: 7459377580835965757}
+  headDetection: {fileID: 2713419684975815092}
   damagedArea: {fileID: 2605438477611383530}
+  health: 3
 --- !u!95 &2605438477663145828
 Animator:
   serializedVersion: 3

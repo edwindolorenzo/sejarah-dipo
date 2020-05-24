@@ -46,7 +46,7 @@ public class EnemyScript : PhysicsObject
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-    public Transform attackPoint, startPatrol, EndPatrol, groundDetection;
+    public Transform attackPoint, startPatrol, EndPatrol, groundDetection, jumpDetection, headDetection;
     public GameObject damagedArea;
 
     [SerializeField] int health = 3;
@@ -202,13 +202,17 @@ public class EnemyScript : PhysicsObject
         }
 
         // check jika player di atas dan ada layer platform di atas dengan jarak chaseRangeY
-        RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.up, chaseRangeY);
-        if (hit)
+        RaycastHit2D hitPlatform = Physics2D.Raycast(jumpDetection.position, Vector2.up, chaseRangeY/2);
+        if (hitPlatform)
         {
-            if (player.transform.position.y - transform.position.y > 0.5f && hit.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && soldier.state.Equals(Enemy.State.Chase) && jumpCounter <= 0 && grounded)
+            RaycastHit2D headerCheck = Physics2D.Raycast(headDetection.position, Vector2.up, chaseRangeY / 2);
+            if (headerCheck.collider == null)
             {
-                velocity.y = jumpTakeOffSpeed;
-                jumpCounter = jumpCount;
+                if (player.transform.position.y - transform.position.y > 0.5f && hitPlatform.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && soldier.state.Equals(Enemy.State.Chase) && jumpCounter <= 0 && grounded)
+                {
+                    velocity.y = jumpTakeOffSpeed;
+                    jumpCounter = jumpCount;
+                }
             }
         }
         if (move.x > 0.01f && !facingRight)

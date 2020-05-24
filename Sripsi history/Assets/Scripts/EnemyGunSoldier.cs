@@ -24,7 +24,7 @@ public class EnemyGunSoldier : PhysicsObject
     private float jumpCounter;
     private float jumpCount = 2f;
 
-    public Transform firePoint, startPatrol, EndPatrol, groundDetection;
+    public Transform firePoint, startPatrol, EndPatrol, groundDetection, jumpDetection, headDetection;
     public GameObject bulletPrefab, damagedArea;
     private BoxCollider2D damagedArearCollider;
 
@@ -283,15 +283,23 @@ public class EnemyGunSoldier : PhysicsObject
         {
             targetVelocity = move * maxSpeed;
         }
-        RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.up, chaseRangeY);
-        if (hit)
+
+        // check if enemy can jump
+        RaycastHit2D hitPlatform = Physics2D.Raycast(jumpDetection.position, Vector2.up, chaseRangeY/2);
+        if (hitPlatform)
         {
-            if (player.transform.position.y - transform.position.y > 0.5f && hit.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && soldier.state == Enemy.State.Chase && jumpCounter <= 0 && grounded)
+            RaycastHit2D headerCheck = Physics2D.Raycast(headDetection.position, Vector2.up, chaseRangeY / 2);
+            if(headerCheck.collider == null)
             {
-                velocity.y = jumpTakeOffSpeed;
-                jumpCounter = jumpCount;
+                if (player.transform.position.y - transform.position.y > 0.5f && hitPlatform.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && soldier.state == Enemy.State.Chase && jumpCounter <= 0 && grounded)
+                {
+                    velocity.y = jumpTakeOffSpeed;
+                    jumpCounter = jumpCount;
+                }
             }
         }
+
+        // check face left or right
         if (move.x > 0.01f && !facingRight)
         {
             Flip();
@@ -300,6 +308,8 @@ public class EnemyGunSoldier : PhysicsObject
         {
             Flip();
         }
+
+        // if patroling
         if (Mathf.Round(transform.position.x) == Mathf.Round(target.position.x) && soldier.state == Enemy.State.Patrol)
         {
             reachPatrol = !reachPatrol;
