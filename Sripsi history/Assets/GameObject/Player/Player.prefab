@@ -123,9 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minGroundNormalY: 0.65
-  gravityModifier: 1
+  gravityModifier: 2
   maxSpeed: 5
-  jumpTakeOffSpeed: 9
+  jumpTakeOffSpeed: 13
   attackPoint: {fileID: 1572660438128247712}
   attackRange: 0.6
   enemyLayers:
@@ -139,6 +139,7 @@ MonoBehaviour:
   stepSound: {fileID: 1735806300889445}
   damagedSound: {fileID: 2154344835097654850}
   damageSound: {fileID: 3294765895949494641}
+  playerLife: 3
   hearts:
   - {fileID: 0}
   - {fileID: 0}
