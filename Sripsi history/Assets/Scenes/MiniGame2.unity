@@ -2744,7 +2744,7 @@ MonoBehaviour:
   maxHeightPoint: {fileID: 845571380}
   maxHeightChange: 3.5
   randomObjectThreshold: 75
-  randomHealthThreshold: 30
+  randomHealthThreshold: 40
   randomTrapThreshold: 50
   trapPool: {fileID: 404449740}
 --- !u!4 &1917971148
@@ -8559,7 +8559,7 @@ PrefabInstance:
     - target: {fileID: 2842298825581321673, guid: f53467857700ff240a54bc978dceda30,
         type: 3}
       propertyPath: jumpTakeOffSpeed
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2842298825581321673, guid: f53467857700ff240a54bc978dceda30,
         type: 3}

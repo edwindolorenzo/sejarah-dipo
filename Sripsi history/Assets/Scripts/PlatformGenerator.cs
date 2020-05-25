@@ -101,7 +101,7 @@ public class PlatformGenerator : MonoBehaviour
                 }
             }
             else { 
-                if (Random.Range(0, 100) < randomObjectThreshold)
+                if (Random.Range(0, 100) < randomObjectThreshold && (platformWidths[platformSelector] > 4))
                 {
                     if ((Random.Range(0, 100) < randomHealthThreshold) && healthExist)
                     {
