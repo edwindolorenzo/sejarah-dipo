@@ -474,7 +474,7 @@ MonoBehaviour:
   - {fileID: 1970621772}
   miniGameImages:
   - {fileID: 21300000, guid: 628ae6e0f749c7b4b9037b6ebe66c88c, type: 3}
-  - {fileID: 21300000, guid: 5b1a64ea234fb2343b8d0686c51280de, type: 3}
+  - {fileID: 21300000, guid: 5d8fb382d5531d14096a1a9cc3f41302, type: 3}
   descriptionText: {fileID: 3579708952549320369}
   highscore: {fileID: 87027240}
   descImage: {fileID: 345106866}
@@ -1249,6 +1249,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 3310228336877937175, guid: 24fd544e8cda6a542825435305ac9e40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24fd544e8cda6a542825435305ac9e40, type: 3}
 --- !u!1 &1804475549
@@ -1714,7 +1719,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6ad2a973de12de142a201cc57123e38a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5d8fb382d5531d14096a1a9cc3f41302, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
