@@ -26,7 +26,6 @@ public class MiniGamePlay : MonoBehaviour
         gamePlayUI.SetActive(false);
         if (audioManager == null)
             audioManager = FindObjectOfType<AudioManager>();
-        audioManager.Stop("MainMenu", true);
         audioManager.Play("GameMusic", true);
     }
 

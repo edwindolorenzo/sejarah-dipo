@@ -22,6 +22,8 @@ public class SelectMiniGame : MonoBehaviour
     GameObject playerMenu;
 
     GameManager gameManager = GameManager.instance;
+    AudioManager audioManager = AudioManager.instance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,8 @@ public class SelectMiniGame : MonoBehaviour
         levelLoader = sceneLoader.GetComponent<LevelLoader>();
         if (gameManager == null)
             gameManager = FindObjectOfType<GameManager>();
+        if (audioManager == null)
+            audioManager = FindObjectOfType<AudioManager>();
         listMiniGames = gameManager.AllMiniGame();
         int i = 0;
         foreach(MiniGame gameManager in listMiniGames)
@@ -61,6 +65,7 @@ public class SelectMiniGame : MonoBehaviour
     public void levelToLoad()
     {
         Destroy(playerMenu);
+        audioManager.Stop("MainMenu", true);
         levelLoader.LoadSceneName("MiniGame"+gameId);
     }
 
