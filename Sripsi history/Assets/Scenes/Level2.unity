@@ -2342,7 +2342,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogue.sentences.Array.data[0]
       value: Saya harus dapat mengalahkan musuh - musuh di sini, untuk mempermudah
-        pejuang - pejuang untuk mengalahkan Belanda.
+        pejuang - pejuang mengalahkan Belanda.
       objectReference: {fileID: 0}
     - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
         type: 3}

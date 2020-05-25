@@ -7709,7 +7709,7 @@ MonoBehaviour:
   maxHeightChange: 3.5
   randomObjectThreshold: 60
   randomHealthThreshold: 30
-  randomTrapThreshold: 40
+  randomTrapThreshold: 42
   trapPool: {fileID: 404449740}
 --- !u!4 &1917971148
 Transform:
@@ -12365,7 +12365,7 @@ MonoBehaviour:
   - {fileID: 8618003007879860045}
   - {fileID: 1561171271212690545}
   - {fileID: 914676074}
-  haveMiniGame: 0
+  haveMiniGame: 1
   objectiveStars:
   - {fileID: 8618003008248286141}
   - {fileID: 8618003007872398306}
