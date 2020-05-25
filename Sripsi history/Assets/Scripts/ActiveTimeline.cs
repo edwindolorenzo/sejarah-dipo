@@ -7,6 +7,7 @@ public class ActiveTimeline : MonoBehaviour
 {
     public PlayableDirector director;
     public GameObject dialougueScript;
+    public bool sceneMusic = true;
 
     public GameObject timelineDirector;
     TimelineManager timelineManager;
@@ -22,15 +23,15 @@ public class ActiveTimeline : MonoBehaviour
     {
         if (collider.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            StartCoroutine(PlayingTimeline());
+            StartCoroutine(PlayingTimeline(sceneMusic));
         }
     }
 
-    IEnumerator PlayingTimeline()
+    IEnumerator PlayingTimeline(bool music)
     {
         gamePlayUI.SetActive(false);
         yield return new WaitForSeconds(2f);
-        timelineManager.ChangeTimeLine(director, dialougueScript);
+        timelineManager.ChangeTimeLine(director, dialougueScript, music);
         gameObject.SetActive(false);
         yield return null;
     }
