@@ -37,11 +37,6 @@ public class EnemyScript : PhysicsObject
     private bool died = false;
     float distToPlayer;
 
-    //can be deleted use in if else case
-    private bool isAgro = false;
-    private bool isSearching = false;
-    private bool isPatrol = true;
-
     //dead enemy
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -125,57 +120,6 @@ public class EnemyScript : PhysicsObject
                 break;
         }
 
-        // IF ELSE CASE
-        //if (!died)
-        //{
-        //    if (distToPlayer < agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
-        //    {
-        //        isAgro = true;
-        //        isPatrol = false;
-        //    }
-        //    else
-        //    {
-        //        if(isAgro)
-        //        {
-        //            if (!isSearching)
-        //            {
-        //                isSearching = true;
-        //                Invoke("StopChasingPlayer", 3);
-        //            }
-        //        }
-        //        if (isPatrol)
-        //        {
-        //            if (reachPatrol)
-        //            {
-        //                Chase(startPatrol);
-        //            }
-        //            else
-        //            {
-        //                Chase(EndPatrol);
-        //            }
-        //        }
-        //    }
-
-        //    if (isAgro)
-        //    {
-        //        if (attackCounter <= 0)
-        //        {
-        //            //float distToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        //            if (distToPlayer <= 1f && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt"))
-        //            {
-        //                attackCounter = attackCount;
-        //                animator.SetTrigger("Attack");
-        //                Attack();
-        //                //nextAttackTime = Time.time + 1f / attackRate;
-        //            }
-        //        }
-        //        Chase(player);
-        //    }
-        //}
-        //else
-        //{
-        //    spriteRenderer.enabled = !spriteRenderer.enabled;
-        //}
         animator.SetFloat("Move", Mathf.Abs(velocity.x));
         animator.SetBool("Grounded", grounded);
     }
@@ -226,13 +170,6 @@ public class EnemyScript : PhysicsObject
         {
             reachPatrol = !reachPatrol;
         }
-        //bool flipSprite = (spriteRenderer.flipX ? (move.x > 0.01f) : (move.x < -0.01f));
-        //if (flipSprite)
-        //{
-        //    transform.Rotate(new Vector3(0, 180, 0));
-            //castPoint.localPosition = new Vector2(-castPoint.localPosition.x, castPoint.localPosition.y);
-            //attackPoint.localPosition = new Vector2(-attackPoint.localPosition.x, attackPoint.localPosition.y);
-        //}
     }
 
     void canMove(bool left = false, bool right = false)
@@ -298,44 +235,6 @@ public class EnemyScript : PhysicsObject
         facingRight = !facingRight;
             transform.Rotate(new Vector3(0, 180, 0));
     }
-
-
-    // CAN BE DELETED
-    //void StopChasingPlayer()
-    //{
-    //    isAgro = false;
-    //    isSearching = false;
-    //    isPatrol = true;
-    //}
-
-    // CAN BE DELETED USE IN IF ELSE CASE
-    //bool CanSeePlayer(float distance)
-    //{
-    //    bool val = false;
-    //    float castDist = distance;
-
-    //    Vector2 endPos = castPoint.position + Vector3.right * distance;
-
-    //    RaycastHit2D hit = Physics2D.Linecast(castPoint.position, endPos, 1 << LayerMask.NameToLayer("Player"));
-
-    //    if(hit.collider != null)
-    //    {
-    //        if (hit.collider.gameObject.CompareTag("Player"))
-    //        {
-    //            val = true;
-    //        }
-    //        else
-    //        {
-    //            val = false;
-    //        }
-    //        Debug.DrawLine(castPoint.position, endPos, Color.yellow);
-    //    }
-    //    else
-    //    {
-    //        Debug.DrawLine(castPoint.position, endPos, Color.blue);
-    //    }
-    //    return val;
-    //}
 
     void OnDrawGizmosSelected()
     {

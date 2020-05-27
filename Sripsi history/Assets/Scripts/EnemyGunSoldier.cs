@@ -43,12 +43,6 @@ public class EnemyGunSoldier : PhysicsObject
     private bool facingRight = true;
     private bool died = false;
 
-    // can be deleted ( use in if else case)
-    private bool isAgro = false;
-    private bool isSearching = false;
-    private bool isAttacking = false;
-    private bool isPatrol = true;
-
     // dead enemy
     private SpriteRenderer spriteRenderer;
 
@@ -125,69 +119,6 @@ public class EnemyGunSoldier : PhysicsObject
             default:
                 break;
         }
-
-        // USE IF ELSE CAN BE DELETED
-        //if (!died)
-        //{
-
-        //    if (isAttacking)
-        //    {
-        //        if(attackCounter <= 0)
-        //        {
-        //            attackCounter = attackLength;
-        //            Invoke("Attack",1);
-        //        }
-        //    }
-        //    else {
-        //        isAttacking = AttackRange(attackRange);
-        //        if (distToPlayer <= agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
-        //        {
-        //            isAgro = true;
-        //            isPatrol = false;
-        //        }
-        //        else
-        //        {
-        //            if (isAgro)
-        //            {
-        //                if (!isSearching)
-        //                {
-        //                    isSearching = true;
-        //                    Invoke("StopChasingPlayer", 3);
-        //                }
-        //            }
-        //            if (isPatrol)
-        //            {
-        //                if (reachPatrol)
-        //                {
-        //                    Chase(startPatrol);
-        //                }
-        //                else
-        //                {
-        //                    Chase(EndPatrol);
-        //                }
-        //            }
-        //        }
-
-        //        if (isAgro)
-        //        {
-
-        //            //if (Time.time >= nextAttackTime)
-        //            //{
-        //            //    float distToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        //            //    if (distToPlayer <= 1.5f)
-        //            //    {
-        //            //        //animator.SetTrigger("Attack");
-        //            //        Attack();
-        //            //    }
-        //            //}
-        //            Chase(player);
-        //        }
-        //    }
-        //}
-        //else
-        //{
-        //    spriteRenderer.enabled = !spriteRenderer.enabled;
-        //}
 
         animator.SetFloat("Move", Mathf.Abs(velocity.x));
         animator.SetBool("Grounded", grounded);
@@ -315,11 +246,6 @@ public class EnemyGunSoldier : PhysicsObject
             reachPatrol = !reachPatrol;
         }
 
-        //bool flipSprite = (spriteRenderer.flipX ? (move.x > 0.01f) : (move.x < -0.01f));
-        //if (flipSprite)
-        //{
-        //    spriteRenderer.flipX = !spriteRenderer.flipX;
-        //}
     }
 
     void canMove(bool left = false, bool right = false)
@@ -358,7 +284,6 @@ public class EnemyGunSoldier : PhysicsObject
         transform.Rotate(new Vector3(0, 180, 0));
         castPoint.localPosition = new Vector2(-castPoint.localPosition.x, castPoint.localPosition.y);
         xAttack = -xAttack;
-        //firePoint.localPosition = new Vector2(-firePoint.localPosition.x, firePoint.localPosition.y);
     }
 
     IEnumerator Attacking()
@@ -394,32 +319,6 @@ public class EnemyGunSoldier : PhysicsObject
         }
 
     }
-
-    //====================================================================
-    // USE IN IF ELSE CASE CAN BE DELETED
-    //void StopChasingPlayer()
-    //{
-    //    isAgro = false;
-    //    isSearching = false;
-    //    isPatrol = true;
-    //}
-
-    //void Attack()
-    //{
-    //    if(!animator.GetCurrentAnimatorStateInfo(0).IsTag("Hurt") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Die"))
-    //    {
-    //        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-    //        gunShotSound.Play();
-    //    }
-    //    firePoint.transform.rotation = Quaternion.Euler(new Vector3(0, AttackRotation, 0));
-    //    firePoint.localPosition = firePosition[0];
-    //    animator.SetBool("ShootUp", false);
-    //    animator.SetBool("ShootMid", false);
-    //    animator.SetBool("ShootDown", false);
-    //    isAttacking = false;
-    //}
-
-
 
     void OnDrawGizmosSelected()
     {
