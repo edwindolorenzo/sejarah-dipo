@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Humanoid
+public class Humanoid : PhysicsObject
 {
     private float health;
     private float maxHealth = 3f;
-    private float attack = 1f;
+    private float attackStreght = 1f;
 
     public float Health
     {
@@ -35,22 +35,22 @@ public class Humanoid
         }
     }
 
-    public float Attack
+    public float AttackStreght
     {
         get
         {
-            return attack;
+            return attackStreght;
         }
         set
         {
-            attack = value;
+            attackStreght = value;
         }
     }
 
-    public Humanoid()
-    {
-        health = maxHealth;
-    }
+    //public Humanoid()
+    //{
+    //    health = maxHealth;
+    //}
 
     //public Humanoid(float max)
     //{

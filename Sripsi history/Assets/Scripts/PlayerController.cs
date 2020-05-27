@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class PlayerController : PhysicsObject
+public class PlayerController : Player
 {
     //movement
     public float maxSpeed = 7;
@@ -41,7 +41,7 @@ public class PlayerController : PhysicsObject
 
     //validate player life
     public int playerLife = 3;
-    Player player;
+    //Player player;
 
     //MAKE HEART UI
     public Image[] hearts;
@@ -54,8 +54,9 @@ public class PlayerController : PhysicsObject
     // Start is called before the first frame update
     void Awake()
     {
-        player = new Player(playerLife);
-        lifeText.text = player.Life+" X";
+        //player = new Player(playerLife);
+        Life = playerLife;
+        lifeText.text = Life+" X";
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         finishGame = finishUI.GetComponent<FinishGame>();
@@ -68,7 +69,7 @@ public class PlayerController : PhysicsObject
         // HEART UI SHOW
         for (int i = 0; i < hearts.Length; i++)
         {
-            if(i < player.MaxHealth)
+            if(i < MaxHealth)
             {
                 hearts[i].enabled = true;
             }
@@ -76,7 +77,7 @@ public class PlayerController : PhysicsObject
             {
                 hearts[i].enabled = false;
             }
-            if(i < player.Health)
+            if(i < Health)
             {
                 hearts[i].sprite = fullHeart;
             }
@@ -107,7 +108,7 @@ public class PlayerController : PhysicsObject
                 spriteRenderer.enabled = !spriteRenderer.enabled;
                 flashCounter = flashLength;
             }
-            if(invicibiltyCounter <= 0 || player.Life <= 0)
+            if(invicibiltyCounter <= 0 || Life <= 0)
             {
                 spriteRenderer.enabled = true;
             }
@@ -171,9 +172,9 @@ public class PlayerController : PhysicsObject
         foreach (Collider2D enemy in hitEnemies)
         {
             if (enemy.GetComponent<EnemyScript>())
-            enemy.GetComponent<EnemyScript>().TakeDamage(player.Attack);
+            enemy.GetComponent<EnemyScript>().TakeDamage(AttackStreght);
             if (enemy.GetComponent<EnemyGunSoldier>())
-            enemy.GetComponent<EnemyGunSoldier>().TakeDamage(player.Attack);
+            enemy.GetComponent<EnemyGunSoldier>().TakeDamage(AttackStreght);
         }
     }
 
@@ -181,7 +182,7 @@ public class PlayerController : PhysicsObject
     {
         if ((invicibiltyCounter <= 0 || fallDamage) && !die)
         {
-            player.Health -= damage;
+            Health -= damage;
             animator.SetTrigger("Hurt");
             damagedSound.Play();
             // membuat kena damage mundur belum bisa
@@ -193,15 +194,15 @@ public class PlayerController : PhysicsObject
             //{
             //    transform.position += Vector3.right;
             //}
-            if (player.Health <= 0)
+            if (Health <= 0)
             {
                 animator.SetTrigger("Die");
                 animator.SetBool("Died", true);
-                player.Life -= 1;
-                lifeText.text = player.Life+" X";
-                if (player.Life > 0)
+                Life -= 1;
+                lifeText.text = Life+" X";
+                if (Life > 0)
                 {
-                    //lifeText.text = player.Life + " x";
+                    //lifeText.text = Life + " x";
                     //for (float i = 0; i >= 1; i += Time.deltaTime)
                     //{
                     //    lifeUI.color = new Color(1, 1, 1, i);
@@ -226,7 +227,7 @@ public class PlayerController : PhysicsObject
     {
         animator.SetBool("Died", false);
         lifeCounter = 3f;
-        player.Health = player.MaxHealth;
+        Health = MaxHealth;
         transform.position = respawn.transform.position;
     }
 
@@ -239,20 +240,26 @@ public class PlayerController : PhysicsObject
             finishMiniGame.GameOver();
     }
 
-    public Player givePlayerStatus()
+    //public Player givePlayerStatus()
+    //{
+    //    return player;
+    //}
+
+    // sementara dipindahkan nanti
+    public float giveLife()
     {
-        return player;
+        return Life;
     }
 
     public bool HealtUp(int healt)
     {
-        if(player.Health >= player.MaxHealth)
+        if(Health >= MaxHealth)
         {
             return false;
         }
         else
         {
-            player.Health += healt;
+            Health += healt;
             return true;
         }
     }

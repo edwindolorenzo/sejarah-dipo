@@ -14,9 +14,10 @@ public class Enemy : Humanoid
     }
 
     private StateEnemy state;
+    private Transform player;
 
     public StateEnemy State { get; set; }
-
+    public Transform Player { get; set; }
 
     public Enemy()
     {
@@ -28,6 +29,7 @@ public class Enemy : Humanoid
     {
         Health = health;
         State = StateEnemy.Patrol;
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
 }

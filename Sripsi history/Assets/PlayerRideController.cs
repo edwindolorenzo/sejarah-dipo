@@ -273,4 +273,9 @@ public class PlayerRideController : PhysicsObject
     {
         return player;
     }
+    // sementara dipindahkan nanti
+    public float giveLife()
+    {
+        return Life;
+    }
 }

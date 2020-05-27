@@ -29,6 +29,9 @@ public class FinishGame : MonoBehaviour
     Stage stage;
     List<MiniGame> listMiniGames = new List<MiniGame>();
 
+    float health = 3;
+    float life;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,11 +51,14 @@ public class FinishGame : MonoBehaviour
     void Update()
     {
         if(playerController != null)
-            player = playerController.givePlayerStatus();
+        {
+            life = playerController.giveLife();
+        }
         else if (playerRideController != null)
-            player = playerRideController.givePlayerStatus();
+            life = playerRideController.giveLife();
+        //player = playerRideController.givePlayerStatus();
         
-        if (player.Health < 3)
+        if (health < 3)
             damaged = true;
     }
 
@@ -82,7 +88,7 @@ public class FinishGame : MonoBehaviour
             gameManager.UpdateStage(stage, stage.Level, listMiniGames);
         }
         else
-            Debug.Log("Stage Tidak Ditemukan");
+            Debug.LogError("Stage Tidak Ditemukan");
         for (int i = 0; i < finishedObjects.Length; i++)
         {
             finishedObjects[i].SetActive(true);
@@ -118,10 +124,10 @@ public class FinishGame : MonoBehaviour
                 cleared = true;
                 break;
             case 2:
-                cleared = player.Life == 3 ? true : false;
+                cleared = life == 3 ? true : false;
                 break;
             case 3:
-                cleared = player.Life >= 2 ? true : false;
+                cleared = life >= 2 ? true : false;
                 break;
             case 4:
                 cleared = damaged ? false : true;

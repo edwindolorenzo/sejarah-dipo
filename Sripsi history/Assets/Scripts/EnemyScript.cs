@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyScript : PhysicsObject
 {
     //chase range
-    [SerializeField] public Transform player;
+    //[SerializeField] public Transform player;
     [SerializeField] float agroRange;
     [SerializeField] private float chaseRangeY = 4f;
 
@@ -51,8 +51,8 @@ public class EnemyScript : PhysicsObject
     void Awake()
     {
         soldier = new Enemy(health);
-        if (player == null)
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        //if (player == null)
+        //    player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         damagedArearCollider = damagedArea.GetComponent<BoxCollider2D>();
@@ -70,7 +70,7 @@ public class EnemyScript : PhysicsObject
         }
         //Enemy AGRO RUSH IN DISTANCE
         //// distance to player (range chase player)
-        distToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        distToPlayer = Vector2.Distance(transform.position, soldier.Player.position);
 
         canMove(true, true);
 
@@ -98,7 +98,7 @@ public class EnemyScript : PhysicsObject
                 Attack();
                 break;
             case Enemy.StateEnemy.Chase:
-                Chase(player);
+                Chase(soldier.Player);
                 StartCoroutine(ChaseCase());
                     break;
             case Enemy.StateEnemy.Patrol:
@@ -110,7 +110,7 @@ public class EnemyScript : PhysicsObject
                 {
                     Chase(EndPatrol);
                 }
-                if (distToPlayer < agroRange && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
+                if (distToPlayer < agroRange && Mathf.Abs(soldier.Player.position.y - transform.position.y) <= chaseRangeY)
                     soldier.State = Enemy.StateEnemy.Chase;
                 break;
             case Enemy.StateEnemy.Dead:
@@ -152,7 +152,7 @@ public class EnemyScript : PhysicsObject
             RaycastHit2D headerCheck = Physics2D.Raycast(headDetection.position, Vector2.up, chaseRangeY / 2);
             if (headerCheck.collider == null)
             {
-                if (player.transform.position.y - transform.position.y > 0.5f && hitPlatform.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && soldier.State.Equals(Enemy.StateEnemy.Chase) && jumpCounter <= 0 && grounded)
+                if (soldier.Player.position.y - transform.position.y > 0.5f && hitPlatform.transform.gameObject.layer == LayerMask.NameToLayer("Platform") && soldier.State.Equals(Enemy.StateEnemy.Chase) && jumpCounter <= 0 && grounded)
                 {
                     velocity.y = jumpTakeOffSpeed;
                     jumpCounter = jumpCount;
@@ -187,7 +187,7 @@ public class EnemyScript : PhysicsObject
         SwordSound.Play();
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<PlayerController>().TakeDamage(soldier.Attack);
+            enemy.GetComponent<PlayerController>().TakeDamage(soldier.AttackStreght);
         }
         soldier.State = Enemy.StateEnemy.Chase;
     }
@@ -199,7 +199,7 @@ public class EnemyScript : PhysicsObject
             soldier.State = Enemy.StateEnemy.Attack;
             yield return null;
         }
-        if (!(distToPlayer < agroRange) && Mathf.Abs(player.transform.position.y - transform.position.y) <= chaseRangeY)
+        if (!(distToPlayer < agroRange) && Mathf.Abs(soldier.Player.position.y - transform.position.y) <= chaseRangeY)
         {
             yield return new WaitForSeconds(3f);
             soldier.State = Enemy.StateEnemy.Patrol;
