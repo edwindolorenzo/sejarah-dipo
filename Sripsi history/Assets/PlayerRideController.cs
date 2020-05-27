@@ -34,7 +34,6 @@ public class PlayerRideController : PhysicsObject
     public Sprite fullHeart;
     public Sprite emptyHeart;
     public Text lifeText;
-    public Image lifeUI;
 
     // kebal
     private float invicibiltyCounter;
@@ -45,7 +44,6 @@ public class PlayerRideController : PhysicsObject
     public int playerLife = 3;
     Player player;
 
-    public LayerMask enemyLayer;
     public GameObject respawn, finishUI;
 
     private Animator anim;
@@ -57,7 +55,6 @@ public class PlayerRideController : PhysicsObject
     // ded script
     FinishGame finishGame;
     FinishRunnerMiniGame finishRunnerMiniGame;
-    bool die = false;
 
     private void Awake()
     {
@@ -228,7 +225,6 @@ public class PlayerRideController : PhysicsObject
 
     void Die()
     {
-        die = true;
         if (finishGame != null)
             finishGame.GameOver();
         else
