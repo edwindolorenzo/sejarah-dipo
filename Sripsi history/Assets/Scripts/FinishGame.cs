@@ -11,7 +11,6 @@ public class FinishGame : MonoBehaviour
 
     public GameObject [] finishedObjects;
     public GameObject [] gameOverObjects;
-    bool damaged = false;
     [SerializeField] bool haveMiniGame = false;
 
 
@@ -51,9 +50,6 @@ public class FinishGame : MonoBehaviour
             player = playerController.givePlayerStatus();
         else if (playerRideController != null)
             player = playerRideController.givePlayerStatus();
-        
-        if (player.Health < 3)
-            damaged = true;
     }
 
     public void GameFinished()
@@ -124,7 +120,9 @@ public class FinishGame : MonoBehaviour
                 cleared = player.Life >= 2 ? true : false;
                 break;
             case 4:
-                cleared = damaged ? false : true;
+                GameObject[] collect = GameObject.FindGameObjectsWithTag("CollectiveChallange");
+                Debug.Log(collect.Length);
+                cleared = collect.Length == 0 ? true : false;
                 break;
             case 5:
                 GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemies");

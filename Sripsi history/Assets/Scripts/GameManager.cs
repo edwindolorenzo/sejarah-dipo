@@ -112,11 +112,11 @@ public class GameManager : MonoBehaviour
                 new MiniGame(1),
                 new MiniGame(2)
             };
-            stages.Add(new Stage(1, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(3) }));
-            stages.Add(new Stage(2, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(4) }));
+            stages.Add(new Stage(1, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(5) }));
+            stages.Add(new Stage(2, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(3) }));
             stages.Add(new Stage(3, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(3) }));
             stages.Add(new Stage(4, new List<Chalange> { new Chalange(1), new Chalange(3), new Chalange(5) }));
-            stages.Add(new Stage(5, new List<Chalange> { new Chalange(2), new Chalange(2), new Chalange(4) }));
+            stages.Add(new Stage(5, new List<Chalange> { new Chalange(1), new Chalange(2), new Chalange(4) }));
         }
     }
 }

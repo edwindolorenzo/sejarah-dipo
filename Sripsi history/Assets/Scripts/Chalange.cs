@@ -68,7 +68,7 @@ public class Chalange
         "Menyelesaikan permainan",
         "Menyelesaikan permainan tanpa menggunakan kesempatan hidup",
         "Menggunakan kesempatan hidup hanya satu kali",
-        "Tidak terkena serangan selama permainan",
+        "Mengumpulkan semua keris yang ada di dalam permainan",
         "Mengalahkan semua prajurit"
     };
 }

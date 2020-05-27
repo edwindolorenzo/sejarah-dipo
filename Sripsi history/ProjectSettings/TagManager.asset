@@ -10,6 +10,7 @@ TagManager:
   - EnemiesGun
   - Traps
   - PlatformGenerator
+  - CollectiveChallange
   layers:
   - Default
   - TransparentFX
