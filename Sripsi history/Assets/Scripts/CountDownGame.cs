@@ -34,7 +34,7 @@ public class CountDownGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = playerController.givePlayerStatus();
+        player = playerController.GivePlayerStatus();
         if(player.Life != 0)
         {
             if(counting > 0)

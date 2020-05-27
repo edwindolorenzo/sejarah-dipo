@@ -47,7 +47,6 @@ public class PlayerController : PhysicsObject
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
-    public Image lifeUI;
     public Text lifeText;
 
 
@@ -85,18 +84,7 @@ public class PlayerController : PhysicsObject
                 hearts[i].sprite = emptyHeart;
             }
         }
-        //if (lifeCounter > 0)
-        //{
-        //    lifeCounter -= Time.deltaTime;
-        //}
-        //else
-        //{
-        //    for (float i = 1; i >= 0; i -= Time.deltaTime)
-        //    {
-        //        lifeUI.color = new Color(1, 1, 1, i);
-        //        lifeText.color = new Color(50, 50, 50, i);
-        //    }
-        //}
+
         // Invicible after take damage
         if (invicibiltyCounter > 0)
         {
@@ -201,12 +189,6 @@ public class PlayerController : PhysicsObject
                 lifeText.text = player.Life+" X";
                 if (player.Life > 0)
                 {
-                    //lifeText.text = player.Life + " x";
-                    //for (float i = 0; i >= 1; i += Time.deltaTime)
-                    //{
-                    //    lifeUI.color = new Color(1, 1, 1, i);
-                    //    lifeText.color = new Color(0, 0, 0, i);
-                    //}
                     Invoke("Respawn", 1);
                 }
                 else
@@ -239,7 +221,7 @@ public class PlayerController : PhysicsObject
             finishMiniGame.GameOver();
     }
 
-    public Player givePlayerStatus()
+    public Player GivePlayerStatus()
     {
         return player;
     }

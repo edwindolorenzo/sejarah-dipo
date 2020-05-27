@@ -269,7 +269,7 @@ public class PlayerRideController : PhysicsObject
         }
     }
 
-    public Player givePlayerStatus()
+    public Player GivePlayerStatus()
     {
         return player;
     }
