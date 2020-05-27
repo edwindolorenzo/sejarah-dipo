@@ -1829,7 +1829,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: KEMBALI
+  m_Text: Kembali
 --- !u!222 &2060975219
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2030,7 +2030,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BERMAIN
+  m_Text: Bermain
 --- !u!222 &3579708952582929697
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2107,7 +2107,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: KEMBALI
+  m_Text: Kembali
 --- !u!222 &3579708952660219121
 CanvasRenderer:
   m_ObjectHideFlags: 0

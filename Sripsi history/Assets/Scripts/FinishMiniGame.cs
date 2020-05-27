@@ -40,6 +40,7 @@ public class FinishMiniGame : MonoBehaviour
     {
         float score = miniGamePlay.GetScore();
         string _score = score.ToString("0");
+        audioManager.Stop("GameMusic");
         audioManager.Play("WinGame");
         backGroundUI.SetActive(true);
         if (miniGame != null)
