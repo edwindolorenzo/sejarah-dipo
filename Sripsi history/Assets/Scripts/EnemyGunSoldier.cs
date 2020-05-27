@@ -74,17 +74,17 @@ public class EnemyGunSoldier : PhysicsObject
         }
 
         // check if front edge
-        canMove(true, true);
+        CanMove(true, true);
         RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.down, chaseRangeY);
         if (hit.collider == null)
         {
             if (Mathf.Round(transform.rotation.y) < 0)
             {
-                canMove(false, true);
+                CanMove(false, true);
             }
             if (Mathf.Round(transform.rotation.y) >= 0)
             {
-                canMove(true, false);
+                CanMove(true, false);
             }
         }
 
@@ -200,7 +200,7 @@ public class EnemyGunSoldier : PhysicsObject
         Vector2 move = Vector2.zero;
         if (!grounded)
         {
-            canMove(true, true);
+            CanMove(true, true);
         }
         if (transform.position.x < target.position.x && moveRight)
         {
@@ -248,7 +248,7 @@ public class EnemyGunSoldier : PhysicsObject
 
     }
 
-    void canMove(bool left = false, bool right = false)
+    void CanMove(bool left = false, bool right = false)
     {
         moveLeft = left;
         moveRight = right;
