@@ -5,7 +5,6 @@ using UnityEngine;
 public class HealtUp : MonoBehaviour
 {
     public int healt = 1;
-    public float fadeOutTime = 2f;
     private Animator animator;
     private AudioSource audioSource;
     private bool added = false;
