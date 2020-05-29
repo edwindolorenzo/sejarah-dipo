@@ -289,6 +289,7 @@ MonoBehaviour:
   dificultIncrase: 100
   countDownPlay: {fileID: 1275077329}
   gamePlayUI: {fileID: 682695249617546219}
+  spawnManager: {fileID: 1218537604}
   spawnPonts:
   - {fileID: 1694834978}
   - {fileID: 77092259}
@@ -1138,6 +1139,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f3ae3ffa235d5041a84ec0eaa9a9d7b, type: 3}
+--- !u!1 &1218537604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1218537606}
+  - component: {fileID: 1218537605}
+  m_Layer: 0
+  m_Name: TimerScript
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1218537605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218537604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9621fac0e1794a145a9a00de8133e306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeCountdown: 1
+  timerText: {fileID: 0}
+  miniGame: 1
+  respawnObjects:
+  - {fileID: 1694834978}
+  - {fileID: 77092259}
+  dialogue: {fileID: 0}
+  gamePlayUI: {fileID: 0}
+  playerObject: {fileID: 0}
+  cam: {fileID: 0}
+--- !u!4 &1218537606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218537604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 188.97789, y: -4.8413267, z: -0.11209552}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1275077328
 GameObject:
   m_ObjectHideFlags: 0

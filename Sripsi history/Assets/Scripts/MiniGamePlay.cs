@@ -16,7 +16,8 @@ public class MiniGamePlay : MonoBehaviour
     public Text countDownPlay;
 
     public GameObject gamePlayUI;
-    public GameObject[] spawnPonts;
+    public GameObject spawnManager;
+    CountDownGame countDownGame;
 
     AudioManager audioManager = AudioManager.instance;
 
@@ -26,6 +27,7 @@ public class MiniGamePlay : MonoBehaviour
         gamePlayUI.SetActive(false);
         if (audioManager == null)
             audioManager = FindObjectOfType<AudioManager>();
+        countDownGame = spawnManager.GetComponent<CountDownGame>();
         audioManager.Play("GameMusic", true);
     }
 
@@ -34,18 +36,15 @@ public class MiniGamePlay : MonoBehaviour
     {
         if(incraseCounter > 0)
         {
-            incraseCounter -= pointToScore * Time.deltaTime;
+            incraseCounter -= Time.deltaTime;
         }
         if (start)
         {
             score += pointToScore * Time.deltaTime;
-            if(score%dificultIncrase < 0.01f)
+            if(score%dificultIncrase < 0.1f && incraseCounter <=0)
             {
-                incraseCounter = dificultIncrase;
-                foreach (GameObject respawnObject in spawnPonts)
-                {
-                    respawnObject.GetComponent<Spawner>().AddSpawn();
-                }
+                incraseCounter = 10;
+                countDownGame.AddSpawnerNumber();
             }
             scoreText.text = score.ToString("0");
 
@@ -55,10 +54,7 @@ public class MiniGamePlay : MonoBehaviour
     public float GetScore()
     {
         start = false;
-        foreach (GameObject respawnObject in spawnPonts)
-        {
-            respawnObject.GetComponent<Spawner>().StopGame();
-        }
+        countDownGame.SpawnInactive();
         return score;
     }
 
@@ -70,10 +66,7 @@ public class MiniGamePlay : MonoBehaviour
         countDownPlay.text = "Mulai";
         yield return new WaitForSeconds(1f);
         countDownPlay.gameObject.SetActive(false);
-        for(int i = 0; i< spawnPonts.Length; i++)
-        {
-            spawnPonts[i].SetActive(true);
-        }
+        spawnManager.SetActive(true);
         gamePlayUI.SetActive(true);
         start = true;
         yield return null;
