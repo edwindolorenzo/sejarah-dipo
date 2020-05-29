@@ -41,6 +41,7 @@ public class SelectLevel : MonoBehaviour
             gameManager = FindObjectOfType<GameManager>();
         if (audioManager == null)
             audioManager = FindObjectOfType<AudioManager>();
+        audioManager.Play("MainMenu", true);
         stages = gameManager.AllStage();
         playerMenu = GameObject.Find("MainMenuPlayer");
         foreach(Stage stage in stages)

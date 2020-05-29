@@ -14,7 +14,7 @@ public class Checkpoint : MonoBehaviour
         animator = GetComponent<Animator>();
     }
     // Start is called before the first frame update
-    public void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {

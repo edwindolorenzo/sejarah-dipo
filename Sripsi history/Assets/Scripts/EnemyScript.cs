@@ -10,10 +10,10 @@ public class EnemyScript : PhysicsObject
     [SerializeField] private float chaseRangeY = 4f;
 
     //range view enemy
-    [SerializeField] Transform castPoint;
+    public Transform castPoint;
 
     //move enemy
-    [SerializeField] float maxSpeed;
+    public float maxSpeed;
     [SerializeField] private float jumpTakeOffSpeed = 10;
     private bool moveLeft = true;
     private bool moveRight = true;
@@ -27,8 +27,6 @@ public class EnemyScript : PhysicsObject
     private float attackCounter;
     private float attackCount = 2f;
     public float attackRange = 0.5f;
-    public float attackRate = 2f;
-    float nextAttackTime = 0f;
     public LayerMask enemyLayers;
 
     //state enemy
@@ -72,7 +70,7 @@ public class EnemyScript : PhysicsObject
         //// distance to player (range chase player)
         distToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
-        canMove(true, true);
+        CanMove(true, true);
 
         // check front of soldier
         RaycastHit2D hit = Physics2D.Raycast(groundDetection.position, Vector2.down, chaseRangeY);
@@ -80,11 +78,11 @@ public class EnemyScript : PhysicsObject
         {
             if (Mathf.Round(transform.rotation.y) < 0)
             {
-                canMove(false, true);
+                CanMove(false, true);
             }
             if (Mathf.Round(transform.rotation.y) >= 0)
             {
-                canMove(true, false);
+                CanMove(true, false);
             }
         }
 
@@ -129,7 +127,7 @@ public class EnemyScript : PhysicsObject
     {
         if (!grounded)
         {
-            canMove(true, true);
+            CanMove(true, true);
         }
         Vector2 move = Vector2.zero;
         if (transform.position.x < target.position.x && moveRight)
@@ -172,7 +170,7 @@ public class EnemyScript : PhysicsObject
         }
     }
 
-    void canMove(bool left = false, bool right = false)
+    void CanMove(bool left = false, bool right = false)
     {
         moveLeft = left;
         moveRight = right;

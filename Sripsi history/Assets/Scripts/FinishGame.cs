@@ -47,9 +47,9 @@ public class FinishGame : MonoBehaviour
     void Update()
     {
         if(playerController != null)
-            player = playerController.givePlayerStatus();
+            player = playerController.GivePlayerStatus();
         else if (playerRideController != null)
-            player = playerRideController.givePlayerStatus();
+            player = playerRideController.GivePlayerStatus();
     }
 
     public void GameFinished()
