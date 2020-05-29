@@ -22,6 +22,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField]
     float topLimit;
 
+    public bool useClampX = true;
+
     private Vector3 velocity;
 
     // Start is called before the first frame update
@@ -45,12 +47,23 @@ public class CameraFollow : MonoBehaviour
 
         transform.position = Vector3.SmoothDamp(startPos, endPos, ref velocity, timeOffset);
 
-        transform.position = new Vector3
-        (
-            Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
-            Mathf.Clamp(transform.position.y, bottomLimit, topLimit),
-            transform.position.z
-        );
+        if (useClampX) { 
+            transform.position = new Vector3
+            (
+                Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
+                Mathf.Clamp(transform.position.y, bottomLimit, topLimit),
+                transform.position.z
+            );
+        }
+        else
+        {
+            transform.position = new Vector3
+            (
+                transform.position.x,
+                Mathf.Clamp(transform.position.y, bottomLimit, topLimit),
+                transform.position.z
+            );
+        }
     }
 
     private void OnDrawGizmos()

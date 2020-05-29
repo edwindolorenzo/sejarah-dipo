@@ -36,8 +36,6 @@ public class TimelineManager : MonoBehaviour
         }
         if (cameraSetting)
         {
-            if (cameraSetting.GetComponent<CameraFollowHorse>() != null)
-                cameraSetting.GetComponent<CameraFollowHorse>().enabled = false;
             if(cameraSetting.GetComponent<CameraFollow>() != null)
                 cameraSetting.GetComponent<CameraFollow>().enabled = false;
         }
@@ -72,8 +70,6 @@ public class TimelineManager : MonoBehaviour
             }
             if (cameraSetting)
             {
-                if (cameraSetting.GetComponent<CameraFollowHorse>() != null)
-                    cameraSetting.GetComponent<CameraFollowHorse>().enabled = true;
                 if (cameraSetting.GetComponent<CameraFollow>() != null)
                     cameraSetting.GetComponent<CameraFollow>().enabled = true;
             }
