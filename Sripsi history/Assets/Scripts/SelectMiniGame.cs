@@ -33,6 +33,7 @@ public class SelectMiniGame : MonoBehaviour
             gameManager = FindObjectOfType<GameManager>();
         if (audioManager == null)
             audioManager = FindObjectOfType<AudioManager>();
+        audioManager.Play("MainMenu", true);
         listMiniGames = gameManager.AllMiniGame();
         int i = 0;
         foreach(MiniGame gameManager in listMiniGames)
