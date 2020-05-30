@@ -66,7 +66,7 @@ public class SelectLevel : MonoBehaviour
         pickLevel = level;
         if(stage != null)
         {
-            headerLevelText.text = "Level " + level;
+            headerLevelText.text = "Tingkat " + level;
             int i = 0;
             foreach(Chalange chalange in stage.Chalanges)
             {

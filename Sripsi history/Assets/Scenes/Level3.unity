@@ -13528,7 +13528,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Finish Game
+  m_Text: Permainan Selesai
 --- !u!224 &1561171270868609803
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13652,7 +13652,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Game Over
+  m_Text: Anda Kalah
 --- !u!1 &1561171271212690545
 GameObject:
   m_ObjectHideFlags: 0
