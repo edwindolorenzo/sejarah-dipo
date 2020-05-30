@@ -660,6 +660,7 @@ MonoBehaviour:
   rightLimit: 172.85
   bottomLimit: -4.3
   topLimit: 13.53
+  useClampX: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -24039,7 +24040,7 @@ PrefabInstance:
     - target: {fileID: 1561171271221932010, guid: e4a859f9abd9bb349bb66ee54d772c3a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -20.000061
+      value: -20.000122
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8618003007101002418, guid: e4a859f9abd9bb349bb66ee54d772c3a, type: 3}
