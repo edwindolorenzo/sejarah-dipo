@@ -1941,7 +1941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9621fac0e1794a145a9a00de8133e306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeCountdown: 180
+  timeCountdown: 60
   timerText: {fileID: 2014610331}
   miniGame: 0
   respawnObjects:
@@ -44056,7 +44056,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.17, y: 0.25}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 0.17, y: 0.33}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
