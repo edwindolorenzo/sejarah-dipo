@@ -7697,7 +7697,7 @@ MonoBehaviour:
   isMiniGame: 0
   eojPooled: 0
   endOfJourneyObject: {fileID: 1393182658}
-  endOfJourney: 600
+  endOfJourney: 500
   thePlatformThatWillGenerate: {fileID: 362134119929932842, guid: 24429b1e9bfe7924492bded75adc1673,
     type: 3}
   generationPoint: {fileID: 942562867}
@@ -7712,7 +7712,7 @@ MonoBehaviour:
   maxHeightChange: 3.5
   randomObjectThreshold: 60
   randomHealthThreshold: 30
-  randomTrapThreshold: 42
+  randomTrapThreshold: 35
   trapPool: {fileID: 404449740}
 --- !u!4 &1917971148
 Transform:
@@ -13922,7 +13922,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -25, y: 5}
+  m_AnchoredPosition: {x: -40, y: 5}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 1, y: 0}
 --- !u!1 &1561171271362308817

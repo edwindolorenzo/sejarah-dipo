@@ -414,7 +414,6 @@ MonoBehaviour:
   SwordSound: {fileID: 7588885097513090103}
   damagedSound: {fileID: 2551264815166257868}
   attackRange: 0.3
-  attackRate: 10
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
@@ -425,7 +424,7 @@ MonoBehaviour:
   jumpDetection: {fileID: 7459377580835965757}
   headDetection: {fileID: 2713419684975815092}
   damagedArea: {fileID: 2605438477611383530}
-  health: 3
+  health: 2
 --- !u!95 &2605438477663145828
 Animator:
   serializedVersion: 3

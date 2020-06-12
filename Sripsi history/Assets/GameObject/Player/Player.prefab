@@ -127,7 +127,7 @@ MonoBehaviour:
   maxSpeed: 5
   jumpTakeOffSpeed: 13
   attackPoint: {fileID: 1572660438128247712}
-  attackRange: 0.6
+  attackRange: 0.75
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512
@@ -146,7 +146,6 @@ MonoBehaviour:
   - {fileID: 0}
   fullHeart: {fileID: 21300000, guid: 0172f236c9986aa4e887861c3a46b7f7, type: 3}
   emptyHeart: {fileID: 21300000, guid: 4edfab73ddf386b4b8e2835679d368be, type: 3}
-  lifeUI: {fileID: 0}
   lifeText: {fileID: 0}
 --- !u!114 &1572660437940329186
 MonoBehaviour:
@@ -520,7 +519,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572660438128247719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.124, y: -0.01, z: 0}
+  m_LocalPosition: {x: 0.15, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1572660437940329185}

@@ -24181,13 +24181,18 @@ PrefabInstance:
     - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
         type: 3}
       propertyPath: dialogue.sentences.Array.data[1]
-      value: Mari kita mempellajari bagaimana bermain game ini dan mengetahui siapa
+      value: Mari kita mempelajari bagaimana bermain game ini dan mengetahui siapa
         sih Pangeran Diponegoro.
       objectReference: {fileID: 0}
     - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
         type: 3}
       propertyPath: dialogue.sentences.Array.data[3]
       value: Pangeran Diponegoro lahir pada tanggal 11 November 1785.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396494719822455762, guid: 39ba28b69f0aaf441a779eb7dd569b28,
+        type: 3}
+      propertyPath: dialogue.sentences.Array.data[4]
+      value: Untuk menjalankan pangeran Diponegoro, gunakanlah tombol di kiri bawah
       objectReference: {fileID: 0}
     - target: {fileID: 2396494719822455763, guid: 39ba28b69f0aaf441a779eb7dd569b28,
         type: 3}
