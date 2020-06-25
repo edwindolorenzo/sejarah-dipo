@@ -7697,7 +7697,7 @@ MonoBehaviour:
   isMiniGame: 0
   eojPooled: 0
   endOfJourneyObject: {fileID: 1393182658}
-  endOfJourney: 500
+  endOfJourney: 300
   thePlatformThatWillGenerate: {fileID: 362134119929932842, guid: 24429b1e9bfe7924492bded75adc1673,
     type: 3}
   generationPoint: {fileID: 942562867}
