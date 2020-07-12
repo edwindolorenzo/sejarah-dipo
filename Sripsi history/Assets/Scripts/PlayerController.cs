@@ -142,7 +142,7 @@ public class PlayerController : PhysicsObject
             if (move.x <= -0.1)
                 move.x = 0;
         if (!moveRight)
-            if (move.x >= -0.1)
+            if (move.x >= 0.1)
                 move.x = 0;
         targetVelocity = move * maxSpeed;
         if (Mathf.Abs(velocity.x) > 0.1 && grounded && stepSound.isPlaying == false)

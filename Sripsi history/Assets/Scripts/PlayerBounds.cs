@@ -14,6 +14,6 @@ public class PlayerBounds : MonoBehaviour
         screenBounds = GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         Vector3 camera = Camera.main.transform.position;
         leftBounds.position = new Vector3(screenBounds.x * -1 + camera.x, leftBounds.position.y, leftBounds.position.z);
-        rightBounds.position = new Vector3(screenBounds.x - camera.x, rightBounds.position.y, rightBounds.position.z);
+        rightBounds.position = new Vector3(screenBounds.x + camera.x, rightBounds.position.y, rightBounds.position.z);
     }
 }
